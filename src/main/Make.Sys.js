@@ -11,6 +11,31 @@ Make.Sys = {
 		}
 		return readFile(path);
 	},
+	getName: function (path) {
+		return this._translateJavaString(new java.io.File(path).getName());
+	},
+	copyFileToDirectory: function (srcPath, destPath) {
+		this.copyFileToFile(srcPath, this.combinePath(destPath, this.getName(srcPath)));
+	},
+	copyFileToFile: function (srcPath, destPath) {
+		var srcFile, destFile, output, input, buffer, n;
+		srcFile = new java.io.File(srcPath);
+		destFile = new java.io.File(destPath);
+		input = new java.io.FileInputStream(srcFile);
+		try {
+			output = new java.io.FileOutputStream(destFile);
+			try {
+				buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024 * 4);
+				while (-1 !== (n = input.read(buffer))) {
+					output.write(buffer, 0, n);
+				}
+			} finally {
+				output.close();
+			}
+		} finally {
+			input.close();
+		}
+	},
 	writeFile: function (path, data, encoding) {
 		this.createDirectory(this.getParentDirectory(path));
 		var out = new java.io.FileOutputStream(new java.io.File(path));

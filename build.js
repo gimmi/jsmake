@@ -63,7 +63,14 @@ project('jsmake', 'build', function () {
 	});
 
 	task('build', [ 'compile' ], function () {
-		sys.log('TODO');
+		var files = new Make.FsScanner('src/main')
+				.include('**/*')
+				.exclude('**/*.js')
+				.scan();
+		utils.each(files, function (file) {
+			sys.copyFileToDirectory(sys.combinePath('src/main', file), buildPath);
+		}, this);
+		sys.copyFileToDirectory('lib/main/rhino-1.7r2/js.jar', buildPath);
 	});
 
 	task('clean', [], function () {
