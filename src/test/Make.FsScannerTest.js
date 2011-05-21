@@ -56,13 +56,13 @@ describe("Make.FsScanner", function () {
 			}).join('/');
 		}
 
-		spyOn(Make.Sys, 'getFiles').andCallFake(function (path) {
+		spyOn(Make.Fs, 'getFiles').andCallFake(function (path) {
 			return files[cleanPath(path)];
 		});
-		spyOn(Make.Sys, 'getDirectories').andCallFake(function (path) {
+		spyOn(Make.Fs, 'getDirectories').andCallFake(function (path) {
 			return directories[cleanPath(path)];
 		});
-		spyOn(Make.Sys, 'combinePath').andCallFake(function (path1, path2) {
+		spyOn(Make.Fs, 'combinePath').andCallFake(function (path1, path2) {
 			return cleanPath([path1, path2].join('/'));
 		});
 	});

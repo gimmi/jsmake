@@ -6,6 +6,7 @@ JSMAKE_FILES = [
 	'src/main/Make.RecursionChecker.js',
 	'src/main/Make.AntPathMatcher.js',
 	'src/main/Make.Sys.js',
+	'src/main/Make.Fs.js',
 	'src/main/Make.FsScanner.js',
 	'src/main/Make.Main.js'
 ];
@@ -19,16 +20,17 @@ main.initGlobalScope(this);
 
 project('jsmake', 'build', function () {
 	var sys = Make.Sys;
+	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
 	var buildPath = 'build';
 	var version = '0.8.0';
 
 	task('jslint', [], function () {
-		var files = sys.createScanner('src').include('**/*.js').scan();
+		var files = fs.createScanner('src').include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
-			var content = '/*global Make: true, java, toString */\n' + sys.readFile(file);
+			var content = '/*global Make: true, java, toString */\n' + fs.readFile(file);
 			JSLINT(content, { white: true, onevar: true, undef: true, regexp: true, plusplus: true, bitwise: true, newcap: true, rhino: true });
 			utils.each(JSLINT.errors, function (error) {
 				if (error) {
@@ -38,8 +40,8 @@ project('jsmake', 'build', function () {
 		});
 
 		if (errors.length) {
-			sys.log('JSLint found ' + errors.length + ' errors');
-			sys.log(errors.join('\n'));
+			fs.log('JSLint found ' + errors.length + ' errors');
+			fs.log(errors.join('\n'));
 			throw 'Fatal error, see previous messages.';
 		}
 	});
@@ -48,36 +50,36 @@ project('jsmake', 'build', function () {
 		var mainFiles = JSMAKE_FILES.slice();
 		mainFiles.push('src/main/bootstrap.js');
 		mainFiles = utils.map(mainFiles, function (file) {
-			return sys.readFile(file);
+			return fs.readFile(file);
 		});
 
 		var header = [];
 		header.push('/*');
 		header.push('JSMake version ' + version);
 		header.push('');
-		header.push(sys.readFile('LICENSE'));
+		header.push(fs.readFile('LICENSE'));
 		header.push('*/');
 		mainFiles.unshift(header.join('\n'));
 
-		sys.writeFile(sys.combinePath(buildPath, 'jsmake.js'), mainFiles.join('\n'));
+		fs.writeFile(fs.combinePath(buildPath, 'jsmake.js'), mainFiles.join('\n'));
 	});
 
 	task('build', [ 'compile' ], function () {
-		var files = sys.createScanner('src/main')
+		var files = fs.createScanner('src/main')
 				.exclude('**/*.js')
 				.scan();
 		utils.each(files, function (file) {
-			sys.copyFileToDirectory(file, buildPath);
+			fs.copyFileToDirectory(file, buildPath);
 		}, this);
-		sys.copyFileToDirectory('lib/main/rhino-1.7r2/js.jar', buildPath);
+		fs.copyFileToDirectory('lib/main/rhino-1.7r2/js.jar', buildPath);
 	});
 
 	task('clean', [], function () {
-		sys.deletePath(buildPath);
+		fs.deletePath(buildPath);
 	});
 	
 	task('runcmd', [], function () {
-		sys.runCmd(sys.getEnvVar('SystemRoot') + '/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe');
+		fs.runCmd(fs.getEnvVar('SystemRoot') + '/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe');
 	});
 });
 
