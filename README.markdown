@@ -3,6 +3,7 @@
 #### JSMake has the following benefits:
 
  * Let you write build script in Javascript, the most widely used scripting language
+ * It is a general purpose build tool, not specific for building Javascript projects
  * It's cross platform, supporting both Windows and *nix environment
  * It's very lightweight, it's meant to be included directly in your project repository so you don't have to do exotic setup just to build your project
  * It only require Java to run, and should work anywhere Java works
