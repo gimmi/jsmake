@@ -1,5 +1,6 @@
-Make.AntPathMatcher = function (pattern) {
+Make.AntPathMatcher = function (pattern, caseSensitive) {
 	this._pattern = pattern;
+	this._caseSensitive = caseSensitive;
 };
 Make.AntPathMatcher.prototype = {
 	match: function (path) {
@@ -43,7 +44,7 @@ Make.AntPathMatcher.prototype = {
 				regex += Make.Utils.escapeForRegex(ch);
 			}
 		}
-		return new RegExp(regex).test(pathToken);
+		return new RegExp(regex, (this._caseSensitive ? '' : 'i')).test(pathToken);
 	},
 	_tokenize: function (pattern) {
 		var tokens = pattern.split(/\\+|\/+/);

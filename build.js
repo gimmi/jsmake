@@ -25,7 +25,7 @@ project('jsmake', 'build', function () {
 	var version = '0.8.0';
 
 	task('jslint', [], function () {
-		var files = new Make.FsScanner('src').include('**/*.js').scan();
+		var files = new Make.FsScanner('src', false).include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
 			var content = '/*global Make: true, java, toString */\n' + sys.readFile(file);
@@ -63,7 +63,7 @@ project('jsmake', 'build', function () {
 	});
 
 	task('build', [ 'compile' ], function () {
-		var files = new Make.FsScanner('src/main')
+		var files = new Make.FsScanner('src/main', false)
 				.exclude('**/*.js')
 				.scan();
 		utils.each(files, function (file) {

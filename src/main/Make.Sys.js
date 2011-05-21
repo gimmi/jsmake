@@ -5,6 +5,15 @@ Make.Sys = {
 	loadJavascriptFile: function (file) {
 		load(file);
 	},
+	isWindowsOs: function () {
+		return this.getPathSeparator() === '\\';
+	},
+	getPathSeparator: function () {
+		return java.io.File.separator;
+	},
+	isFsCaseSensitive: function () {
+		return !this.isWindowsOs();
+	},
 	readFile: function (path) {
 		if (!this.fileExists(path)) {
 			throw "File '" + path + "' not found";

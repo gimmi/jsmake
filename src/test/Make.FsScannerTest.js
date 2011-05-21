@@ -68,7 +68,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should include **/* when no include filter specified', function () {
-		var actual = new Make.FsScanner('base/lib/rhino').scan();
+		var actual = new Make.FsScanner('base/lib/rhino', true).scan();
 
 		expect(actual).toEqual([
 			'base/lib/rhino/js.jar',
@@ -77,7 +77,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it("should traverse directory tree from base path", function () {
-		var actual = new Make.FsScanner('base').include('**/*').scan();
+		var actual = new Make.FsScanner('base', true).include('**/*').scan();
 
 		expect(actual).toEqual([
 			'base/readme.txt',
@@ -99,7 +99,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should apply include filters', function () {
-		var actual = new Make.FsScanner('base').include('**/*.js').scan();
+		var actual = new Make.FsScanner('base', true).include('**/*.js').scan();
 
 		expect(actual).toEqual([
 			'base/src/main/Main.js',
@@ -115,7 +115,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should apply exclude filters', function () {
-		var actual = new Make.FsScanner('base').include('**/*').exclude('**/*.js').scan();
+		var actual = new Make.FsScanner('base', true).include('**/*').exclude('**/*.js').scan();
 
 		expect(actual).toEqual([
 			'base/readme.txt',
@@ -128,8 +128,8 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should evaluate inclusion', function () {
-		expect(new Make.FsScanner('base')._evaluatePath('anything')).toBeFalsy();
-		expect(new Make.FsScanner('base').include('**/*')._evaluatePath('anything')).toBeTruthy();
-		expect(new Make.FsScanner('base').include('**/*').exclude('**/*_old.*')._evaluatePath('folder/file_old.txt')).toBeFalsy();
+		expect(new Make.FsScanner('base', true)._evaluatePath('anything')).toBeFalsy();
+		expect(new Make.FsScanner('base', true).include('**/*')._evaluatePath('anything')).toBeTruthy();
+		expect(new Make.FsScanner('base', true).include('**/*').exclude('**/*_old.*')._evaluatePath('folder/file_old.txt')).toBeFalsy();
 	});
 });

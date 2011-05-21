@@ -1,15 +1,16 @@
-Make.FsScanner = function (basePath) {
+Make.FsScanner = function (basePath, caseSensitive) {
 	this._basePath = basePath;
 	this._includeMatchers = [];
 	this._excludeMatchers = [];
+	this._caseSensitive = caseSensitive;
 };
 Make.FsScanner.prototype = {
 	include: function (pattern) {
-		this._includeMatchers.push(new Make.AntPathMatcher(pattern));
+		this._includeMatchers.push(new Make.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	exclude: function (pattern) {
-		this._excludeMatchers.push(new Make.AntPathMatcher(pattern));
+		this._excludeMatchers.push(new Make.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	scan: function () {

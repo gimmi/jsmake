@@ -4,29 +4,29 @@ describe("Make.AntPathMatcher", function () {
 	var target;
 
 	beforeEach(function () {
-		target = new Make.AntPathMatcher('');
+		target = new Make.AntPathMatcher('', true);
 	});
 	
 	it('should match patterns without ** wildcard', function () {
-		expect(new Make.AntPathMatcher('a', 'a')).toBeTruthy();
-		expect(new Make.AntPathMatcher('a/b').match('a/b')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a', true).match('a')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a/b', true).match('a/b')).toBeTruthy();
 
-		expect(new Make.AntPathMatcher('a').match('b')).toBeFalsy();
-		expect(new Make.AntPathMatcher('a').match('a/b')).toBeFalsy();
-		expect(new Make.AntPathMatcher('a/b').match('a')).toBeFalsy();
-		expect(new Make.AntPathMatcher('a/b').match('a/b/c')).toBeFalsy();
+		expect(new Make.AntPathMatcher('a', true).match('b')).toBeFalsy();
+		expect(new Make.AntPathMatcher('a', true).match('a/b')).toBeFalsy();
+		expect(new Make.AntPathMatcher('a/b', true).match('a')).toBeFalsy();
+		expect(new Make.AntPathMatcher('a/b', true).match('a/b/c')).toBeFalsy();
 	});
-	
-	it('should match pattern with ** wildcard', function () {
-		expect(new Make.AntPathMatcher('**/a').match('a')).toBeTruthy();
-		expect(new Make.AntPathMatcher('**/b').match('a/b')).toBeTruthy();
-		expect(new Make.AntPathMatcher('**/c').match('a/b/c')).toBeTruthy();
-		expect(new Make.AntPathMatcher('a/**/b').match('a/b')).toBeTruthy();
-		expect(new Make.AntPathMatcher('a/**/c').match('a/b/c')).toBeTruthy();
-		expect(new Make.AntPathMatcher('a/**/d').match('a/b/c/d')).toBeTruthy();
-		expect(new Make.AntPathMatcher('a/**/d').match('a/b/c/d/d')).toBeTruthy();
 
-		expect(new Make.AntPathMatcher('a/**/c').match('a/b')).toBeFalsy();
+	it('should match pattern with ** wildcard', function () {
+		expect(new Make.AntPathMatcher('**/a', true).match('a')).toBeTruthy();
+		expect(new Make.AntPathMatcher('**/b', true).match('a/b')).toBeTruthy();
+		expect(new Make.AntPathMatcher('**/c', true).match('a/b/c')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a/**/b', true).match('a/b')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a/**/c', true).match('a/b/c')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a/**/d', true).match('a/b/c/d')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a/**/d', true).match('a/b/c/d/d')).toBeTruthy();
+
+		expect(new Make.AntPathMatcher('a/**/c', true).match('a/b')).toBeFalsy();
 	});
 
 	it('should tokenize path/pattern', function () {
@@ -61,6 +61,12 @@ describe("Make.AntPathMatcher", function () {
 		expect(target._matchToken('?', '')).toBeFalsy();
 		expect(target._matchToken('a?c', 'ac')).toBeFalsy();
 		expect(target._matchToken('a*c', 'def')).toBeFalsy();
+	});
+
+	it('should consider or ignore case', function () {
+		expect(new Make.AntPathMatcher('a', false).match('A')).toBeTruthy();
+		expect(new Make.AntPathMatcher('a', true).match('A')).toBeFalsy();
+
 	});
 	
 	it('should match token with special characters', function () {
