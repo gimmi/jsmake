@@ -13,7 +13,8 @@
 
 #### Getting started
 
- * Download JsMake, and put it in a place you can reach from the commandline
+ * Download latest release of JSMake by clicking on "Download" button in github, or [here](https://github.com/gimmi/jsmake/archives/master)
+ * Extract JSMake in a place you can reach from the commandline
  * Create a file named "build.js" in your project folder
  * Add the following code to build.js
 
@@ -23,7 +24,8 @@
 			});
 		});
 
- * Save file open a commandline and go to the directory containing build.js you just created
+ * Save file
+ * Open a commandline and go to the directory containing build.js file you just created
  * Run the following command
 
 		path/to/jsmake/jsmake
