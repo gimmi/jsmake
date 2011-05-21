@@ -31,4 +31,4 @@
 
 #### License
 
-See [LICENSE](LICENSE) file included with sources
+See [LICENSE file](https://github.com/gimmi/jsmake/raw/master/LICENSE) included with sources
