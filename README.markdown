@@ -13,7 +13,7 @@
 
 #### Getting started
 
- * Download latest release of JSMake by clicking on "Download" button in github, or [here](https://github.com/gimmi/jsmake/archives/master)
+ * Download latest JSMake package from [here](https://github.com/gimmi/jsmake/archives/master)
  * Extract JSMake in a place you can reach from the commandline
  * Create a file named "build.js" in your project folder
  * Add the following code to build.js
