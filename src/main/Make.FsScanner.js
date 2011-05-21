@@ -14,6 +14,9 @@ Make.FsScanner.prototype = {
 	},
 	scan: function () {
 		var fileNames = [];
+		if (this._includeMatchers.length === 0) {
+			this.include('**/*');
+		}
 		this._scan('.', fileNames);
 		return fileNames;
 	},

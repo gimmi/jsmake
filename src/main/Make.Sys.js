@@ -99,20 +99,10 @@ Make.Sys = {
 		});
 	},
 	runCmd: function (cmd) {
-		var process = java.lang.Runtime.getRuntime().exec(cmd);
-
-		this.printInputStream(process.getInputStream());
-		this.printInputStream(process.getErrorStream());
-
-		return process.exitValue();
+		return runCommand(cmd);
 	},
-	printInputStream: function (inputStream) {
-		var reader, line;
-		reader = new java.io.BufferedReader(new java.io.InputStreamReader(inputStream));
-		while ((line = reader.readLine()) !== null) {
-			this.log(line);
-		}
-		reader.close();
+	getEnvVar: function (name, def) {
+		return java.lang.System.getenv(name) || def;
 	},
 	log: function (msg) {
 		print(msg);

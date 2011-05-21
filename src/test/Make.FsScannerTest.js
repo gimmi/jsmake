@@ -3,42 +3,77 @@
 describe("Make.FsScanner", function () {
 	var files, directories;
 
+
 	beforeEach(function () {
 		files = {
-			'base/.': [
+			'base': [
 				'readme.txt',
 				'build.sh'
 			],
-			'base/./src': [ ],
-			'base/./src/main': [
+			'base/src': [],
+			'base/lib': [
+				'underscore.js'
+			],
+			'base/lib/rhino': [
+				'js.jar',
+				'LICENSE.txt'
+			],
+			'base/lib/jasmine': [
+				'jasmine.css',
+				'jasmine.js',
+				'jasmine-html.js',
+				'MIT-LICENSE'
+			],
+			'base/src/main': [
 				'Main.js',
 				'Core.js',
 				'Helpers.js'
 			],
-			'base/./src/test': [
+			'base/src/test': [
 				'MainTests.js',
 				'CoreTests.js',
 				'HelpersTests.js'
 			]
 		};
 		directories = {
-			'base/.': [
-				'src'
+			'base': [
+				'src',
+				'lib'
 			],
-			'base/./src': [
+			'base/src': [
 				'main',
 				'test'
+			],
+			'base/lib': [
+				'rhino',
+				'jasmine'
 			]
 		};
+
+		function cleanPath(path) {
+			return Make.Utils.filter(path.split('/'), function (part) {
+				return (part.length > 0) && (part !== '.');
+			}).join('/');
+		}
+
 		spyOn(Make.Sys, 'getFiles').andCallFake(function (path) {
-			return files[path];
+			return files[cleanPath(path)];
 		});
 		spyOn(Make.Sys, 'getDirectories').andCallFake(function (path) {
-			return directories[path];
+			return directories[cleanPath(path)];
 		});
 		spyOn(Make.Sys, 'combinePath').andCallFake(function (path1, path2) {
 			return [path1, path2].join('/');
 		});
+	});
+
+	it('should include **/* when no include filter specified', function () {
+		var actual = new Make.FsScanner('base/lib/rhino').scan();
+
+		expect(actual).toEqual([
+			'./js.jar',
+			'./LICENSE.txt'
+		]);
 	});
 
 	it("should traverse directory tree from base path", function () {
@@ -52,7 +87,14 @@ describe("Make.FsScanner", function () {
 			'./src/main/Helpers.js',
 			'./src/test/MainTests.js',
 			'./src/test/CoreTests.js',
-			'./src/test/HelpersTests.js'
+			'./src/test/HelpersTests.js',
+			'./lib/underscore.js',
+			'./lib/rhino/js.jar',
+			'./lib/rhino/LICENSE.txt',
+			'./lib/jasmine/jasmine.css',
+			'./lib/jasmine/jasmine.js',
+			'./lib/jasmine/jasmine-html.js',
+			'./lib/jasmine/MIT-LICENSE'
 		]);
 	});
 
@@ -65,7 +107,10 @@ describe("Make.FsScanner", function () {
 			'./src/main/Helpers.js',
 			'./src/test/MainTests.js',
 			'./src/test/CoreTests.js',
-			'./src/test/HelpersTests.js'
+			'./src/test/HelpersTests.js',
+			'./lib/underscore.js',
+			'./lib/jasmine/jasmine.js',
+			'./lib/jasmine/jasmine-html.js'
 		]);
 	});
 
@@ -74,7 +119,11 @@ describe("Make.FsScanner", function () {
 
 		expect(actual).toEqual([
 			'./readme.txt',
-			'./build.sh'
+			'./build.sh',
+			'./lib/rhino/js.jar',
+			'./lib/rhino/LICENSE.txt',
+			'./lib/jasmine/jasmine.css',
+			'./lib/jasmine/MIT-LICENSE'
 		]);
 	});
 
