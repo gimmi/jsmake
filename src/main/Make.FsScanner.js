@@ -25,7 +25,7 @@ Make.FsScanner.prototype = {
 		Make.Utils.each(Make.Sys.getFiles(fullPath), function (fileName) {
 			fileName = Make.Sys.combinePath(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
-				fileNames.push(fileName);
+				fileNames.push(Make.Sys.combinePath(this._basePath, fileName));
 			}
 		}, this);
 		Make.Utils.each(Make.Sys.getDirectories(fullPath), function (dir) {

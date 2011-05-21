@@ -28,7 +28,7 @@ project('jsmake', 'build', function () {
 		var files = new Make.FsScanner('src').include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
-			var content = '/*global Make: true, java, toString */\n' + sys.readFile(sys.combinePath('src', file));
+			var content = '/*global Make: true, java, toString */\n' + sys.readFile(file);
 			JSLINT(content, { white: true, onevar: true, undef: true, regexp: true, plusplus: true, bitwise: true, newcap: true, rhino: true });
 			utils.each(JSLINT.errors, function (error) {
 				if (error) {
@@ -64,17 +64,20 @@ project('jsmake', 'build', function () {
 
 	task('build', [ 'compile' ], function () {
 		var files = new Make.FsScanner('src/main')
-				.include('**/*')
 				.exclude('**/*.js')
 				.scan();
 		utils.each(files, function (file) {
-			sys.copyFileToDirectory(sys.combinePath('src/main', file), buildPath);
+			sys.copyFileToDirectory(file, buildPath);
 		}, this);
 		sys.copyFileToDirectory('lib/main/rhino-1.7r2/js.jar', buildPath);
 	});
 
 	task('clean', [], function () {
 		sys.deletePath(buildPath);
+	});
+	
+	task('runcmd', [], function () {
+		sys.runCmd(sys.getEnvVar('SystemRoot') + '/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe');
 	});
 });
 
