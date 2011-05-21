@@ -23,8 +23,8 @@ project('jsmake', 'build', function () {
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var buildPath = 'build';
 	var version = '0.8.0';
+	var buildPath = 'build/jsmake-' + version;
 
 	task('jslint', [], function () {
 		var files = fs.createScanner('src').include('**/*.js').scan();
@@ -76,10 +76,6 @@ project('jsmake', 'build', function () {
 
 	task('clean', [], function () {
 		fs.deletePath(buildPath);
-	});
-	
-	task('runcmd', [], function () {
-		fs.runCmd(fs.getEnvVar('SystemRoot') + '/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe');
 	});
 });
 
