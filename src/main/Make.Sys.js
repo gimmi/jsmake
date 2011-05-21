@@ -1,4 +1,7 @@
 Make.Sys = {
+	createScanner: function (basePath) {
+		return new Make.FsScanner(basePath, this.isFsCaseSensitive());
+	},
 	getDefaultFileEncoding: function () {
 		return java.lang.System.getProperty("file.encoding", "UTF-8"); // Windows default is "Cp1252"
 	},
