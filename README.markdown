@@ -7,7 +7,7 @@
  * It's cross platform, supporting both Windows and *nix environment
  * It's very lightweight, it's meant to be included directly in your project repository so you don't have to do exotic setup just to build your project
  * It only require Java to run, and should work anywhere Java works
- * Thanks to Rhino, you get interactive debugging of your build script without installing anything else, just run jsmaked instead of jsmake
+ * Thanks to Rhino, you get interactive debugging of your build script without installing anything else, just run jsmaked instead of jsmake ([more info](http://www.mozilla.org/rhino/debugger.html))
  * You can include external JS libraries like [JSLint](http://www.jslint.com/), [Underscore.js](http://documentcloud.github.com/underscore/), [XRegExp](http://xregexp.com/), ... and use it to develop your build script
  * You can easly use any Java class or library, thanks to Rhino interoperability
 
