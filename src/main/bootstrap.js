@@ -1,10 +1,7 @@
-(function (args) {
+(function (global, args) {
+	load(args[0]);
 	var main = new Make.Main();
-	main.initGlobalScope(this);
-	if (!Make.Fs.fileExists('build.js')) {
-		Make.Sys.log('File build.js not found in current directory.');
-	} else {
-		Make.Sys.loadJavascriptFile('build.js');
-		main.run(args);
-	}
-}(arguments));
+	main.initGlobalScope(global);
+	load('build.js');
+	main.run(args.slice(1));
+}(this, arguments));

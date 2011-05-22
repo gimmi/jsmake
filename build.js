@@ -47,9 +47,7 @@ project('jsmake', 'build', function () {
 	});
 
 	task('compile', [ 'jslint' ], function () {
-		var mainFiles = JSMAKE_FILES.slice();
-		mainFiles.push('src/main/bootstrap.js');
-		mainFiles = utils.map(mainFiles, function (file) {
+		var content = utils.map(JSMAKE_FILES, function (file) {
 			return fs.readFile(file);
 		});
 
@@ -59,19 +57,15 @@ project('jsmake', 'build', function () {
 		header.push('');
 		header.push(fs.readFile('LICENSE'));
 		header.push('*/');
-		mainFiles.unshift(header.join('\n'));
+		content.unshift(header.join('\n'));
 
-		fs.writeFile(fs.combinePath(buildPath, 'jsmake.js'), mainFiles.join('\n'));
+		fs.writeFile(fs.combinePath(buildPath, 'jsmake.js'), content.join('\n'));
 	});
 
 	task('build', [ 'compile' ], function () {
-		var files = fs.createScanner('src/main')
-				.exclude('**/*.js')
-				.scan();
-		utils.each(files, function (file) {
+		utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r2/js.jar' ], function (file) {
 			fs.copyFileToDirectory(file, buildPath);
-		}, this);
-		fs.copyFileToDirectory('lib/main/rhino-1.7r2/js.jar', buildPath);
+		});
 	});
 
 	task('clean', [], function () {
