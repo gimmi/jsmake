@@ -46,6 +46,19 @@ describe("Make.Utils", function () {
 		expect(target.isNumber(NaN)).toBe(false);
 	});
 
+	it('toArray', function () {
+		expect(target.toArray()).toEqual([]);
+		expect(target.toArray(null)).toEqual([]);
+		expect(target.toArray(undefined)).toEqual([]);
+		expect(target.toArray([ 1, 2 ])).toEqual([ 1, 2 ]);
+		expect(target.toArray(1)).toEqual([ 1 ]);
+		expect(target.toArray('str')).toEqual([ 'str' ]);
+		expect(target.toArray('')).toEqual([ '' ]);
+		(function () {
+			expect(target.toArray(arguments)).toEqual([ 1, 2, 3 ]);
+		}(1, 2, 3));
+	});
+
 	it("trim", function () {
 		expect(target.trim(' a ')).toBe('a');
 		expect(target.trim('')).toBe('');

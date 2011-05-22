@@ -8,6 +8,17 @@ Make.Utils = {
 	isArguments: function (v) {
 		return !!(v && hasOwnProperty.call(v, 'callee'));
 	},
+	toArray: function (v) {
+		if(this.isEmpty(v)) {
+			return [];
+		} else if(this.isArray(v)) {
+			return v;
+		} else if(this.isArguments(v)) {
+			return Array.prototype.slice.call(v);
+		} else {
+			return [ v ];
+		}
+	},
 	isObject : function (v) {
 		return !!v && Object.prototype.toString.call(v) === '[object Object]';
 	},
