@@ -23,7 +23,7 @@ project('jsmake', 'build', function () {
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var version = '0.8.0';
+	var version = '0.8.1';
 	var buildPath = 'build/jsmake-' + version;
 
 	task('jslint', [], function () {
