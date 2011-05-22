@@ -9,11 +9,11 @@ Make.Utils = {
 		return !!(v && hasOwnProperty.call(v, 'callee'));
 	},
 	toArray: function (v) {
-		if(this.isEmpty(v)) {
+		if (this.isEmpty(v)) {
 			return [];
-		} else if(this.isArray(v)) {
+		} else if (this.isArray(v)) {
 			return v;
-		} else if(this.isArguments(v)) {
+		} else if (this.isArguments(v)) {
 			return Array.prototype.slice.call(v);
 		} else {
 			return [ v ];
@@ -33,9 +33,6 @@ Make.Utils = {
 	},
 	each: function (items, fn, scope) {
 		var key;
-		if (items === null || items === undefined) {
-			return;
-		}
 		if (this.isObject(items)) {
 			for (key in items) {
 				if (items.hasOwnProperty(key)) {
@@ -44,14 +41,13 @@ Make.Utils = {
 					}
 				}
 			}
-		} else if (this.isArray(items) || this.isArguments(items)) {
+		} else {
+			items = this.toArray(items);
 			for (key = 0; key < items.length; key += 1) {
 				if (fn.call(scope, items[key], key, items)) {
 					return;
 				}
 			}
-		} else {
-			fn.call(scope, items, undefined, items);
 		}
 	},
 	filter: function (items, fn, scope) {

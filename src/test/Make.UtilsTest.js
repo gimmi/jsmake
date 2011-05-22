@@ -116,14 +116,13 @@ describe("Make.Utils", function () {
 		});
 		
 		it('should just pass parameter when not object or array', function () {
-			var items, fn, scope;
-			items = 123;
+			var fn, scope;
 			fn = jasmine.createSpy();
 			scope = {};
 
-			target.each(items, fn, scope);
+			target.each(123, fn, scope);
 
-			expect(fn).toHaveBeenCalledWith(123, undefined, items);
+			expect(fn).toHaveBeenCalledWith(123, 0, [ 123 ]);
 			expect(fn.callCount).toEqual(1);
 			expect(fn.mostRecentCall.object).toBe(scope);
 		});
