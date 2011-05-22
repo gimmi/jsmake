@@ -5,6 +5,9 @@ Make.Utils = {
 	isArray: function (v) {
 		return toString.apply(v) === '[object Array]';
 	},
+	isArguments: function (v) {
+		return !!(v && hasOwnProperty.call(v, 'callee'));
+	},
 	isObject : function (v) {
 		return !!v && Object.prototype.toString.call(v) === '[object Object]';
 	},
@@ -30,7 +33,7 @@ Make.Utils = {
 					}
 				}
 			}
-		} else if (this.isArray(items)) {
+		} else if (this.isArray(items) || this.isArguments(items)) {
 			for (key = 0; key < items.length; key += 1) {
 				if (fn.call(scope, items[key], key, items)) {
 					return;

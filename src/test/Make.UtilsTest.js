@@ -17,6 +17,16 @@ describe("Make.Utils", function () {
 		expect(target.isArray(null)).toBe(false);
 	});
 	
+	it("isArguments", function () {
+		expect(target.isArguments(arguments)).toBe(true);
+		expect(target.isArguments([])).toBe(false);
+		expect(target.isArguments({})).toBe(false);
+		expect(target.isArguments(123)).toBe(false);
+		expect(target.isArguments('')).toBe(false);
+		expect(target.isArguments('a string')).toBe(false);
+		expect(target.isArguments(null)).toBe(false);
+	});
+
 	it("isObject", function () {
 		expect(target.isObject()).toBe(false);
 		expect(target.isObject([])).toBe(false);
@@ -112,6 +122,18 @@ describe("Make.Utils", function () {
 			target.each(undefined, fn);
 			
 			expect(fn).not.toHaveBeenCalled();
+		});
+
+		it('should work with "arguments" parameter', function () {
+			var fn = jasmine.createSpy();
+
+			(function () {
+				target.each(arguments, fn);
+			}(1, 2, 3));
+
+			expect(fn).toHaveBeenCalledWith(1, 0, jasmine.any(Object));
+			expect(fn).toHaveBeenCalledWith(2, 1, jasmine.any(Object));
+			expect(fn).toHaveBeenCalledWith(3, 2, jasmine.any(Object));
 		});
 	});
 	
