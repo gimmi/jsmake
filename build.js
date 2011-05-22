@@ -40,8 +40,8 @@ project('jsmake', 'build', function () {
 		});
 
 		if (errors.length) {
-			fs.log('JSLint found ' + errors.length + ' errors');
-			fs.log(errors.join('\n'));
+			sys.log('JSLint found ' + errors.length + ' errors');
+			sys.log(errors.join('\n'));
 			throw 'Fatal error, see previous messages.';
 		}
 	});
