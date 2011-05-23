@@ -7,7 +7,7 @@ Make.Utils = {
 		return Object.prototype.toString.apply(v) === '[object Array]';
 	},
 	isArguments: function (v) {
-		return !!(v && hasOwnProperty.call(v, 'callee'));
+		return !!(v && Object.prototype.hasOwnProperty.call(v, 'callee'));
 	},
 	toArray: function (v) {
 		if (this.isEmpty(v)) {
