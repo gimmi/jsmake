@@ -210,6 +210,27 @@ describe("Make.Utils", function () {
 		expect(fn.mostRecentCall.object).toBe(scope);
 	});
 
+	it('flatten', function () {
+		var actual;
+
+		(function () {
+			actual = target.flatten(arguments);
+		}(1, [ 2, 3 ]));
+		expect(actual).toEqual([ 1, 2, 3 ]);
+
+		actual = target.flatten([ 4, 5, 6 ]);
+		expect(actual).toEqual([ 4, 5, 6 ]);
+
+		actual = target.flatten([ 1, [ 2, [ 3, 4 ]], 5, 6 ]);
+		expect(actual).toEqual([ 1, 2, 3, 4, 5, 6 ]);
+
+		actual = target.flatten();
+		expect(actual).toEqual([]);
+
+		actual = target.flatten(null);
+		expect(actual).toEqual([]);
+	});
+
 	it('escapeForRegex', function () {
 		expect(target.escapeForRegex('-')).toEqual('\\-');
 		expect(target.escapeForRegex('[')).toEqual('\\[');
