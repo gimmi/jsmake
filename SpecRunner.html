@@ -1,39 +1,40 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>Jasmine Test Runner</title>
-  <link rel="stylesheet" type="text/css" href="lib/test/jasmine-1.0.2/jasmine.css">
-  <script type="text/javascript" src="lib/test/jasmine-1.0.2/jasmine.js"></script>
-  <script type="text/javascript" src="lib/test/jasmine-1.0.2/jasmine-html.js"></script>
+	<title>Jasmine Test Runner</title>
+	<link rel="stylesheet" type="text/css" href="lib/test/jasmine-1.0.2/jasmine.css">
+	<script type="text/javascript" src="lib/test/jasmine-1.0.2/jasmine.js"></script>
+	<script type="text/javascript" src="lib/test/jasmine-1.0.2/jasmine-html.js"></script>
 
-  <!-- include source files here... -->
-  <script type="text/javascript" src="src/main/Globals.js"></script>
-  <script type="text/javascript" src="src/main/Make.js"></script>
-  <script type="text/javascript" src="src/main/Make.Utils.js"></script>
-  <script type="text/javascript" src="src/main/Make.Sys.js"></script>
-  <script type="text/javascript" src="src/main/Make.Fs.js"></script>
-  <script type="text/javascript" src="src/main/Make.Project.js"></script>
-  <script type="text/javascript" src="src/main/Make.Task.js"></script>
-  <script type="text/javascript" src="src/main/Make.RecursionChecker.js"></script>
-  <script type="text/javascript" src="src/main/Make.AntPathMatcher.js"></script>
-  <script type="text/javascript" src="src/main/Make.FsScanner.js"></script>
-  <script type="text/javascript" src="src/main/Make.Main.js"></script>
+	<!-- include source files here... -->
+	<script type="text/javascript" src="src/main/Make.js"></script>
+	<script type="text/javascript" src="src/main/Make.Utils.js"></script>
+	<script type="text/javascript" src="src/main/Make.Sys.js"></script>
+	<script type="text/javascript" src="src/main/Make.Fs.js"></script>
+	<script type="text/javascript" src="src/main/Make.Project.js"></script>
+	<script type="text/javascript" src="src/main/Make.Task.js"></script>
+	<script type="text/javascript" src="src/main/Make.RecursionChecker.js"></script>
+	<script type="text/javascript" src="src/main/Make.AntPathMatcher.js"></script>
+	<script type="text/javascript" src="src/main/Make.FsScanner.js"></script>
+	<script type="text/javascript" src="src/main/Make.Main.js"></script>
+	<script type="text/javascript" src="src/main/Make.CommandRunner.js"></script>
 
-  <!-- include spec files here... -->
-  <script type="text/javascript" src="src/test/Make.UtilsTest.js"></script>
-  <script type="text/javascript" src="src/test/Make.RecursionCheckerTest.js"></script>
-  <script type="text/javascript" src="src/test/Make.ProjectTest.js"></script>
-  <script type="text/javascript" src="src/test/Make.TaskTest.js"></script>
-  <script type="text/javascript" src="src/test/Make.AntPathMatcherTest.js"></script>
-  <script type="text/javascript" src="src/test/Make.FsScannerTest.js"></script>
+	<!-- include spec files here... -->
+	<script type="text/javascript" src="src/test/Make.UtilsTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.RecursionCheckerTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.ProjectTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.TaskTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.AntPathMatcherTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.FsScannerTest.js"></script>
 	<script type="text/javascript" src="src/test/Make.MainTest.js"></script>
+	<script type="text/javascript" src="src/test/Make.CommandRunnerTest.js"></script>
 
 </head>
 <body>
 
 <script type="text/javascript">
-  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-  jasmine.getEnv().execute();
+	jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+	jasmine.getEnv().execute();
 </script>
 
 </body>

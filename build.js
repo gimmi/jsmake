@@ -8,6 +8,7 @@ JSMAKE_FILES = [
 	'src/main/Make.Sys.js',
 	'src/main/Make.Fs.js',
 	'src/main/Make.FsScanner.js',
+	'src/main/Make.CommandRunner.js',
 	'src/main/Make.Main.js'
 ];
 for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
@@ -23,7 +24,7 @@ project('jsmake', 'build', function () {
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var version = '0.8.1';
+	var version = '0.8.2';
 	var buildPath = 'build/jsmake-' + version;
 
 	task('jslint', [], function () {

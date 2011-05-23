@@ -89,8 +89,8 @@ Make.Utils = {
 		}, this);
 		return ret;
 	},
-	flatten: function(items) {
-		return this.reduce(items, function(memo, item) {
+	flatten: function (items) {
+		return this.reduce(items, function (memo, item) {
 			if (this.isArray(item)) {
 				memo = memo.concat(this.flatten(item));
 			} else {
