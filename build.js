@@ -24,7 +24,7 @@ project('jsmake', 'build', function () {
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var version = '0.8.2';
+	var version = '0.8.3';
 	var buildPath = 'build/jsmake-' + version;
 
 	task('jslint', [], function () {
@@ -64,7 +64,7 @@ project('jsmake', 'build', function () {
 	});
 
 	task('build', [ 'compile' ], function () {
-		utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r2/js.jar' ], function (file) {
+		utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r3/js.jar' ], function (file) {
 			fs.copyFileToDirectory(file, buildPath);
 		});
 	});
