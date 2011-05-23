@@ -15,6 +15,7 @@ describe("Make.Utils", function () {
 		expect(target.isArray('')).toBe(false);
 		expect(target.isArray('a string')).toBe(false);
 		expect(target.isArray(null)).toBe(false);
+		expect(target.isArray(arguments)).toBe(false);
 	});
 	
 	it("isArguments", function () {
@@ -35,6 +36,7 @@ describe("Make.Utils", function () {
 		expect(target.isObject('')).toBe(false);
 		expect(target.isObject('a string')).toBe(false);
 		expect(target.isObject(null)).toBe(false);
+		expect(target.isObject(arguments)).toBe(false);
 	});
 	
 	it("isNumber", function () {
@@ -44,6 +46,7 @@ describe("Make.Utils", function () {
 		expect(target.isNumber(undefined)).toBe(false);
 		expect(target.isNumber(null)).toBe(false);
 		expect(target.isNumber(NaN)).toBe(false);
+		expect(target.isNumber(arguments)).toBe(false);
 	});
 
 	it('toArray', function () {
