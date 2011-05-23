@@ -1,10 +1,15 @@
-/*global Make, jasmine, describe, beforeEach, expect, it */
+/*global Make, jasmine, describe, beforeEach, expect, it, xit, toString */
 
 describe("Make.Utils", function () {
 	var target;
 
 	beforeEach(function () {
 		target = Make.Utils;
+	});
+
+	xit('isArray should show strange behavior on Firefox', function () {
+		expect(toString.apply([])).toBe('[xpconnect wrapped native prototype]');
+		expect(Object.prototype.toString.apply([])).toBe('[object Array]');
 	});
 
 	it("isArray", function () {

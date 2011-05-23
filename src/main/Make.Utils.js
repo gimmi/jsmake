@@ -3,7 +3,8 @@ Make.Utils = {
 		return str.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	},
 	isArray: function (v) {
-		return toString.apply(v) === '[object Array]';
+		// Check ignored test 'isArray should show strange behavior on Firefox'
+		return Object.prototype.toString.apply(v) === '[object Array]';
 	},
 	isArguments: function (v) {
 		return !!(v && hasOwnProperty.call(v, 'callee'));

@@ -31,7 +31,7 @@ project('jsmake', 'build', function () {
 		var files = fs.createScanner('src').include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
-			var content = '/*global Make: true, java, toString */\n' + fs.readFile(file);
+			var content = '/*global Make: true, java */\n' + fs.readFile(file);
 			JSLINT(content, { white: true, onevar: true, undef: true, regexp: true, plusplus: true, bitwise: true, newcap: true, rhino: true });
 			utils.each(JSLINT.errors, function (error) {
 				if (error) {
