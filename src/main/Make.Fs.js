@@ -20,35 +20,13 @@ Make.Fs = {
 	getName: function (path) {
 		return this._translateJavaString(new java.io.File(path).getName());
 	},
-	copyDirectory: function (srcPath, destPath) {
-		this.createDirectory(destPath);
-		Make.Utils.each(this.getFiles(srcPath), function (path) {
-			this.copyFileToDirectory(this.combinePaths(srcPath, path), destPath);
-		}, this);
-		Make.Utils.each(this.getDirectories(srcPath), function (path) {
-			this.copyDirectory(this.combinePaths(srcPath, path), this.combinePaths(destPath, path));
-		}, this);
-	},
-	copyFileToDirectory: function (srcPath, destPath) {
-		this.copyFileToFile(srcPath, this.combinePaths(destPath, this.getName(srcPath)));
-	},
-	copyFileToFile: function (srcPath, destPath) {
-		var srcFile, destFile, output, input, buffer, n;
-		srcFile = new java.io.File(srcPath);
-		destFile = new java.io.File(destPath);
-		input = new java.io.FileInputStream(srcFile);
-		try {
-			output = new java.io.FileOutputStream(destFile);
-			try {
-				buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024 * 4);
-				while (-1 !== (n = input.read(buffer))) {
-					output.write(buffer, 0, n);
-				}
-			} finally {
-				output.close();
-			}
-		} finally {
-			input.close();
+	copyPath: function (srcPath, destDirectory) {
+		if (this.fileExists(srcPath)) {
+			this._copyFile(srcPath, destDirectory);
+		} else if (this.directoryExists(srcPath)) {
+			this._copyDirectory(srcPath, destDirectory);
+		} else {
+			throw "Cannot copy source path '" + srcPath + "', it does not exists";
 		}
 	},
 	writeFile: function (path, data, encoding) {
@@ -118,6 +96,41 @@ Make.Fs = {
 		return this._getFiles(basePath, function (fileName) {
 			return new java.io.File(fileName).isDirectory();
 		});
+	},
+	_copyDirectory: function (srcDirectory, destDirectory) {
+		this.deletePath(destDirectory);
+		this.createDirectory(destDirectory);
+		Make.Utils.each(this.getFiles(srcDirectory), function (path) {
+			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
+		}, this);
+		Make.Utils.each(this.getDirectories(srcDirectory), function (path) {
+			this.copyPath(this.combinePaths(srcDirectory, path), this.combinePaths(destDirectory, path));
+		}, this);
+	},
+	_copyFile: function (srcFile, destDirectory) {
+		var destFile = this.combinePaths(destDirectory, this.getName(srcFile));
+		this.deletePath(destFile);
+		this.createDirectory(destDirectory);
+		this._copyFileToFile(srcFile, destFile);
+	},
+	_copyFileToFile: function (srcPath, destPath) {
+		var srcFile, destFile, output, input, buffer, n;
+		srcFile = new java.io.File(srcPath);
+		destFile = new java.io.File(destPath);
+		input = new java.io.FileInputStream(srcFile);
+		try {
+			output = new java.io.FileOutputStream(destFile);
+			try {
+				buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024 * 4);
+				while (-1 !== (n = input.read(buffer))) {
+					output.write(buffer, 0, n);
+				}
+			} finally {
+				output.close();
+			}
+		} finally {
+			input.close();
+		}
 	},
 	_getFiles: function (basePath, filter) {
 		var fileFilter, files;

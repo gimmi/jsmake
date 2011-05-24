@@ -34,7 +34,7 @@ project('jsmake', 'release', function () {
 	task('release', [ 'build' ], function () {
 		version.patch += 1;
 		fs.writeFile('version.json', JSON.stringify(version));
-		fs.copyDirectory(buildPath, buildPath + '-' + versionString)
+		fs.copyPath(buildPath, buildPath + '-' + versionString);
 	});
 
 	task('jslint', [], function () {
@@ -75,7 +75,7 @@ project('jsmake', 'release', function () {
 
 	task('build', [ 'compile' ], function () {
 		utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r3/js.jar' ], function (file) {
-			fs.copyFileToDirectory(file, buildPath);
+			fs.copyPath(file, buildPath);
 		});
 	});
 
