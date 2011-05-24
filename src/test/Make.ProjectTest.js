@@ -66,7 +66,7 @@ describe("Make.Project", function () {
 			execution.push(3);
 		});
 
-		target.run('t1');
+		target.runTask('t1');
 
 		expect(execution).toEqual([ 2, 3, 1 ]);
 		expect(logger.log).toHaveBeenCalledWith('Task execution order: t2, t3, t1');
@@ -84,7 +84,7 @@ describe("Make.Project", function () {
 			t3Args = arguments;
 		});
 
-		target.run('t1', [ 1, 2, 3 ]);
+		target.runTask('t1', [ 1, 2, 3 ]);
 
 		expect(t1Args).toEqual([ 1, 2, 3 ]);
 		expect(t2Args).toEqual([]);
@@ -95,7 +95,7 @@ describe("Make.Project", function () {
 		var taskBody = jasmine.createSpy();
 		createTask('default task', [], taskBody);
 		
-		target.run();
+		target.runTask();
 		
 		expect(taskBody).toHaveBeenCalled();
 	});

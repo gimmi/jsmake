@@ -4,5 +4,5 @@
 	main.initGlobalScope(global);
 	load('build.js');
 	main.getProject().runBody(global);
-	main.getProject().run(args.shift(), args);
+	main.getProject().runTask(args.shift(), args);
 }(this, arguments));

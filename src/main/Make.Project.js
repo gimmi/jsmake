@@ -32,7 +32,7 @@ Make.Project.prototype = {
 		this._body.apply({}, []);
 		global.task = undefined;
 	},
-	run: function (name, args) {
+	runTask: function (name, args) {
 		var tasks, taskNames;
 		name = name || this._defaultTaskName;
 		tasks = this.getTasks(name);
