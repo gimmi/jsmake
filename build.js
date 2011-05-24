@@ -60,7 +60,7 @@ project('jsmake', 'build', function () {
 		header.push('*/');
 		content.unshift(header.join('\n'));
 
-		fs.writeFile(fs.combinePath(buildPath, 'jsmake.js'), content.join('\n'));
+		fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
 	});
 
 	task('build', [ 'compile' ], function () {

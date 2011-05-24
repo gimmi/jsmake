@@ -62,7 +62,7 @@ describe("Make.FsScanner", function () {
 		spyOn(Make.Fs, 'getDirectories').andCallFake(function (path) {
 			return directories[cleanPath(path)];
 		});
-		spyOn(Make.Fs, 'combinePath').andCallFake(function (path1, path2) {
+		spyOn(Make.Fs, 'combinePaths').andCallFake(function (path1, path2) {
 			return cleanPath([path1, path2].join('/'));
 		});
 	});

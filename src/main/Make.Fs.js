@@ -21,7 +21,7 @@ Make.Fs = {
 		return this._translateJavaString(new java.io.File(path).getName());
 	},
 	copyFileToDirectory: function (srcPath, destPath) {
-		this.copyFileToFile(srcPath, this.combinePath(destPath, this.getName(srcPath)));
+		this.copyFileToFile(srcPath, this.combinePaths(destPath, this.getName(srcPath)));
 	},
 	copyFileToFile: function (srcPath, destPath) {
 		var srcFile, destFile, output, input, buffer, n;
@@ -81,7 +81,7 @@ Make.Fs = {
 			new java.io.File(path, fileName)['delete']();
 		}, this);
 		Make.Utils.each(this.getDirectories(path), function (dirName) {
-			this.deletePath(this.combinePath(path, dirName));
+			this.deletePath(this.combinePaths(path, dirName));
 		}, this);
 		new java.io.File(path)['delete']();
 	},
@@ -91,7 +91,13 @@ Make.Fs = {
 	getParentDirectory: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
 	},
-	combinePath: function (path1, path2) {
+	combinePaths: function () {
+		var paths = Make.Utils.flatten(arguments);
+		return Make.Utils.reduce(paths, function (memo, path) {
+			return (memo ? this._combine(memo, path) : path);
+		}, null, this);
+	},
+	_combine: function (path1, path2) {
 		return this._translateJavaString(new java.io.File(path1, path2).getPath());
 	},
 	getFiles: function (basePath) {

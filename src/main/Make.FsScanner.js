@@ -22,15 +22,15 @@ Make.FsScanner.prototype = {
 		return fileNames;
 	},
 	_scan: function (relativePath, fileNames) {
-		var fullPath = Make.Fs.combinePath(this._basePath, relativePath);
+		var fullPath = Make.Fs.combinePaths(this._basePath, relativePath);
 		Make.Utils.each(Make.Fs.getFiles(fullPath), function (fileName) {
-			fileName = Make.Fs.combinePath(relativePath, fileName);
+			fileName = Make.Fs.combinePaths(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
-				fileNames.push(Make.Fs.combinePath(this._basePath, fileName));
+				fileNames.push(Make.Fs.combinePaths(this._basePath, fileName));
 			}
 		}, this);
 		Make.Utils.each(Make.Fs.getDirectories(fullPath), function (dir) {
-			dir = Make.Fs.combinePath(relativePath, dir);
+			dir = Make.Fs.combinePaths(relativePath, dir);
 			if (this._evaluatePath(dir, true)) {
 				this._scan(dir, fileNames);
 			}
