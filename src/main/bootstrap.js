@@ -1,7 +1,8 @@
 (function (global, args) {
-	load(args[0]);
+	load(args.shift());
 	var main = new Make.Main();
 	main.initGlobalScope(global);
 	load('build.js');
-	main.run(args.slice(1));
+	main.getProject().runBody(global);
+	main.getProject().run(args.shift(), args);
 }(this, arguments));

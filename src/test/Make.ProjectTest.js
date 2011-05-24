@@ -1,11 +1,12 @@
 /*global Make, jasmine, describe, beforeEach, expect, it */
 
 describe("Make.Project", function () {
-	var target, logger;
+	var target, body, logger;
 
 	beforeEach(function () {
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
-		target = new Make.Project('test project', 'default task', logger);
+		body = jasmine.createSpy();
+		target = new Make.Project('test project', 'default task', body, logger);
 	});
 
 	function createTask(name, tasks, fn) {
@@ -103,5 +104,27 @@ describe("Make.Project", function () {
 		expect(function () {
 			target.getTask('a task');
 		}).toThrow("Task 'a task' not defined");
+	});
+
+	it('project body should run in neutral scope', function () {
+		target.runBody('global');
+
+		expect(body.mostRecentCall.object).toEqual({});
+	});
+
+	it('should initialize all tasks defined in project body', function () {
+		var global = {};
+		body.andCallFake(function () {
+			global.task('a task', [], jasmine.createSpy());
+			global.task('another task', [ 'a task' ], jasmine.createSpy());
+		});
+
+		target.runBody(global);
+
+		expect(global.task).toBeUndefined();
+		expect(target._tasks['a task']).toBeTruthy();
+		expect(target._tasks['a task'].getTaskNames()).toEqual([]);
+		expect(target._tasks['another task']).toBeTruthy();
+		expect(target._tasks['another task'].getTaskNames()).toEqual([ 'a task' ]);
 	});
 });

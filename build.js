@@ -84,5 +84,6 @@ project('jsmake', 'release', function () {
 	});
 });
 
-main.run(arguments);
+main.getProject().runBody(this);
+main.getProject().run(arguments[0], []);
 
