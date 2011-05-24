@@ -19,13 +19,23 @@ load('tools/JSLint-2011.05.10/jslint.js');
 var main = new Make.Main();
 main.initGlobalScope(this);
 
-project('jsmake', 'build', function () {
+project('jsmake', 'release', function () {
 	var sys = Make.Sys;
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var version = '0.8.4';
-	var buildPath = 'build/jsmake-' + version;
+	var version, versionString, buildPath = 'build/jsmake';
+
+	task('init', [], function () {
+		version = JSON.parse(fs.readFile('version.json'));
+		versionString = version.major + '.' + version.minor + '.' + version.patch;
+	});
+
+	task('release', [ 'build' ], function () {
+		version.patch += 1;
+		fs.writeFile('version.json', JSON.stringify(version));
+		fs.copyDirectory(buildPath, buildPath + '-' + versionString)
+	});
 
 	task('jslint', [], function () {
 		var files = fs.createScanner('src').include('**/*.js').scan();
@@ -47,14 +57,14 @@ project('jsmake', 'build', function () {
 		}
 	});
 
-	task('compile', [ 'jslint' ], function () {
+	task('compile', [ 'init', 'jslint' ], function () {
 		var content = utils.map(JSMAKE_FILES, function (file) {
 			return fs.readFile(file);
 		});
 
 		var header = [];
 		header.push('/*');
-		header.push('JSMake version ' + version);
+		header.push('JSMake version ' + versionString);
 		header.push('');
 		header.push(fs.readFile('LICENSE'));
 		header.push('*/');

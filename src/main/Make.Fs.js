@@ -20,6 +20,15 @@ Make.Fs = {
 	getName: function (path) {
 		return this._translateJavaString(new java.io.File(path).getName());
 	},
+	copyDirectory: function (srcPath, destPath) {
+		this.createDirectory(destPath);
+		Make.Utils.each(this.getFiles(srcPath), function (path) {
+			this.copyFileToDirectory(this.combinePaths(srcPath, path), destPath);
+		}, this);
+		Make.Utils.each(this.getDirectories(srcPath), function (path) {
+			this.copyDirectory(this.combinePaths(srcPath, path), this.combinePaths(destPath, path));
+		}, this);
+	},
 	copyFileToDirectory: function (srcPath, destPath) {
 		this.copyFileToFile(srcPath, this.combinePaths(destPath, this.getName(srcPath)));
 	},
