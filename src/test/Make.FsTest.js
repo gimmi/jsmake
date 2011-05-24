@@ -27,7 +27,7 @@ describe("Make.Fs", function () {
 			spyOn(target, 'directoryExists').andReturn(false);
 			expect(function () {
 				target.copyPath('a', 'b');
-			}).toThrow("Cannot copy source path 'a', it does not exists")
+			}).toThrow("Cannot copy source path 'a', it does not exists");
 		});
 	});
 });
