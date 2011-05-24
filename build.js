@@ -24,7 +24,7 @@ project('jsmake', 'build', function () {
 	var fs = Make.Fs;
 	var utils = Make.Utils;
 	
-	var version = '0.8.3';
+	var version = '0.8.4';
 	var buildPath = 'build/jsmake-' + version;
 
 	task('jslint', [], function () {
