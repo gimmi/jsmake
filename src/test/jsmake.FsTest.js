@@ -8,7 +8,7 @@ describe("jsmake.Fs", function () {
 	});
 
 	it('should combine paths', function () {
-		spyOn(target, '_combine').andCallFake(function (p1, p2) {
+		spyOn(target, '_javaCombine').andCallFake(function (p1, p2) {
 			return [ p1, p2 ].join('/');
 		});
 

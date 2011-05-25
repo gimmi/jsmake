@@ -81,11 +81,8 @@ jsmake.Fs = {
 	combinePaths: function () {
 		var paths = jsmake.Utils.flatten(arguments);
 		return jsmake.Utils.reduce(paths, function (memo, path) {
-			return (memo ? this._combine(memo, path) : path);
+			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);
-	},
-	_combine: function (path1, path2) {
-		return this._translateJavaString(new java.io.File(path1, path2).getPath());
 	},
 	getFileNames: function (basePath) {
 		return this._getPathNames(basePath, function (fileName) {
@@ -96,6 +93,9 @@ jsmake.Fs = {
 		return this._getPathNames(basePath, function (fileName) {
 			return new java.io.File(fileName).isDirectory();
 		});
+	},
+	_javaCombine: function (path1, path2) {
+		return this._translateJavaString(new java.io.File(path1, path2).getPath());
 	},
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
