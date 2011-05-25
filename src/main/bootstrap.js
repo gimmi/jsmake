@@ -1,6 +1,6 @@
 (function (global, args) {
 	load(args.shift());
-	var main = new Make.Main();
+	var main = new jsmake.Main();
 	main.initGlobalScope(global);
 	load('build.js');
 	main.getProject().runBody(global);

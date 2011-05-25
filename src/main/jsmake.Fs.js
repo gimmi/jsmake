@@ -1,6 +1,6 @@
-Make.Fs = {
+jsmake.Fs = {
 	createScanner: function (basePath) {
-		return new Make.FsScanner(basePath, this.isCaseSensitive());
+		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
 	},
 	getFileEncoding: function () {
 		return java.lang.System.getProperty("file.encoding", "UTF-8"); // Windows default is "Cp1252"
@@ -9,7 +9,7 @@ Make.Fs = {
 		return java.io.File.separator;
 	},
 	isCaseSensitive: function () {
-		return !Make.Sys.isWindowsOs();
+		return !jsmake.Sys.isWindowsOs();
 	},
 	readFile: function (path) {
 		if (!this.fileExists(path)) {
@@ -64,10 +64,10 @@ Make.Fs = {
 		}
 	},
 	deletePath: function (path) {
-		Make.Utils.each(this.getFiles(path), function (fileName) {
+		jsmake.Utils.each(this.getFiles(path), function (fileName) {
 			new java.io.File(path, fileName)['delete']();
 		}, this);
-		Make.Utils.each(this.getDirectories(path), function (dirName) {
+		jsmake.Utils.each(this.getDirectories(path), function (dirName) {
 			this.deletePath(this.combinePaths(path, dirName));
 		}, this);
 		new java.io.File(path)['delete']();
@@ -79,8 +79,8 @@ Make.Fs = {
 		return this._translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
 	},
 	combinePaths: function () {
-		var paths = Make.Utils.flatten(arguments);
-		return Make.Utils.reduce(paths, function (memo, path) {
+		var paths = jsmake.Utils.flatten(arguments);
+		return jsmake.Utils.reduce(paths, function (memo, path) {
 			return (memo ? this._combine(memo, path) : path);
 		}, null, this);
 	},
@@ -100,10 +100,10 @@ Make.Fs = {
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
 		this.createDirectory(destDirectory);
-		Make.Utils.each(this.getFiles(srcDirectory), function (path) {
+		jsmake.Utils.each(this.getFiles(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
 		}, this);
-		Make.Utils.each(this.getDirectories(srcDirectory), function (path) {
+		jsmake.Utils.each(this.getDirectories(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), this.combinePaths(destDirectory, path));
 		}, this);
 	},
@@ -136,7 +136,7 @@ Make.Fs = {
 		var fileFilter, files;
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
-		return Make.Utils.map(files, function (file) {
+		return jsmake.Utils.map(files, function (file) {
 			return this._translateJavaString(file.getName());
 		}, this);
 	},

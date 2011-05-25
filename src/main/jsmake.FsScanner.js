@@ -1,16 +1,16 @@
-Make.FsScanner = function (basePath, caseSensitive) {
+jsmake.FsScanner = function (basePath, caseSensitive) {
 	this._basePath = basePath;
 	this._includeMatchers = [];
 	this._excludeMatchers = [];
 	this._caseSensitive = caseSensitive;
 };
-Make.FsScanner.prototype = {
+jsmake.FsScanner.prototype = {
 	include: function (pattern) {
-		this._includeMatchers.push(new Make.AntPathMatcher(pattern, this._caseSensitive));
+		this._includeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	exclude: function (pattern) {
-		this._excludeMatchers.push(new Make.AntPathMatcher(pattern, this._caseSensitive));
+		this._excludeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	scan: function () {
@@ -22,15 +22,15 @@ Make.FsScanner.prototype = {
 		return fileNames;
 	},
 	_scan: function (relativePath, fileNames) {
-		var fullPath = Make.Fs.combinePaths(this._basePath, relativePath);
-		Make.Utils.each(Make.Fs.getFiles(fullPath), function (fileName) {
-			fileName = Make.Fs.combinePaths(relativePath, fileName);
+		var fullPath = jsmake.Fs.combinePaths(this._basePath, relativePath);
+		jsmake.Utils.each(jsmake.Fs.getFiles(fullPath), function (fileName) {
+			fileName = jsmake.Fs.combinePaths(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
-				fileNames.push(Make.Fs.combinePaths(this._basePath, fileName));
+				fileNames.push(jsmake.Fs.combinePaths(this._basePath, fileName));
 			}
 		}, this);
-		Make.Utils.each(Make.Fs.getDirectories(fullPath), function (dir) {
-			dir = Make.Fs.combinePaths(relativePath, dir);
+		jsmake.Utils.each(jsmake.Fs.getDirectories(fullPath), function (dir) {
+			dir = jsmake.Fs.combinePaths(relativePath, dir);
 			if (this._evaluatePath(dir, true)) {
 				this._scan(dir, fileNames);
 			}
@@ -47,7 +47,7 @@ Make.FsScanner.prototype = {
 	},
 	_runMatchers: function (matchers, value) {
 		var match = false;
-		Make.Utils.each(matchers, function (matcher) {
+		jsmake.Utils.each(matchers, function (matcher) {
 			match = match || matcher.match(value);
 		}, this);
 		return match;

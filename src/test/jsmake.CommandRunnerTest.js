@@ -1,12 +1,12 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, spyOn */
 
-describe("Make.CommandRunner", function () {
+describe("jsmake.CommandRunner", function () {
 	var target;
 
 	beforeEach(function () {
-		target = new Make.CommandRunner('cmd');
+		target = new jsmake.CommandRunner('cmd');
 		target._logger = jasmine.createSpyObj('logger', [ 'log' ]);
-		spyOn(Make.Sys, 'runCommand');
+		spyOn(jsmake.Sys, 'runCommand');
 	});
 
 	it('should add parameters whit a single call', function () {
@@ -16,15 +16,15 @@ describe("Make.CommandRunner", function () {
 	});
 
 	it('should invoke command with parameters', function () {
-		Make.Sys.runCommand.andReturn(0);
+		jsmake.Sys.runCommand.andReturn(0);
 
 		target.args('p1', 'p2').run();
 
-		expect(Make.Sys.runCommand).toHaveBeenCalledWith('cmd', { args: [ 'p1', 'p2' ]});
+		expect(jsmake.Sys.runCommand).toHaveBeenCalledWith('cmd', { args: [ 'p1', 'p2' ]});
 	});
 
 	it('should throw exception when command fail', function () {
-		Make.Sys.runCommand.andReturn(1);
+		jsmake.Sys.runCommand.andReturn(1);
 
 		expect(function () {
 			target.args('p1', 'p2').run();

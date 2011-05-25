@@ -1,10 +1,10 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, xit, toString */
 
-describe("Make.Utils", function () {
+describe("jsmake.Utils", function () {
 	var target;
 
 	beforeEach(function () {
-		target = Make.Utils;
+		target = jsmake.Utils;
 	});
 
 	xit('isArray should show strange behavior on Firefox', function () {

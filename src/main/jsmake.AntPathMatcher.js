@@ -1,8 +1,8 @@
-Make.AntPathMatcher = function (pattern, caseSensitive) {
+jsmake.AntPathMatcher = function (pattern, caseSensitive) {
 	this._pattern = pattern;
 	this._caseSensitive = caseSensitive;
 };
-Make.AntPathMatcher.prototype = {
+jsmake.AntPathMatcher.prototype = {
 	match: function (path) {
 		var patternTokens, pathTokens;
 		patternTokens = this._tokenize(this._pattern);
@@ -41,17 +41,17 @@ Make.AntPathMatcher.prototype = {
 			} else if (ch === '?') {
 				regex += '.{1}';
 			} else {
-				regex += Make.Utils.escapeForRegex(ch);
+				regex += jsmake.Utils.escapeForRegex(ch);
 			}
 		}
 		return new RegExp(regex, (this._caseSensitive ? '' : 'i')).test(pathToken);
 	},
 	_tokenize: function (pattern) {
 		var tokens = pattern.split(/\\+|\/+/);
-		tokens = Make.Utils.map(tokens, function (token) {
-			return Make.Utils.trim(token);
+		tokens = jsmake.Utils.map(tokens, function (token) {
+			return jsmake.Utils.trim(token);
 		}, this);
-		tokens = Make.Utils.filter(tokens, function (token) {
+		tokens = jsmake.Utils.filter(tokens, function (token) {
 			return !/^[\s\.]*$/.test(token);
 		}, this);
 		if (tokens[tokens.length - 1] === '**') {

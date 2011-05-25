@@ -1,11 +1,11 @@
-Make.Project = function (name, defaultTaskName, body, logger) {
+jsmake.Project = function (name, defaultTaskName, body, logger) {
 	this._name = name;
 	this._defaultTaskName = defaultTaskName;
 	this._tasks = {};
 	this._body = body;
 	this._logger = logger;
 };
-Make.Project.prototype = {
+jsmake.Project.prototype = {
 	getName: function () {
 		return this._name;
 	},
@@ -21,13 +21,13 @@ Make.Project.prototype = {
 	},
 	getTasks: function (name) {
 		var tasks = [];
-		this._fillDependencies(this.getTask(name), tasks, new Make.RecursionChecker('Task recursion found'));
-		return Make.Utils.distinct(tasks);
+		this._fillDependencies(this.getTask(name), tasks, new jsmake.RecursionChecker('Task recursion found'));
+		return jsmake.Utils.distinct(tasks);
 	},
 	runBody: function (global) {
 		var me = this;
 		global.task = function (name, tasks, body) {
-			me.addTask(new Make.Task(name, tasks, body, me._logger));
+			me.addTask(new jsmake.Task(name, tasks, body, me._logger));
 		};
 		this._body.apply({}, []);
 		global.task = undefined;
@@ -36,17 +36,17 @@ Make.Project.prototype = {
 		var tasks, taskNames;
 		name = name || this._defaultTaskName;
 		tasks = this.getTasks(name);
-		taskNames = Make.Utils.map(tasks, function (task) {
+		taskNames = jsmake.Utils.map(tasks, function (task) {
 			return task.getName();
 		}, this);
 		this._logger.log('Task execution order: ' + taskNames.join(', '));
-		Make.Utils.each(tasks, function (task) {
+		jsmake.Utils.each(tasks, function (task) {
 			task.run(task.getName() === name ? args : []);
 		}, this);
 	},
 	_fillDependencies: function (task, tasks, recursionChecker) {
 		recursionChecker.wrap(task.getName(), function () {
-			Make.Utils.each(task.getTaskNames(), function (taskName) {
+			jsmake.Utils.each(task.getTaskNames(), function (taskName) {
 				var task = this.getTask(taskName);
 				this._fillDependencies(task, tasks, recursionChecker);
 			}, this);

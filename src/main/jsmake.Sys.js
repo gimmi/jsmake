@@ -1,15 +1,15 @@
-Make.Sys = {
+jsmake.Sys = {
 	loadJavascriptFile: function (file) {
 		load(file);
 	},
 	isWindowsOs: function () {
-		return Make.Fs.getPathSeparator() === '\\';
+		return jsmake.Fs.getPathSeparator() === '\\';
 	},
 	runCommand: function (command, opts) {
 		return runCommand(command, opts);
 	},
 	createRunner: function (command) {
-		return new Make.CommandRunner(command);
+		return new jsmake.CommandRunner(command);
 	},
 	getEnvVar: function (name, def) {
 		return java.lang.System.getenv(name) || def;

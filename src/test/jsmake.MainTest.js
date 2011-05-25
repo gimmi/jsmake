@@ -1,10 +1,10 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, spyOn */
 
-describe("Make.Main", function () {
+describe("jsmake.Main", function () {
 	var target;
 
 	beforeEach(function () {
-		target = new Make.Main();
+		target = new jsmake.Main();
 		target._logger = jasmine.createSpyObj('logger', [ 'log' ]);
 	});
 

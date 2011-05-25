@@ -1,28 +1,28 @@
 JSMAKE_FILES = [
-	'src/main/Make.js',
-	'src/main/Make.Utils.js',
-	'src/main/Make.Project.js',
-	'src/main/Make.Task.js',
-	'src/main/Make.RecursionChecker.js',
-	'src/main/Make.AntPathMatcher.js',
-	'src/main/Make.Sys.js',
-	'src/main/Make.Fs.js',
-	'src/main/Make.FsScanner.js',
-	'src/main/Make.CommandRunner.js',
-	'src/main/Make.Main.js'
+	'src/main/jsmake.js',
+	'src/main/jsmake.Utils.js',
+	'src/main/jsmake.Project.js',
+	'src/main/jsmake.Task.js',
+	'src/main/jsmake.RecursionChecker.js',
+	'src/main/jsmake.AntPathMatcher.js',
+	'src/main/jsmake.Sys.js',
+	'src/main/jsmake.Fs.js',
+	'src/main/jsmake.FsScanner.js',
+	'src/main/jsmake.CommandRunner.js',
+	'src/main/jsmake.Main.js'
 ];
 for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
 	load(JSMAKE_FILES[i]);
 }
 load('tools/JSLint-2011.05.10/jslint.js');
 
-var main = new Make.Main();
+var main = new jsmake.Main();
 main.initGlobalScope(this);
 
 project('jsmake', 'release', function () {
-	var sys = Make.Sys;
-	var fs = Make.Fs;
-	var utils = Make.Utils;
+	var sys = jsmake.Sys;
+	var fs = jsmake.Fs;
+	var utils = jsmake.Utils;
 	
 	var version, versionString, buildPath = 'build/jsmake';
 
@@ -41,7 +41,7 @@ project('jsmake', 'release', function () {
 		var files = fs.createScanner('src').include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
-			var content = '/*global Make: true, java */\n' + fs.readFile(file);
+			var content = '/*global jsmake: true, java */\n' + fs.readFile(file);
 			JSLINT(content, { white: true, onevar: true, undef: true, regexp: true, plusplus: true, bitwise: true, newcap: true, rhino: true });
 			utils.each(JSLINT.errors, function (error) {
 				if (error) {

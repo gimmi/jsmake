@@ -1,4 +1,4 @@
-Make.Utils = {
+jsmake.Utils = {
 	escapeForRegex: function (str) {
 		return str.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	},

@@ -1,10 +1,10 @@
 /*global Make, describe, beforeEach, expect, it, spyOn */
 
-describe("Make.Fs", function () {
+describe("jsmake.Fs", function () {
 	var target;
 
 	beforeEach(function () {
-		target = Make.Fs;
+		target = jsmake.Fs;
 	});
 
 	it('should combine paths', function () {

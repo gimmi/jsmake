@@ -1,6 +1,6 @@
 /*global Make, describe, beforeEach, expect, it, spyOn */
 
-describe("Make.FsScanner", function () {
+describe("jsmake.FsScanner", function () {
 	var files, directories;
 
 
@@ -51,24 +51,24 @@ describe("Make.FsScanner", function () {
 		};
 
 		function cleanPath(path) {
-			return Make.Utils.filter(path.split('/'), function (part) {
+			return jsmake.Utils.filter(path.split('/'), function (part) {
 				return (part.length > 0) && (part !== '.');
 			}).join('/');
 		}
 
-		spyOn(Make.Fs, 'getFiles').andCallFake(function (path) {
+		spyOn(jsmake.Fs, 'getFiles').andCallFake(function (path) {
 			return files[cleanPath(path)];
 		});
-		spyOn(Make.Fs, 'getDirectories').andCallFake(function (path) {
+		spyOn(jsmake.Fs, 'getDirectories').andCallFake(function (path) {
 			return directories[cleanPath(path)];
 		});
-		spyOn(Make.Fs, 'combinePaths').andCallFake(function (path1, path2) {
+		spyOn(jsmake.Fs, 'combinePaths').andCallFake(function (path1, path2) {
 			return cleanPath([path1, path2].join('/'));
 		});
 	});
 
 	it('should include **/* when no include filter specified', function () {
-		var actual = new Make.FsScanner('base/lib/rhino', true).scan();
+		var actual = new jsmake.FsScanner('base/lib/rhino', true).scan();
 
 		expect(actual).toEqual([
 			'base/lib/rhino/js.jar',
@@ -77,7 +77,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it("should traverse directory tree from base path", function () {
-		var actual = new Make.FsScanner('base', true).include('**/*').scan();
+		var actual = new jsmake.FsScanner('base', true).include('**/*').scan();
 
 		expect(actual).toEqual([
 			'base/readme.txt',
@@ -99,7 +99,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should apply include filters', function () {
-		var actual = new Make.FsScanner('base', true).include('**/*.js').scan();
+		var actual = new jsmake.FsScanner('base', true).include('**/*.js').scan();
 
 		expect(actual).toEqual([
 			'base/src/main/Main.js',
@@ -115,7 +115,7 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should apply exclude filters', function () {
-		var actual = new Make.FsScanner('base', true).include('**/*').exclude('**/*.js').scan();
+		var actual = new jsmake.FsScanner('base', true).include('**/*').exclude('**/*.js').scan();
 
 		expect(actual).toEqual([
 			'base/readme.txt',
@@ -128,8 +128,8 @@ describe("Make.FsScanner", function () {
 	});
 
 	it('should evaluate inclusion', function () {
-		expect(new Make.FsScanner('base', true)._evaluatePath('anything')).toBeFalsy();
-		expect(new Make.FsScanner('base', true).include('**/*')._evaluatePath('anything')).toBeTruthy();
-		expect(new Make.FsScanner('base', true).include('**/*').exclude('**/*_old.*')._evaluatePath('folder/file_old.txt')).toBeFalsy();
+		expect(new jsmake.FsScanner('base', true)._evaluatePath('anything')).toBeFalsy();
+		expect(new jsmake.FsScanner('base', true).include('**/*')._evaluatePath('anything')).toBeTruthy();
+		expect(new jsmake.FsScanner('base', true).include('**/*').exclude('**/*_old.*')._evaluatePath('folder/file_old.txt')).toBeFalsy();
 	});
 });

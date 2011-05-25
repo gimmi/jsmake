@@ -1,0 +1,1 @@
+jsmake = this.jsmake || {};

@@ -1,8 +1,8 @@
-Make.Main = function () {
+jsmake.Main = function () {
 	this._project = null;
-	this._logger = Make.Sys;
+	this._logger = jsmake.Sys;
 };
-Make.Main.prototype = {
+jsmake.Main.prototype = {
 	getProject: function () {
 		if (!this._project) {
 			throw 'No project defined';
@@ -19,7 +19,7 @@ Make.Main.prototype = {
 		if (this._project) {
 			throw 'project already defined';
 		}
-		this._project = new Make.Project(name, defaultTaskName, body, this._logger);
+		this._project = new jsmake.Project(name, defaultTaskName, body, this._logger);
 	},
 	_bind: function (fn, scope) {
 		return function () {
