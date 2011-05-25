@@ -17,18 +17,6 @@ jsmake.Fs = {
 		}
 		return readFile(path);
 	},
-	getName: function (path) {
-		return this._translateJavaString(new java.io.File(path).getName());
-	},
-	copyPath: function (srcPath, destDirectory) {
-		if (this.fileExists(srcPath)) {
-			this._copyFile(srcPath, destDirectory);
-		} else if (this.directoryExists(srcPath)) {
-			this._copyDirectory(srcPath, destDirectory);
-		} else {
-			throw "Cannot copy source path '" + srcPath + "', it does not exists";
-		}
-	},
 	writeFile: function (path, data, encoding) {
 		this.createDirectory(this.getParentDirectory(path));
 		var out = new java.io.FileOutputStream(new java.io.File(path));
@@ -41,6 +29,18 @@ jsmake.Fs = {
 			}
 		} finally {
 			out.close();
+		}
+	},
+	getName: function (path) {
+		return this._translateJavaString(new java.io.File(path).getName());
+	},
+	copyPath: function (srcPath, destDirectory) {
+		if (this.fileExists(srcPath)) {
+			this._copyFile(srcPath, destDirectory);
+		} else if (this.directoryExists(srcPath)) {
+			this._copyDirectory(srcPath, destDirectory);
+		} else {
+			throw "Cannot copy source path '" + srcPath + "', it does not exists";
 		}
 	},
 	pathExists: function (path) {
