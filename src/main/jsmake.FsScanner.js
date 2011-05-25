@@ -23,13 +23,13 @@ jsmake.FsScanner.prototype = {
 	},
 	_scan: function (relativePath, fileNames) {
 		var fullPath = jsmake.Fs.combinePaths(this._basePath, relativePath);
-		jsmake.Utils.each(jsmake.Fs.getFiles(fullPath), function (fileName) {
+		jsmake.Utils.each(jsmake.Fs.getFileNames(fullPath), function (fileName) {
 			fileName = jsmake.Fs.combinePaths(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
 				fileNames.push(jsmake.Fs.combinePaths(this._basePath, fileName));
 			}
 		}, this);
-		jsmake.Utils.each(jsmake.Fs.getDirectories(fullPath), function (dir) {
+		jsmake.Utils.each(jsmake.Fs.getDirectoryNames(fullPath), function (dir) {
 			dir = jsmake.Fs.combinePaths(relativePath, dir);
 			if (this._evaluatePath(dir, true)) {
 				this._scan(dir, fileNames);

@@ -56,10 +56,10 @@ describe("jsmake.FsScanner", function () {
 			}).join('/');
 		}
 
-		spyOn(jsmake.Fs, 'getFiles').andCallFake(function (path) {
+		spyOn(jsmake.Fs, 'getFileNames').andCallFake(function (path) {
 			return files[cleanPath(path)];
 		});
-		spyOn(jsmake.Fs, 'getDirectories').andCallFake(function (path) {
+		spyOn(jsmake.Fs, 'getDirectoryNames').andCallFake(function (path) {
 			return directories[cleanPath(path)];
 		});
 		spyOn(jsmake.Fs, 'combinePaths').andCallFake(function (path1, path2) {

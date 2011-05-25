@@ -64,10 +64,10 @@ jsmake.Fs = {
 		}
 	},
 	deletePath: function (path) {
-		jsmake.Utils.each(this.getFiles(path), function (fileName) {
+		jsmake.Utils.each(this.getFileNames(path), function (fileName) {
 			new java.io.File(path, fileName)['delete']();
 		}, this);
-		jsmake.Utils.each(this.getDirectories(path), function (dirName) {
+		jsmake.Utils.each(this.getDirectoryNames(path), function (dirName) {
 			this.deletePath(this.combinePaths(path, dirName));
 		}, this);
 		new java.io.File(path)['delete']();
@@ -87,23 +87,23 @@ jsmake.Fs = {
 	_combine: function (path1, path2) {
 		return this._translateJavaString(new java.io.File(path1, path2).getPath());
 	},
-	getFiles: function (basePath) {
-		return this._getFiles(basePath, function (fileName) {
+	getFileNames: function (basePath) {
+		return this._getPathNames(basePath, function (fileName) {
 			return new java.io.File(fileName).isFile();
 		});
 	},
-	getDirectories: function (basePath) {
-		return this._getFiles(basePath, function (fileName) {
+	getDirectoryNames: function (basePath) {
+		return this._getPathNames(basePath, function (fileName) {
 			return new java.io.File(fileName).isDirectory();
 		});
 	},
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
 		this.createDirectory(destDirectory);
-		jsmake.Utils.each(this.getFiles(srcDirectory), function (path) {
+		jsmake.Utils.each(this.getFileNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
 		}, this);
-		jsmake.Utils.each(this.getDirectories(srcDirectory), function (path) {
+		jsmake.Utils.each(this.getDirectoryNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), this.combinePaths(destDirectory, path));
 		}, this);
 	},
@@ -132,7 +132,7 @@ jsmake.Fs = {
 			input.close();
 		}
 	},
-	_getFiles: function (basePath, filter) {
+	_getPathNames: function (basePath, filter) {
 		var fileFilter, files;
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
