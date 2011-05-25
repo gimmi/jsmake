@@ -1,7 +1,4 @@
 jsmake.Sys = {
-	loadJavascriptFile: function (file) {
-		load(file);
-	},
 	isWindowsOs: function () {
 		return jsmake.Fs.getPathSeparator() === '\\';
 	},
