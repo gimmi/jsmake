@@ -2,7 +2,7 @@ jsmake.Fs = {
 	createScanner: function (basePath) {
 		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
 	},
-	getFileEncoding: function () {
+	getCharacterEncoding: function () {
 		return java.lang.System.getProperty("file.encoding", "UTF-8"); // Windows default is "Cp1252"
 	},
 	getPathSeparator: function () {
@@ -11,22 +11,20 @@ jsmake.Fs = {
 	isCaseSensitive: function () {
 		return !jsmake.Sys.isWindowsOs();
 	},
-	readFile: function (path) {
+	readFile: function (path, characterEncoding) {
+		characterEncoding = characterEncoding || this.getCharacterEncoding();
 		if (!this.fileExists(path)) {
 			throw "File '" + path + "' not found";
 		}
-		return readFile(path);
+		return readFile(path, characterEncoding);
 	},
-	writeFile: function (path, data, encoding) {
+	writeFile: function (path, data, characterEncoding) {
+		characterEncoding = characterEncoding || this.getCharacterEncoding();
 		this.createDirectory(this.getParentDirectory(path));
 		var out = new java.io.FileOutputStream(new java.io.File(path));
 		data = new java.lang.String(data || '');
 		try {
-			if (!encoding) {
-				out.write(data.getBytes());
-			} else {
-				out.write(data.getBytes(encoding));
-			}
+			out.write(data.getBytes(characterEncoding));
 		} finally {
 			out.close();
 		}
