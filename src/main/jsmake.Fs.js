@@ -1,4 +1,7 @@
 jsmake.Fs = {
+	zipPath: function (srcPath, destFile) {
+		jsmake.PathZipper.zip(srcPath, destFile);
+	},
 	createScanner: function (basePath) {
 		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
 	},

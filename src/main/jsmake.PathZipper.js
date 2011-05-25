@@ -1,20 +1,25 @@
-jsmake.DirectoryZipper = {
-	zip: function (srcDirectory, destFile) {
+jsmake.PathZipper = {
+	zip: function (srcPath, destFile) {
 		var zipOutputStream = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(destFile));
 		try {
-			this._zip(jsmake.Fs.getParentDirectory(srcDirectory), jsmake.Fs.getName(srcDirectory), zipOutputStream);
+			this._zip(jsmake.Fs.getParentDirectory(srcPath), jsmake.Fs.getName(srcPath), zipOutputStream);
 		} finally {
 			zipOutputStream.close(); // This raise exception "java.util.zip.ZipException: ZIP file must have at least one entry"
 		}
 	},
 	_zip: function (basePath, relativePath, zipOutputStream) {
-		var path = jsmake.Fs.combinePaths(basePath, relativePath);
-		jsmake.Utils.each(jsmake.Fs.getFileNames(path), function (fileName) {
-			this._addFile(basePath, jsmake.Fs.combinePaths(relativePath, fileName), zipOutputStream);
-		}, this);
-		jsmake.Utils.each(jsmake.Fs.getDirectoryNames(path), function (dirName) {
-			this._zip(basePath, jsmake.Fs.combinePaths(relativePath, dirName), zipOutputStream);
-		}, this);
+		var names, path;
+		path = jsmake.Fs.combinePaths(basePath, relativePath);
+		if (jsmake.Fs.fileExists(path)) {
+			this._addFile(basePath, relativePath, zipOutputStream);
+		} else if (jsmake.Fs.directoryExists(path)) {
+			names = jsmake.Fs.getFileNames(path).concat(jsmake.Fs.getDirectoryNames(path));
+			jsmake.Utils.each(names, function (name) {
+				this._zip(basePath, jsmake.Fs.combinePaths(relativePath, name), zipOutputStream);
+			}, this);
+		} else {
+			throw "Cannot zip source path '" + path + "', it does not exists";
+		}
 	},
 	_addFile: function (basePath, relativePath, zipOutputStream) {
 		var fileInputStream, buffer, n;
