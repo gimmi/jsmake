@@ -9,6 +9,7 @@ JSMAKE_FILES = [
 	'src/main/jsmake.Fs.js',
 	'src/main/jsmake.FsScanner.js',
 	'src/main/jsmake.CommandRunner.js',
+	'src/main/jsmake.DirectoryZipper.js',
 	'src/main/jsmake.Main.js'
 ];
 for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
@@ -34,7 +35,7 @@ project('jsmake', 'release', function () {
 	task('release', [ 'build' ], function () {
 		version.patch += 1;
 		fs.writeFile('version.json', JSON.stringify(version));
-		fs.copyPath(buildPath, buildPath + '-' + versionString);
+		jsmake.DirectoryZipper.zip(buildPath, buildPath + '-' + versionString + '.zip');
 	});
 
 	task('jslint', [], function () {
