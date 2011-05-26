@@ -44,7 +44,7 @@ jsmake.AntPathMatcher.prototype = {
 				regex += jsmake.Utils.escapeForRegex(ch);
 			}
 		}
-		return new RegExp(regex, (this._caseSensitive ? '' : 'i')).test(pathToken);
+		return new RegExp('^' + regex + '$', (this._caseSensitive ? '' : 'i')).test(pathToken);
 	},
 	_tokenize: function (pattern) {
 		var tokens = pattern.split(/\\+|\/+/);

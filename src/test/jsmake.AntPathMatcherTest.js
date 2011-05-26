@@ -62,6 +62,11 @@ describe("jsmake.AntPathMatcher", function () {
 		expect(target._matchToken('a?c', 'ac')).toBeFalsy();
 		expect(target._matchToken('a*c', 'def')).toBeFalsy();
 	});
+	
+	it('pattern should match the whole path', function () {
+		expect(target._matchToken('file', 'fileXXX')).toBeFalsy();
+		expect(target._matchToken('file', 'XXXfile')).toBeFalsy();
+	});
 
 	it('should consider or ignore case', function () {
 		expect(new jsmake.AntPathMatcher('a', false).match('A')).toBeTruthy();
