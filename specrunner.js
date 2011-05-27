@@ -29,6 +29,12 @@
 
 load('lib/test/jasmine-1.0.2/jasmine.js');
 
+(function (args) {
+	for (var i = 0; i < args.length; i += 1) {
+		load(args[i]);
+	}
+}(arguments));
+/*
 load('src/main/jsmake.js');
 load('src/main/jsmake.Utils.js');
 load('src/main/jsmake.Sys.js');
@@ -50,12 +56,13 @@ load('src/test/jsmake.FsScannerTest.js');
 load('src/test/jsmake.MainTest.js');
 load('src/test/jsmake.CommandRunnerTest.js');
 load('src/test/jsmake.FsTest.js');
+*/
 
 jasmine.RhinoReporter = function() {
-	this._results = "";
 };
 jasmine.RhinoReporter.prototype = {
 	reportRunnerStarting: function(runner) {
+		this._results = '';
 	},
 	reportRunnerResults: function(runner) {
 		var failedCount = runner.results().failedCount;

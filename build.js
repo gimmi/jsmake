@@ -73,8 +73,18 @@ project('jsmake', 'release', function () {
 
 		fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
 	});
+	
+	task('test', [ 'compile' ], function () {
+		var runner = jsmake.Sys.createRunner('java');
+		runner.args('-jar', 'lib/main/rhino-1.7r3/js.jar', 'specrunner.js');
+		var files = fs.createScanner('src/test').include('**/*.js').scan();
+		utils.each(utils.flatten([ fs.combinePaths(buildPath, 'jsmake.js'), files ]), function (file) {
+			runner.args(file);
+		});
+		runner.run();
+	});
 
-	task('build', [ 'compile' ], function () {
+	task('build', [ 'test' ], function () {
 		utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r3/js.jar' ], function (file) {
 			fs.copyPath(file, buildPath);
 		});
