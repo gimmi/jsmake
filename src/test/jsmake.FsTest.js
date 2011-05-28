@@ -76,7 +76,7 @@ describe("jsmake.Fs", function () {
 		target.writeFile('temp/b/file4.txt', 'content');
 
 		expect(target.getChildFileNames('temp')).toEqual([ 'file1.txt', 'file2.txt' ]);
-		expect(target.getDirectoryNames('temp')).toEqual([ 'a', 'b' ]);
+		expect(target.getChildDirectoryNames('temp')).toEqual([ 'a', 'b' ]);
 		expect(target.getChildPathNames('temp')).toEqual([ 'a', 'b', 'file1.txt', 'file2.txt' ]);
 	});
 
@@ -94,7 +94,8 @@ describe("jsmake.Fs", function () {
 		target.writeFile('temp/file.txt', 'content');
 
 		expect(target.getChildFileNames('temp/file.txt')).toEqual([]);
-		expect(target.getDirectoryNames('temp/file.txt')).toEqual([]);
+		expect(target.getChildDirectoryNames('temp/file.txt')).toEqual([]);
+		expect(target.getChildPathNames('temp/file.txt')).toEqual([]);
 	});
 
 	it('should write and read file, handling strange chars, and creating parent directories if needed', function () {
