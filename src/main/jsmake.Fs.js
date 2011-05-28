@@ -65,14 +65,16 @@ jsmake.Fs = {
 		}
 	},
 	deletePath: function (path) {
+		if (!this.pathExists(path)) {
+			return;
+		}
 		var names = jsmake.Fs.getFileNames(path).concat(jsmake.Fs.getDirectoryNames(path));
 		jsmake.Utils.each(names, function (name) {
 			this.deletePath(this.combinePaths(path, name));
 		}, this);
-		new java.io.File(path)['delete']();
-//		if (!new java.io.File(path)['delete']()) {
-//			throw "'Unable to delete path '" + path + "'";
-//		}
+		if (!new java.io.File(path)['delete']()) {
+			throw "'Unable to delete path '" + path + "'";
+		}
 	},
 	getCanonicalPath: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalPath());

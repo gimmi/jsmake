@@ -21,6 +21,10 @@ describe("jsmake.Fs", function () {
 		expect(target.getName('a/b/c/file.txt')).toEqual('file.txt');
 	});
 
+	it('should do nothing when trying to delete non existent paths', function () {
+		target.deletePath('temp/doesntexists.txt');
+	});
+
 	it('should copy file', function () {
 		target.writeFile('temp/file.txt', 'content');
 		target.copyPath('temp/file.txt', 'temp/a/b/c');
