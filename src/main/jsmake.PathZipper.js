@@ -24,10 +24,14 @@ jsmake.PathZipper = {
 	_addFile: function (basePath, relativePath, zipOutputStream) {
 		var fileInputStream, buffer, n;
 		zipOutputStream.putNextEntry(new java.util.zip.ZipEntry(relativePath));
-		fileInputStream = new java.io.FileInputStream(jsmake.Fs.combinePaths(basePath, relativePath));
 		buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024 * 4);
-		while (-1 !== (n = fileInputStream.read(buffer))) {
-			zipOutputStream.write(buffer, 0, n);
+		fileInputStream = new java.io.FileInputStream(jsmake.Fs.combinePaths(basePath, relativePath));
+		try {
+			while (-1 !== (n = fileInputStream.read(buffer))) {
+				zipOutputStream.write(buffer, 0, n);
+			}
+		} finally {
+			fileInputStream.close();
 		}
 		zipOutputStream.closeEntry();
 	}
