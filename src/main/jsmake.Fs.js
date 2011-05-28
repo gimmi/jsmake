@@ -65,13 +65,14 @@ jsmake.Fs = {
 		}
 	},
 	deletePath: function (path) {
-		jsmake.Utils.each(this.getFileNames(path), function (fileName) {
-			new java.io.File(path, fileName)['delete']();
-		}, this);
-		jsmake.Utils.each(this.getDirectoryNames(path), function (dirName) {
-			this.deletePath(this.combinePaths(path, dirName));
+		var names = jsmake.Fs.getFileNames(path).concat(jsmake.Fs.getDirectoryNames(path));
+		jsmake.Utils.each(names, function (name) {
+			this.deletePath(this.combinePaths(path, name));
 		}, this);
 		new java.io.File(path)['delete']();
+//		if (!new java.io.File(path)['delete']()) {
+//			throw "'Unable to delete path '" + path + "'";
+//		}
 	},
 	getCanonicalPath: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalPath());
@@ -114,10 +115,8 @@ jsmake.Fs = {
 		this.createDirectory(destDirectory);
 		this._copyFileToFile(srcFile, destFile);
 	},
-	_copyFileToFile: function (srcPath, destPath) {
-		var srcFile, destFile, output, input, buffer, n;
-		srcFile = new java.io.File(srcPath);
-		destFile = new java.io.File(destPath);
+	_copyFileToFile: function (srcFile, destFile) {
+		var input, output, buffer, n;
 		input = new java.io.FileInputStream(srcFile);
 		try {
 			output = new java.io.FileOutputStream(destFile);

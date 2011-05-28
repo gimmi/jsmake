@@ -85,6 +85,13 @@ describe("jsmake.Fs", function () {
 		expect(actual).toEqual([ 'file1.txt', 'file2.txt' ]);
 	});
 
+	it('should return no children for file', function () {
+		target.writeFile('temp/file.txt', 'content');
+
+		expect(target.getFileNames('temp/file.txt')).toEqual([]);
+		expect(target.getDirectoryNames('temp/file.txt')).toEqual([]);
+	});
+
 	it('should write and read file, handling strange chars, and creating parent directories if needed', function () {
 		target.writeFile('temp/a/b/c/file.txt', 'אטעיש');
 		expect(target.fileExists('temp/a/b/c/file.txt')).toBeTruthy();
