@@ -77,7 +77,7 @@ describe("jsmake.Fs", function () {
 
 		expect(target.getFileNames('temp')).toEqual([ 'file1.txt', 'file2.txt' ]);
 		expect(target.getDirectoryNames('temp')).toEqual([ 'a', 'b' ]);
-		expect(target.getPathNames('temp')).toEqual([ 'a', 'b', 'file1.txt', 'file2.txt' ]);
+		expect(target.getChildPathNames('temp')).toEqual([ 'a', 'b', 'file1.txt', 'file2.txt' ]);
 	});
 
 	it('should get all directories in directory', function () {

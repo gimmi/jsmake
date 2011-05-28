@@ -68,7 +68,7 @@ jsmake.Fs = {
 		if (!this.pathExists(path)) {
 			return;
 		}
-		jsmake.Utils.each(jsmake.Fs.getPathNames(path), function (name) {
+		jsmake.Utils.each(jsmake.Fs.getChildPathNames(path), function (name) {
 			this.deletePath(this.combinePaths(path, name));
 		}, this);
 		if (!new java.io.File(path)['delete']()) {
@@ -87,7 +87,7 @@ jsmake.Fs = {
 			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);
 	},
-	getPathNames: function (basePath) {
+	getChildPathNames: function (basePath) {
 		return this._listFilesWithFilter(basePath, function () {
 			return true;
 		});
