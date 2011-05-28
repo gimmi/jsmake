@@ -13,8 +13,7 @@ jsmake.PathZipper = {
 		if (jsmake.Fs.fileExists(path)) {
 			this._addFile(basePath, relativePath, zipOutputStream);
 		} else if (jsmake.Fs.directoryExists(path)) {
-			names = jsmake.Fs.getFileNames(path).concat(jsmake.Fs.getDirectoryNames(path));
-			jsmake.Utils.each(names, function (name) {
+			jsmake.Utils.each(jsmake.Fs.getPathNames(path), function (name) {
 				this._zip(basePath, jsmake.Fs.combinePaths(relativePath, name), zipOutputStream);
 			}, this);
 		} else {

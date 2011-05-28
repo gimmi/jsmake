@@ -68,8 +68,7 @@ jsmake.Fs = {
 		if (!this.pathExists(path)) {
 			return;
 		}
-		var names = jsmake.Fs.getFileNames(path).concat(jsmake.Fs.getDirectoryNames(path));
-		jsmake.Utils.each(names, function (name) {
+		jsmake.Utils.each(jsmake.Fs.getPathNames(path), function (name) {
 			this.deletePath(this.combinePaths(path, name));
 		}, this);
 		if (!new java.io.File(path)['delete']()) {
@@ -88,13 +87,18 @@ jsmake.Fs = {
 			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);
 	},
+	getPathNames: function (basePath) {
+		return this._listFilesWithFilter(basePath, function () {
+			return true;
+		});
+	},
 	getFileNames: function (basePath) {
-		return this._getPathNames(basePath, function (fileName) {
+		return this._listFilesWithFilter(basePath, function (fileName) {
 			return new java.io.File(fileName).isFile();
 		});
 	},
 	getDirectoryNames: function (basePath) {
-		return this._getPathNames(basePath, function (fileName) {
+		return this._listFilesWithFilter(basePath, function (fileName) {
 			return new java.io.File(fileName).isDirectory();
 		});
 	},
@@ -134,7 +138,7 @@ jsmake.Fs = {
 			input.close();
 		}
 	},
-	_getPathNames: function (basePath, filter) {
+	_listFilesWithFilter: function (basePath, filter) {
 		var fileFilter, files;
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
