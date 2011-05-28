@@ -23,7 +23,7 @@ jsmake.FsScanner.prototype = {
 	},
 	_scan: function (relativePath, fileNames) {
 		var fullPath = jsmake.Fs.combinePaths(this._basePath, relativePath);
-		jsmake.Utils.each(jsmake.Fs.getFileNames(fullPath), function (fileName) {
+		jsmake.Utils.each(jsmake.Fs.getChildFileNames(fullPath), function (fileName) {
 			fileName = jsmake.Fs.combinePaths(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
 				fileNames.push(jsmake.Fs.combinePaths(this._basePath, fileName));

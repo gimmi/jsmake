@@ -75,7 +75,7 @@ describe("jsmake.Fs", function () {
 		target.writeFile('temp/a/file3.txt', 'content');
 		target.writeFile('temp/b/file4.txt', 'content');
 
-		expect(target.getFileNames('temp')).toEqual([ 'file1.txt', 'file2.txt' ]);
+		expect(target.getChildFileNames('temp')).toEqual([ 'file1.txt', 'file2.txt' ]);
 		expect(target.getDirectoryNames('temp')).toEqual([ 'a', 'b' ]);
 		expect(target.getChildPathNames('temp')).toEqual([ 'a', 'b', 'file1.txt', 'file2.txt' ]);
 	});
@@ -85,7 +85,7 @@ describe("jsmake.Fs", function () {
 		target.writeFile('temp/file2.txt', 'content');
 		target.writeFile('temp/a/file3.txt', 'content');
 
-		var actual = target.getFileNames('temp');
+		var actual = target.getChildFileNames('temp');
 
 		expect(actual).toEqual([ 'file1.txt', 'file2.txt' ]);
 	});
@@ -93,7 +93,7 @@ describe("jsmake.Fs", function () {
 	it('should return no children for file', function () {
 		target.writeFile('temp/file.txt', 'content');
 
-		expect(target.getFileNames('temp/file.txt')).toEqual([]);
+		expect(target.getChildFileNames('temp/file.txt')).toEqual([]);
 		expect(target.getDirectoryNames('temp/file.txt')).toEqual([]);
 	});
 

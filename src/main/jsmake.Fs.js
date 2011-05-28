@@ -92,7 +92,7 @@ jsmake.Fs = {
 			return true;
 		});
 	},
-	getFileNames: function (basePath) {
+	getChildFileNames: function (basePath) {
 		return this._listFilesWithFilter(basePath, function (fileName) {
 			return new java.io.File(fileName).isFile();
 		});
@@ -108,7 +108,7 @@ jsmake.Fs = {
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
 		this.createDirectory(destDirectory);
-		jsmake.Utils.each(this.getFileNames(srcDirectory), function (path) {
+		jsmake.Utils.each(this.getChildFileNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
 		}, this);
 		jsmake.Utils.each(this.getDirectoryNames(srcDirectory), function (path) {
