@@ -1,16 +1,38 @@
+/** @namespace Contains methods for working with filesystem */
 jsmake.Fs = {
+	/**
+	 * Create a zip file containing specified file/directory
+	 * @param {String} srcPath file/directory to zip
+	 * @param {String} destFile zip file name
+	 */
 	zipPath: function (srcPath, destFile) {
 		jsmake.PathZipper.zip(srcPath, destFile);
 	},
+	/**
+	 * Create a filesystem scanner
+	 * @param {String} basePath the path to scan for children tha match criteria
+	 */
 	createScanner: function (basePath) {
 		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
 	},
+	/**
+	 * Return default OS character encoding
+	 * @returns {String} Character encoding, for example UTF-8 or Cp1252
+	 */
 	getCharacterEncoding: function () {
 		return java.lang.System.getProperty("file.encoding", "UTF-8"); // Windows default is "Cp1252"
 	},
+	/**
+	 * Return OS path separator
+	 * @returns {String} path separator, like / or \
+	 */
 	getPathSeparator: function () {
 		return java.io.File.separator;
 	},
+	/**
+	 * Returns true if OS has case sensitive filesystem
+	 * @returns {Boolean} true if OS has case sensitive filesystem
+	 */
 	isCaseSensitive: function () {
 		return !jsmake.Sys.isWindowsOs();
 	},

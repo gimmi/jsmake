@@ -90,6 +90,15 @@ project('jsmake', 'release', function () {
 		});
 	});
 
+	task('jsdoc', [ 'compile' ], function () {
+		var runner = jsmake.Sys.createRunner('java');
+		runner.args('-jar', 'tools/jsdoctoolkit-2.4.0/jsrun.jar', 'tools/jsdoctoolkit-2.4.0/app/run.js');
+		runner.args('-t=tools/jsdoctoolkit-2.4.0/templates/jsdoc');
+		runner.args('-d=' + fs.combinePaths(buildPath, 'jsdoc'));
+		runner.args(fs.combinePaths(buildPath, 'jsmake.js'));
+		runner.run();
+	});
+
 	task('clean', [], function () {
 		fs.deletePath(buildPath);
 	});
