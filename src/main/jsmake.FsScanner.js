@@ -1,3 +1,7 @@
+/**
+ * Don't instantiate it directly, use {@link jsmake.Fs.createScanner}
+ * @constructor
+ */
 jsmake.FsScanner = function (basePath, caseSensitive) {
 	this._basePath = basePath;
 	this._includeMatchers = [];
