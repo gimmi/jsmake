@@ -32,7 +32,7 @@ project('jsmake', 'release', function () {
 		versionString = version.major + '.' + version.minor + '.' + version.patch;
 	});
 
-	task('release', [ 'build' ], function () {
+	task('release', [ 'build', 'jsdoc' ], function () {
 		version.patch += 1;
 		fs.writeFile('version.json', JSON.stringify(version));
 		fs.zipPath(buildPath, buildPath + '-' + versionString + '.zip');
