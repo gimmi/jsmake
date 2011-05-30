@@ -97,6 +97,7 @@ project('jsmake', 'release', function () {
 		runner.args('-d=' + fs.combinePaths(buildPath, 'jsdoc'));
 		runner.args(fs.combinePaths(buildPath, 'jsmake.js'));
 		runner.run();
+		fs.copyPath(fs.combinePaths(buildPath, 'jsdoc'), 'gh-pages/jsdoc');
 	});
 
 	task('clean', [], function () {
