@@ -14,7 +14,7 @@ jsmake.Fs = {
 	 * @returns {jsmake.FsScanner}
 	 * @see jsmake.FsScanner
 	 * @example
-	 * jsmake.Fs.createScanner('/home').include('**\/*.js').exclude('**\/.git').scan();
+	 * jsmake.Fs.createScanner('\home').include('**\*.js').exclude('**\.git').scan();
 	 */
 	createScanner: function (basePath) {
 		return new jsmake.FsScanner(basePath, this.isCaseSensitive());

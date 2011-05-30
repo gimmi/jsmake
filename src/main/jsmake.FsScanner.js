@@ -9,14 +9,35 @@ jsmake.FsScanner = function (basePath, caseSensitive) {
 	this._caseSensitive = caseSensitive;
 };
 jsmake.FsScanner.prototype = {
+	/**
+	 * Add a criteria for path inclusion. If no inclusion path are specified, '**\*' is assumed
+	 * @param {String} pattern
+	 * @returns {jsmake.FsScanner} this instance, for chaining calls
+	 * @example
+	 * jsmake.Fs.createScanner('\home').include('**\*.js').scan();
+	 */
 	include: function (pattern) {
 		this._includeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
+	/**
+	 * Add a criteria for path exclusion
+	 * @param {String} pattern
+	 * @returns {jsmake.FsScanner} this instance, for chaining calls
+	 * @example
+	 * jsmake.Fs.createScanner('\home').exclude('**\.git').scan();
+	 */
 	exclude: function (pattern) {
 		this._excludeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
+	/**
+	 * Execute filesystem scanning with defined criterias
+	 * @returns {String[]} all mathing paths
+	 * @example
+	 * // returns the path of all files in /home directory
+	 * jsmake.Fs.createScanner('/home').scan();
+	 */
 	scan: function () {
 		var fileNames = [];
 		if (this._includeMatchers.length === 0) {
