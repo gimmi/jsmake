@@ -18,14 +18,14 @@ jsmake.Fs = {
 	},
 	/**
 	 * Return default OS character encoding
-	 * @returns {String} Character encoding, for example UTF-8 or Cp1252
+	 * @returns {String} Character encoding, e.g. 'UTF-8' or 'Cp1252'
 	 */
 	getCharacterEncoding: function () {
 		return java.lang.System.getProperty("file.encoding", "UTF-8"); // Windows default is "Cp1252"
 	},
 	/**
 	 * Return OS path separator
-	 * @returns {String} path separator, like / or \
+	 * @returns {String} path separator, e.g. '/' or '\'
 	 */
 	getPathSeparator: function () {
 		return java.io.File.separator;
@@ -37,6 +37,12 @@ jsmake.Fs = {
 	isCaseSensitive: function () {
 		return !jsmake.Sys.isWindowsOs();
 	},
+	/**
+	 * Read text file content
+	 * @param {String} path path of the file to read
+	 * @param {String} [characterEncoding=OS default]
+	 * @returns {String} text content
+	 */
 	readFile: function (path, characterEncoding) {
 		characterEncoding = characterEncoding || this.getCharacterEncoding();
 		if (!this.fileExists(path)) {
@@ -44,20 +50,38 @@ jsmake.Fs = {
 		}
 		return readFile(path, characterEncoding);
 	},
-	writeFile: function (path, data, characterEncoding) {
+	/**
+	 * Write String to file, creating all necessary parent directories and overwriting if file already exists
+	 * @param {String} path path of the file to write
+	 * @param {String} content file content
+	 * @param {String} [characterEncoding=OS default]
+	 */
+	writeFile: function (path, content, characterEncoding) {
 		characterEncoding = characterEncoding || this.getCharacterEncoding();
 		this.createDirectory(this.getParentDirectory(path));
 		var out = new java.io.FileOutputStream(new java.io.File(path));
-		data = new java.lang.String(data || '');
+		content = new java.lang.String(content || '');
 		try {
-			out.write(data.getBytes(characterEncoding));
+			out.write(content.getBytes(characterEncoding));
 		} finally {
 			out.close();
 		}
 	},
+	/**
+	 * Extract last element from a path
+	 * @param {String} path the source path
+	 * @returns {String} the name of the last element in the path
+	 * @example
+	 * jsmake.Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
+	 */
 	getName: function (path) {
 		return this._translateJavaString(new java.io.File(path).getName());
 	},
+	/**
+	 * Copy file or directory to another directory
+	 * @param {String} srcPath source file/directory. Must exists
+	 * @param {String} destDirectory destination directory
+	 */
 	copyPath: function (srcPath, destDirectory) {
 		if (this.fileExists(srcPath)) {
 			this._copyFile(srcPath, destDirectory);
@@ -67,17 +91,33 @@ jsmake.Fs = {
 			throw "Cannot copy source path '" + srcPath + "', it does not exists";
 		}
 	},
+	/**
+	 * @param {String} path file or directory path
+	 * @returns {Boolean} true if file or directory exists
+	 */
 	pathExists: function (path) {
 		return new java.io.File(path).exists();
 	},
+	/**
+	 * @param {String} path directory path
+	 * @returns {Boolean} true if path exists and is a directory
+	 */
 	directoryExists: function (path) {
 		var file = new java.io.File(path);
 		return file.exists() && file.isDirectory();
 	},
+	/**
+	 * @param {String} path file path
+	 * @returns {Boolean} true if path exists and is a file
+	 */
 	fileExists: function (path) {
 		var file = new java.io.File(path);
 		return file.exists() && file.isFile();
 	},
+	/**
+	 * Create directory and all necessary parents
+	 * @param {String} path directory to create
+	 */
 	createDirectory: function (path) {
 		var file = new java.io.File(path);
 		if (file.exists() && file.isDirectory()) {
@@ -87,6 +127,10 @@ jsmake.Fs = {
 			throw "Failed to create directories for path '" + path + "'";
 		}
 	},
+	/**
+	 * Delete file or directory, with all cild elements
+	 * @param {String} path to delete
+	 */
 	deletePath: function (path) {
 		if (!this.pathExists(path)) {
 			return;
@@ -98,12 +142,30 @@ jsmake.Fs = {
 			throw "'Unable to delete path '" + path + "'";
 		}
 	},
+	/**
+	 * Transform a path to absolute, removing '.' and '..' references
+	 * @param {String} path path to translate
+	 * @returns {String} path in canonical form
+	 * @example
+	 * jsmake.Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
+	 */
 	getCanonicalPath: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalPath());
 	},
+	/**
+	 * Returns parent path
+	 * @param {String} path
+	 * @returns {String} parent path
+	 */
 	getParentDirectory: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
 	},
+	/**
+	 * Combine all passed path fragments into one, using OS path separator. Supports any number of parameters.
+	 * @example
+	 * jsmake.Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);
+	 * // returns 'home/gimmi/dir/subdir/file.txt'
+	 */
 	combinePaths: function () {
 		var paths = jsmake.Utils.flatten(arguments);
 		return jsmake.Utils.reduce(paths, function (memo, path) {
