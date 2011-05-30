@@ -1,4 +1,4 @@
-/** @namespace Contains methods for working with filesystem */
+/** @class Contains methods for working with filesystem */
 jsmake.Fs = {
 	/**
 	 * Create a zip file containing specified file/directory
