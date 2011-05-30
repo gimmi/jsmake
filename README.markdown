@@ -1,1 +1,1 @@
-See [JSMake Homepage](https://gimmi.github.com/jsmake/)
+See [JSMake Homepage](http://gimmi.github.com/jsmake/)
