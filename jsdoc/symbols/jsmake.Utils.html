@@ -1,0 +1,1167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - jsmake.Utils</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/jsmake.html">jsmake</a></li>
+	
+	<li><a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a></li>
+	
+	<li><a href="../symbols/jsmake.Fs.html">jsmake.Fs</a></li>
+	
+	<li><a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a></li>
+	
+	<li><a href="../symbols/jsmake.Sys.html">jsmake.Sys</a></li>
+	
+	<li><a href="../symbols/jsmake.Utils.html">jsmake.Utils</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class jsmake.Utils
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				Various helper methods to make working with Javascript easier
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/build_jsmake_jsmake.js.html">jsmake.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class jsmake.Utils.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/jsmake.Utils.html#constructor">jsmake.Utils</a></b>()
+							</div>
+							<div class="description"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class jsmake.Utils.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.contains">contains</a></b>(items, item)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.distinct">distinct</a></b>(items)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.each">each</a></b>(items, fn, scope)
+								</div>
+								<div class="description">Iterate over each element of items.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.escapeForRegex">escapeForRegex</a></b>(str)
+								</div>
+								<div class="description">Return the same string with escaped regex chars, in order to be safely included as part of regex</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.filter">filter</a></b>(items, fn, scope)
+								</div>
+								<div class="description">Filter collection, returning elements that satisfy passed criteria</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.flatten">flatten</a></b>(items)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.isArguments">isArguments</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.isArray">isArray</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.isEmpty">isEmpty</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.isNumber">isNumber</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.isObject">isObject</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.map">map</a></b>(items, fn, scope)
+								</div>
+								<div class="description">Transform each item in passed collection, returning a new array with transformed items</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.reduce">reduce</a></b>(items, fn, memo, scope)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.toArray">toArray</a></b>(v)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Utils.<b><a href="../symbols/jsmake.Utils.html#.trim">trim</a></b>(str)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>jsmake.Utils</b>()
+				</div>
+				
+				<div class="description">
+					
+					
+				</div>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".contains"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Utils.</span><b>contains</b>(items, item)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Utils.contains([ 2, 3 ], 3); // returns truejsmake.Utils.contains([ 2, 3 ], 4); // returns false</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>item</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".distinct"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Utils.</span><b>distinct</b>(items)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Utils.distinct([ 2, 3, 2, 3 ]); // returns [ 2, 3 ]</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".each"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Utils.</span><b>each</b>(items, fn, scope)
+					
+					</div>
+					<div class="description">
+						Iterate over each element of items.
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// Array iteration: the following code logs// item=a, index=0, items=[a,b]// item=b, index=1, items=[a,b]jsmake.Utils.each([ 'a', 'b'], function (item, index, items) {    jsmake.Sys.log('item=' + item + ', index=' + index + ', items=' + items);}, this);// Object iteration: the following code logs// item=1, index=a, items=[object]// item=2, index=b, items=[object]jsmake.Utils.each({ a: 1, b: 2 }, function (item, index, items) {    jsmake.Sys.log('item=' + item + ', index=' + index + ', items=' + items);}, this);</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd>the collection on which iterate, can be anything</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>fn</b>
+									
+								</dt>
+								<dd>the funcion to call for each element in items.Will be called with the following parameters: currentItem, itemIndex, items.If function returns truthy value then iteration will stop</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>scope</b>
+									<i>Optional</i>
+								</dt>
+								<dd>'this' binding for function</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".escapeForRegex"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Utils.</span><b>escapeForRegex</b>(str)
+					
+					</div>
+					<div class="description">
+						Return the same string with escaped regex chars, in order to be safely included as part of regex
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>str</b>
+									
+								</dt>
+								<dd>string to escape</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> escaped string</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".filter"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">jsmake.Utils.</span><b>filter</b>(items, fn, scope)
+					
+					</div>
+					<div class="description">
+						Filter collection, returning elements that satisfy passed criteria
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// returns [ 1, 2 ]jsmake.Utils.filter([ 1, 2, 3 ], function (item) {    return item < 3;});</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd>can be anything, see <a href="../symbols/jsmake.Utils.html#.each">jsmake.Utils.each</a></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>fn</b>
+									
+								</dt>
+								<dd>filter criteria, will be called for each element in items, passing current element as parameter.Must return falsy value to indicate that the element should be filtered out</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>scope</b>
+									<i>Optional</i>
+								</dt>
+								<dd>'this' binding for function</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> filtered values</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".flatten"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Utils.</span><b>flatten</b>(items)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Utils.flatten([ 1, [ 2, 3 ], [ 4, [ 5, 6 ] ] ]); // returns [ 1, 2, 3, 4, 5, 6 ]</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isArguments"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Utils.</span><b>isArguments</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if passed value is an argument object</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isArray"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Utils.</span><b>isArray</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if passed value is an array</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isEmpty"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Utils.</span><b>isEmpty</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if passed value is null, undefined or empty array</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isNumber"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Utils.</span><b>isNumber</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if passed value is a number</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isObject"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Utils.</span><b>isObject</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if passed value is an object</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".map"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">jsmake.Utils.</span><b>map</b>(items, fn, scope)
+					
+					</div>
+					<div class="description">
+						Transform each item in passed collection, returning a new array with transformed items
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// returns [ 4, 9 ]jsmake.Utils.map([ 2, 3 ], function (item) {    return item * item;});</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd>can be anything, see <a href="../symbols/jsmake.Utils.html#.each">jsmake.Utils.each</a></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>fn</b>
+									
+								</dt>
+								<dd>transformation function, will be called for each element in items.Will be called with the following parameters: currentItem, itemIndex, items.If function returns truthy value then iteration will stopMust return the transformed item</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>scope</b>
+									<i>Optional</i>
+								</dt>
+								<dd>'this' binding for function</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> new array with transformed items</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".reduce"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Utils.</span><b>reduce</b>(items, fn, memo, scope)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// returns 'items are: 2 3 'jsmake.Utils.reduce([ 2, 3 ], function (memo, item) {    return memo + item + ' ';}, 'items are: ');</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>items</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>fn</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>memo</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>scope</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".toArray"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">jsmake.Utils.</span><b>toArray</b>(v)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>v</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> passed value, converted to array</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".trim"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Utils.</span><b>trim</b>(str)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>str</b>
+									
+								</dt>
+								<dd>string to trim</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> passed value with head and tail spaces removed</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon May 30 2011 13:55:19 GMT+0200 (CEST)
+		</div>
+	</body>
+</html>

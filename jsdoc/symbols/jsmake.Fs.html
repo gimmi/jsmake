@@ -1,0 +1,1185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - jsmake.Fs</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/jsmake.html">jsmake</a></li>
+	
+	<li><a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a></li>
+	
+	<li><a href="../symbols/jsmake.Fs.html">jsmake.Fs</a></li>
+	
+	<li><a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a></li>
+	
+	<li><a href="../symbols/jsmake.Sys.html">jsmake.Sys</a></li>
+	
+	<li><a href="../symbols/jsmake.Utils.html">jsmake.Utils</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Namespace jsmake.Fs
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				Contains methods for working with filesystem
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/build_jsmake_jsmake.js.html">jsmake.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class jsmake.Fs.">
+				<caption>Namespace Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/jsmake.Fs.html#constructor">jsmake.Fs</a></b>
+							</div>
+							<div class="description"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class jsmake.Fs.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.combinePaths">combinePaths</a></b>()
+								</div>
+								<div class="description">Combine all passed path fragments into one, using OS path separator.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.copyPath">copyPath</a></b>(srcPath, destDirectory)
+								</div>
+								<div class="description">Copy file or directory to another directory</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.createDirectory">createDirectory</a></b>(path)
+								</div>
+								<div class="description">Create directory and all necessary parents</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.createScanner">createScanner</a></b>(basePath)
+								</div>
+								<div class="description">Create a filesystem scanner</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.deletePath">deletePath</a></b>(path)
+								</div>
+								<div class="description">Delete file or directory, with all cild elements</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.directoryExists">directoryExists</a></b>(path)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.fileExists">fileExists</a></b>(path)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.getCanonicalPath">getCanonicalPath</a></b>(path)
+								</div>
+								<div class="description">Transform a path to absolute, removing '.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.getCharacterEncoding">getCharacterEncoding</a></b>()
+								</div>
+								<div class="description">Return default OS character encoding</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.getName">getName</a></b>(path)
+								</div>
+								<div class="description">Extract last element from a path</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.getParentDirectory">getParentDirectory</a></b>(path)
+								</div>
+								<div class="description">Returns parent path</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.getPathSeparator">getPathSeparator</a></b>()
+								</div>
+								<div class="description">Return OS path separator</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.isCaseSensitive">isCaseSensitive</a></b>()
+								</div>
+								<div class="description">Returns true if OS has case sensitive filesystem</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.pathExists">pathExists</a></b>(path)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.readFile">readFile</a></b>(path, characterEncoding)
+								</div>
+								<div class="description">Read text file content</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.writeFile">writeFile</a></b>(path, content, characterEncoding)
+								</div>
+								<div class="description">Write String to file, creating all necessary parent directories and overwriting if file already exists</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Fs.<b><a href="../symbols/jsmake.Fs.html#.zipPath">zipPath</a></b>(srcPath, destFile)
+								</div>
+								<div class="description">Create a zip file containing specified file/directory</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Namespace Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>jsmake.Fs</b>
+				</div>
+				
+				<div class="description">
+					
+					
+				</div>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".combinePaths"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>combinePaths</b>()
+					
+					</div>
+					<div class="description">
+						Combine all passed path fragments into one, using OS path separator. Supports any number of parameters.
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);// returns 'home/gimmi/dir/subdir/file.txt'</pre>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".copyPath"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>copyPath</b>(srcPath, destDirectory)
+					
+					</div>
+					<div class="description">
+						Copy file or directory to another directory
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>srcPath</b>
+									
+								</dt>
+								<dd>source file/directory. Must exists</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>destDirectory</b>
+									
+								</dt>
+								<dd>destination directory</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".createDirectory"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>createDirectory</b>(path)
+					
+					</div>
+					<div class="description">
+						Create directory and all necessary parents
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>directory to create</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".createScanner"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span>
+					<span class="light">jsmake.Fs.</span><b>createScanner</b>(basePath)
+					
+					</div>
+					<div class="description">
+						Create a filesystem scanner
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// returns all js and java files in \home folder, including subfolders, excluding .git foldersjsmake.Fs.createScanner('\home')    .include('**\*.js')    .include('**\*.java')    .exclude('**\.git')    .scan();</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>basePath</b>
+									
+								</dt>
+								<dd>the path to scan for children tha match criteria</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span> FsScanner instance to fluently configure and run scanner</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd><a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a></dd>
+							
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".deletePath"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>deletePath</b>(path)
+					
+					</div>
+					<div class="description">
+						Delete file or directory, with all cild elements
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>to delete</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".directoryExists"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Fs.</span><b>directoryExists</b>(path)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>directory path</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if path exists and is a directory</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".fileExists"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Fs.</span><b>fileExists</b>(path)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>file path</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if path exists and is a file</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getCanonicalPath"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>getCanonicalPath</b>(path)
+					
+					</div>
+					<div class="description">
+						Transform a path to absolute, removing '.' and '..' references
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>path to translate</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> path in canonical form</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getCharacterEncoding"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>getCharacterEncoding</b>()
+					
+					</div>
+					<div class="description">
+						Return default OS character encoding
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> Character encoding, e.g. 'UTF-8' or 'Cp1252'</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getName"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>getName</b>(path)
+					
+					</div>
+					<div class="description">
+						Extract last element from a path
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>the source path</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> the name of the last element in the path</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getParentDirectory"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>getParentDirectory</b>(path)
+					
+					</div>
+					<div class="description">
+						Returns parent path
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> parent path</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getPathSeparator"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>getPathSeparator</b>()
+					
+					</div>
+					<div class="description">
+						Return OS path separator
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> path separator, e.g. '/' or '\'</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isCaseSensitive"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Fs.</span><b>isCaseSensitive</b>()
+					
+					</div>
+					<div class="description">
+						Returns true if OS has case sensitive filesystem
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if OS has case sensitive filesystem</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".pathExists"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">jsmake.Fs.</span><b>pathExists</b>(path)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>file or directory path</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if file or directory exists</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".readFile"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Fs.</span><b>readFile</b>(path, characterEncoding)
+					
+					</div>
+					<div class="description">
+						Read text file content
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>path of the file to read</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>characterEncoding</b>
+									<i>Optional, Default: OS default</i>
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> text content</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".writeFile"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>writeFile</b>(path, content, characterEncoding)
+					
+					</div>
+					<div class="description">
+						Write String to file, creating all necessary parent directories and overwriting if file already exists
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>path</b>
+									
+								</dt>
+								<dd>path of the file to write</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>content</b>
+									
+								</dt>
+								<dd>file content</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>characterEncoding</b>
+									<i>Optional, Default: OS default</i>
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".zipPath"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Fs.</span><b>zipPath</b>(srcPath, destFile)
+					
+					</div>
+					<div class="description">
+						Create a zip file containing specified file/directory
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>srcPath</b>
+									
+								</dt>
+								<dd>file/directory to zip</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>destFile</b>
+									
+								</dt>
+								<dd>zip file name</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon May 30 2011 13:55:19 GMT+0200 (CEST)
+		</div>
+	</body>
+</html>
