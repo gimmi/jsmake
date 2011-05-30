@@ -1,91 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
+	<meta charset='utf-8'>
 
-  <title>gimmi/jsmake @ GitHub</title>
+	<title>JSMake</title>
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #95f361;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #6a0c9e; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #6a0c9e; }
-    h3 { text-align: center; color: #6a0c9e; }
-    a { color: #6a0c9e; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+	<style type="text/css">
+		body {
+			margin-top: 1.0em;
+			background-color: #EEEEEE;
+			font-family: Helvetica, Arial, FreeSans, san-serif;
+			color: #000000;
+		}
+
+		#container {
+			margin: 0 auto;
+			width: 960px;
+		}
+
+		h1 {
+			font-size: 3.8em;
+			color: #000000;
+			margin-bottom: 3px;
+		}
+
+		h1 .small {
+			font-size: 0.4em;
+		}
+
+		h1 a {
+			text-decoration: none
+		}
+
+		h2 {
+			font-size: 1.5em;
+			color: #000000;
+		}
+
+		h3 {
+			text-align: center;
+			color: #BF7130;
+		}
+
+		a {
+			color: #000000;
+		}
+
+		.description {
+			font-size: 1.2em;
+			margin-bottom: 30px;
+			margin-top: 30px;
+			font-style: italic;
+		}
+
+		.download {
+			float: right;
+		}
+
+		pre {
+			background: #000;
+			color: #fff;
+			padding: 15px;
+		}
+
+		hr {
+			border: 0;
+			width: 80%;
+			border-bottom: 1px solid #aaa
+		}
+
+		.footer {
+			text-align: center;
+			padding-top: 30px;
+			font-style: italic;
+		}
+	</style>
 </head>
 
 <body>
-  <a href="http://github.com/gimmi/jsmake"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<a href="http://github.com/gimmi/jsmake"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"/></a>
 
-  <div id="container">
+<div id="container">
 
-    <div class="download">
-      <a href="http://github.com/gimmi/jsmake/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/gimmi/jsmake/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+	<h1>JSMake</h1>
 
-    <h1><a href="http://github.com/gimmi/jsmake">JSMake</a>
-      <span class="small">by <a href="http://github.com/gimmi">gimmi</a></span></h1>
+	<div class="description">
+		JSMake is a simple Javascript build program with capabilities similar to make.
+	</div>
 
-    <div class="description">
-      JSMake is a simple Javascript build program with capabilities similar to make.
-    </div>
+	<pre>
+project('my first jsmake project', 'log', function () {
+    var message;
 
-    <p>Main Project Text</p><h2>Dependencies</h2>
-<p>Dependencies</p>
-<h2>Install</h2>
-<p>Installation Instructions</p>
-<h2>License</h2>
-<p>Code License</p>
-<h2>Authors</h2>
-<p>Gian Marco Gherardi (gianmarco.gherardi@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Gian Marco Gherardi (gianmarco.gherardi@gmail.com)<br/>      </p>
+    task('message', [], function () {
+        message = 'Hello, World!';
+    });
+
+    task('log', [ 'message' ], function () {
+        jsmake.Sys.log(message);
+    });
+});
+	</pre>
+	<p>JSMake has the following benefits:</p>
+
+	<ul>
+		<li>Let you write build script in Javascript, the most widely used scripting language</li>
+		<li>It is a general purpose build tool, not specific for building Javascript projects</li>
+		<li>It's cross platform, supporting both Windows and *nix environment</li>
+		<li>It's very lightweight, it's meant to be included directly in your project repository so you don't have to do exotic setup just to build your project</li>
+		<li>It only require Java to run, and should work anywhere Java works</li>
+		<li>Thanks to <a href="http://www.mozilla.org/rhino/">Rhino</a>, you get interactive debugging of your build script without installing anything else, just run jsmaked instead of jsmake (<a href="http://www.mozilla.org/rhino/debugger.html">more info</a>)</li>
+		<li>You can include external JS libraries like <a href="http://www.jslint.com/">JSLint</a>, <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, <a href="http://xregexp.com/">XRegExp</a>, ... and use it to develop your build script</li>
+		<li>You can easly use any Java class or library, thanks to <a href="http://www.mozilla.org/rhino/ScriptingJava.html">Rhino interoperability</a></li>
+	</ul>
 
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/gimmi/jsmake/zipball/master">zip</a> or
-      <a href="http://github.com/gimmi/jsmake/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/gimmi/jsmake</pre>
-    </p>
+	<h2>Documentation</h2>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/gimmi/jsmake">gimmi/jsmake</a>
-    </div>
+	<ul>
+		<li><a href="#">Getting started</a></li>
+		<li><a href="#">Wiki Index</a></li>
+		<li><a href="jsdoc/index.html">API Documentation</a></li>
+	</ul>
 
-  </div>
+	<h2>Download</h2>
 
-  <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	<p><a href="https://github.com/gimmi/jsmake/archives/master">Release archive on GitHub</a></p>
+
+	<h2>Source Code</h2>
+
+	<p><a href="http://github.com/gimmi/jsmake">GitHub repository</a></p>
+
+	<h2>License</h2>
+
+	<p>See <a href="https://github.com/gimmi/jsmake/raw/master/LICENSE">LICENSE file</a> included with sources</p>
+
+	<div class="footer">
+		JSMake has been developed by Gian Marco Gherardi
+	</div>
+</div>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-23661886-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+	try {
+		var pageTracker = _gat._getTracker("UA-23661886-1");
+		pageTracker._trackPageview();
+	} catch(err) {
+	}</script>
 </body>
 </html>
