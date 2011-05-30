@@ -11,10 +11,15 @@ jsmake.Fs = {
 	/**
 	 * Create a filesystem scanner
 	 * @param {String} basePath the path to scan for children tha match criteria
-	 * @returns {jsmake.FsScanner}
+	 * @returns {jsmake.FsScanner} FsScanner instance to fluently configure and run scanner
 	 * @see jsmake.FsScanner
 	 * @example
-	 * jsmake.Fs.createScanner('\home').include('**\*.js').exclude('**\.git').scan();
+	 * // returns all js and java files in \home folder, including subfolders, excluding .git folders
+	 * jsmake.Fs.createScanner('\home')
+	 *     .include('**\*.js')
+	 *     .include('**\*.java')
+	 *     .exclude('**\.git')
+	 *     .scan();
 	 */
 	createScanner: function (basePath) {
 		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
