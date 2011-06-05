@@ -1,34 +1,38 @@
+var antPathMatcher = require('./antPathMatcher');
+var fs = require('./fs');
+var utils = require('./utils');
+
 /**
- * Don't instantiate it directly, use {@link jsmake.Fs.createScanner}
+ * Don't instantiate it directly, use {@link Fs.createScanner}
  * @constructor
  */
-jsmake.FsScanner = function (basePath, caseSensitive) {
+var FsScanner = function (basePath, caseSensitive) {
 	this._basePath = basePath;
 	this._includeMatchers = [];
 	this._excludeMatchers = [];
 	this._caseSensitive = caseSensitive;
 };
-jsmake.FsScanner.prototype = {
+FsScanner.prototype = {
 	/**
 	 * Add a criteria for path inclusion. If no inclusion path are specified, '**\*' is assumed
 	 * @param {String} pattern
-	 * @returns {jsmake.FsScanner} this instance, for chaining calls
+	 * @returns {FsScanner} this instance, for chaining calls
 	 * @example
-	 * jsmake.Fs.createScanner('\home').include('**\*.js').scan();
+	 * Fs.createScanner('\home').include('**\*.js').scan();
 	 */
 	include: function (pattern) {
-		this._includeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
+		this._includeMatchers.push(new antPathMatcher.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	/**
 	 * Add a criteria for path exclusion
 	 * @param {String} pattern
-	 * @returns {jsmake.FsScanner} this instance, for chaining calls
+	 * @returns {FsScanner} this instance, for chaining calls
 	 * @example
-	 * jsmake.Fs.createScanner('\home').exclude('**\.git').scan();
+	 * Fs.createScanner('\home').exclude('**\.git').scan();
 	 */
 	exclude: function (pattern) {
-		this._excludeMatchers.push(new jsmake.AntPathMatcher(pattern, this._caseSensitive));
+		this._excludeMatchers.push(new antPathMatcher.AntPathMatcher(pattern, this._caseSensitive));
 		return this;
 	},
 	/**
@@ -36,7 +40,7 @@ jsmake.FsScanner.prototype = {
 	 * @returns {String[]} all mathing paths
 	 * @example
 	 * // returns the path of all files in /home directory
-	 * jsmake.Fs.createScanner('/home').scan();
+	 * Fs.createScanner('/home').scan();
 	 */
 	scan: function () {
 		var fileNames = [];
@@ -47,15 +51,15 @@ jsmake.FsScanner.prototype = {
 		return fileNames;
 	},
 	_scan: function (relativePath, fileNames) {
-		var fullPath = jsmake.Fs.combinePaths(this._basePath, relativePath);
-		jsmake.Utils.each(jsmake.Fs.getChildFileNames(fullPath), function (fileName) {
-			fileName = jsmake.Fs.combinePaths(relativePath, fileName);
+		var fullPath = fs.Fs.combinePaths(this._basePath, relativePath);
+		utils.Utils.each(fs.Fs.getChildFileNames(fullPath), function (fileName) {
+			fileName = fs.Fs.combinePaths(relativePath, fileName);
 			if (this._evaluatePath(fileName, false)) {
-				fileNames.push(jsmake.Fs.combinePaths(this._basePath, fileName));
+				fileNames.push(fs.Fs.combinePaths(this._basePath, fileName));
 			}
 		}, this);
-		jsmake.Utils.each(jsmake.Fs.getChildDirectoryNames(fullPath), function (dir) {
-			dir = jsmake.Fs.combinePaths(relativePath, dir);
+		utils.Utils.each(fs.Fs.getChildDirectoryNames(fullPath), function (dir) {
+			dir = fs.Fs.combinePaths(relativePath, dir);
 			if (this._evaluatePath(dir, true)) {
 				this._scan(dir, fileNames);
 			}
@@ -72,9 +76,11 @@ jsmake.FsScanner.prototype = {
 	},
 	_runMatchers: function (matchers, value) {
 		var match = false;
-		jsmake.Utils.each(matchers, function (matcher) {
+		utils.Utils.each(matchers, function (matcher) {
 			match = match || matcher.match(value);
 		}, this);
 		return match;
 	}
 };
+
+exports.FsScanner = FsScanner;

@@ -1,10 +1,10 @@
-jsmake.Task = function (name, taskNames, body, logger) {
+var Task = function (name, taskNames, body, logger) {
 	this._name = name;
 	this._taskNames = taskNames;
 	this._body = body;
 	this._logger = logger;
 };
-jsmake.Task.prototype = {
+Task.prototype = {
 	getName: function () {
 		return this._name;
 	},
@@ -16,3 +16,5 @@ jsmake.Task.prototype = {
 		this._body.apply({}, args);
 	}
 };
+
+exports.Task = Task;

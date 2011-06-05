@@ -1,28 +1,33 @@
+var pathZipper = require('./pathZipper');
+var fsScanner = require('./fsScanner');
+var sys = require('./sys');
+var utils = require('./utils');
+
 /** @class Contains methods for working with filesystem */
-jsmake.Fs = {
+var Fs = {
 	/**
 	 * Create a zip file containing specified file/directory
 	 * @param {String} srcPath file/directory to zip
 	 * @param {String} destFile zip file name
 	 */
 	zipPath: function (srcPath, destFile) {
-		jsmake.PathZipper.zip(srcPath, destFile);
+		pathZipper.PathZipper.zip(srcPath, destFile);
 	},
 	/**
 	 * Create a filesystem scanner
 	 * @param {String} basePath the path to scan for children tha match criteria
-	 * @returns {jsmake.FsScanner} FsScanner instance to fluently configure and run scanner
-	 * @see jsmake.FsScanner
+	 * @returns {FsScanner} FsScanner instance to fluently configure and run scanner
+	 * @see FsScanner
 	 * @example
 	 * // returns all js and java files in \home folder, including subfolders, excluding .git folders
-	 * jsmake.Fs.createScanner('\home')
+	 * Fs.createScanner('\home')
 	 *     .include('**\*.js')
 	 *     .include('**\*.java')
 	 *     .exclude('**\.git')
 	 *     .scan();
 	 */
 	createScanner: function (basePath) {
-		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
+		return new fsScanner.FsScanner(basePath, this.isCaseSensitive());
 	},
 	/**
 	 * Return default OS character encoding
@@ -43,7 +48,7 @@ jsmake.Fs = {
 	 * @returns {Boolean} true if OS has case sensitive filesystem
 	 */
 	isCaseSensitive: function () {
-		return !jsmake.Sys.isWindowsOs();
+		return !sys.Sys.isWindowsOs();
 	},
 	/**
 	 * Read text file content
@@ -80,7 +85,7 @@ jsmake.Fs = {
 	 * @param {String} path the source path
 	 * @returns {String} the name of the last element in the path
 	 * @example
-	 * jsmake.Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
+	 * Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
 	 */
 	getName: function (path) {
 		return this._translateJavaString(new java.io.File(path).getName());
@@ -143,7 +148,7 @@ jsmake.Fs = {
 		if (!this.pathExists(path)) {
 			return;
 		}
-		jsmake.Utils.each(jsmake.Fs.getChildPathNames(path), function (name) {
+		utils.Utils.each(Fs.getChildPathNames(path), function (name) {
 			this.deletePath(this.combinePaths(path, name));
 		}, this);
 		if (!new java.io.File(path)['delete']()) {
@@ -155,7 +160,7 @@ jsmake.Fs = {
 	 * @param {String} path path to translate
 	 * @returns {String} path in canonical form
 	 * @example
-	 * jsmake.Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
+	 * Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
 	 */
 	getCanonicalPath: function (path) {
 		return this._translateJavaString(new java.io.File(path).getCanonicalPath());
@@ -171,12 +176,12 @@ jsmake.Fs = {
 	/**
 	 * Combine all passed path fragments into one, using OS path separator. Supports any number of parameters.
 	 * @example
-	 * jsmake.Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);
+	 * Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);
 	 * // returns 'home/gimmi/dir/subdir/file.txt'
 	 */
 	combinePaths: function () {
-		var paths = jsmake.Utils.flatten(arguments);
-		return jsmake.Utils.reduce(paths, function (memo, path) {
+		var paths = utils.Utils.flatten(arguments);
+		return utils.Utils.reduce(paths, function (memo, path) {
 			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);
 	},
@@ -201,10 +206,10 @@ jsmake.Fs = {
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
 		this.createDirectory(destDirectory);
-		jsmake.Utils.each(this.getChildFileNames(srcDirectory), function (path) {
+		utils.Utils.each(this.getChildFileNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
 		}, this);
-		jsmake.Utils.each(this.getChildDirectoryNames(srcDirectory), function (path) {
+		utils.Utils.each(this.getChildDirectoryNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), this.combinePaths(destDirectory, path));
 		}, this);
 	},
@@ -235,7 +240,7 @@ jsmake.Fs = {
 		var fileFilter, files;
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
-		return jsmake.Utils.map(files, function (file) {
+		return utils.Utils.map(files, function (file) {
 			return this._translateJavaString(file.getName());
 		}, this);
 	},
@@ -253,3 +258,5 @@ jsmake.Fs = {
 		return String(javaString);
 	}
 };
+
+exports.Fs = Fs;

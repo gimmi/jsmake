@@ -1,8 +1,11 @@
-jsmake.Main = function () {
+var sys = require('./sys');
+var project = require('./project');
+
+var Main = function () {
 	this._project = null;
-	this._logger = jsmake.Sys;
+	this._logger = sys.Sys;
 };
-jsmake.Main.prototype = {
+Main.prototype = {
 	getProject: function () {
 		if (!this._project) {
 			throw 'No project defined';
@@ -19,7 +22,7 @@ jsmake.Main.prototype = {
 		if (this._project) {
 			throw 'project already defined';
 		}
-		this._project = new jsmake.Project(name, defaultTaskName, body, this._logger);
+		this._project = new project.Project(name, defaultTaskName, body, this._logger);
 	},
 	_bind: function (fn, scope) {
 		return function () {
@@ -27,3 +30,5 @@ jsmake.Main.prototype = {
 		};
 	}
 };
+
+exports.Main = Main;

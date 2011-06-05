@@ -12,9 +12,12 @@ JSMAKE_FILES = [
 	'src/main/jsmake.PathZipper.js',
 	'src/main/jsmake.Main.js'
 ];
-for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
-	load(JSMAKE_FILES[i]);
-}
+//for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
+//	load(JSMAKE_FILES[i]);
+//}
+
+var jsmake = require('jsmake');
+
 load('tools/JSLint-2011.05.10/jslint.js');
 
 var main = new jsmake.Main();
@@ -42,7 +45,7 @@ project('jsmake', 'release', function () {
 		var files = fs.createScanner('src').include('**/*.js').scan();
 		var errors = [];
 		utils.each(files, function (file) {
-			var content = '/*global jsmake: true, java */\n' + fs.readFile(file);
+			var content = '/*global jsmake: true, java, require, exports */\n' + fs.readFile(file);
 			JSLINT(content, { white: true, onevar: true, undef: true, regexp: true, plusplus: true, bitwise: true, newcap: true, rhino: true });
 			utils.each(JSLINT.errors, function (error) {
 				if (error) {
