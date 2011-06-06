@@ -9,17 +9,12 @@ jsmake.Main.prototype = {
 		}
 		return this._project;
 	},
-	initGlobalScope: function (global) {
-		global.project = this._bind(this.project, this);
+	init: function (global) {
+		this._project = new jsmake.Project('a project', 'default', function () {}, this._logger);
+		global.task = this._bind(this.task, this);
 	},
-	run: function (args) {
-		this.getProject().run(args.shift(), args);
-	},
-	project: function (name, defaultTaskName, body) {
-		if (this._project) {
-			throw 'project already defined';
-		}
-		this._project = new jsmake.Project(name, defaultTaskName, body, this._logger);
+	task: function (name, tasks, body) {
+		this._project.addTask(new jsmake.Task(name, tasks, body, this._logger));
 	},
 	_bind: function (fn, scope) {
 		return function () {

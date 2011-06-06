@@ -10,13 +10,13 @@ describe("jsmake.Main", function () {
 
 	it('should add function to the global scope', function () {
 		var scope = {};
-		spyOn(target, 'project');
+		spyOn(target, 'task');
 
-		target.initGlobalScope(scope);
-		scope.project(1, 2, 3);
+		target.init(scope);
+		scope.task(1, 2, 3);
 
-		expect(target.project).toHaveBeenCalledWith(1, 2, 3);
-		expect(target.project.mostRecentCall.object).toBe(target);
+		expect(target.task).toHaveBeenCalledWith(1, 2, 3);
+		expect(target.task.mostRecentCall.object).toBe(target);
 	});
 
 	it('should throw error when no project defined', function () {
@@ -26,16 +26,8 @@ describe("jsmake.Main", function () {
 	});
 
 	it("should define project", function () {
-		target.project('name', 'defaultTaskName', function () {
-		});
+		target.init({});
 
-		expect(target.getProject().getName()).toEqual('name');
-	});
-
-	it("should allow only one project", function () {
-		target.project('prj1', 'defaultTaskName', jasmine.createSpy());
-		expect(function () {
-			target.project('prj2', 'defaultTaskName', jasmine.createSpy());
-		}).toThrow('project already defined');
+		expect(target.getProject().getName()).toEqual('a project');
 	});
 });
