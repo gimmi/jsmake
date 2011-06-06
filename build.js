@@ -1,31 +1,9 @@
-JSMAKE_FILES = [
-	'src/main/jsmake.js',
-	'src/main/jsmake.Utils.js',
-	'src/main/jsmake.Project.js',
-	'src/main/jsmake.Task.js',
-	'src/main/jsmake.RecursionChecker.js',
-	'src/main/jsmake.AntPathMatcher.js',
-	'src/main/jsmake.Sys.js',
-	'src/main/jsmake.Fs.js',
-	'src/main/jsmake.FsScanner.js',
-	'src/main/jsmake.CommandRunner.js',
-	'src/main/jsmake.PathZipper.js',
-	'src/main/jsmake.Main.js'
-];
-//for(var i = 0; i < JSMAKE_FILES.length; i += 1) {
-//	load(JSMAKE_FILES[i]);
-//}
-
+var task = require('jsmake').task;
 var sys = require('jsmake').Sys;
 var fs = require('jsmake').Fs;
 var utils = require('jsmake').Utils;
-var project = require('jsmake').project;
-var task = require('jsmake').task;
 
 load('tools/JSLint-2011.05.10/jslint.js');
-
-//var main = new jsmake.Main();
-//main.initGlobalScope(this);
 
 var version, versionString, buildPath = 'build/jsmake';
 
@@ -64,22 +42,7 @@ task('jslint', [], function () {
 });
 
 task('compile', [ 'init', 'jslint' ], function () {
-
 	fs.copyPath('src/main', buildPath);
-
-//		var content = utils.map(JSMAKE_FILES, function (file) {
-//			return fs.readFile(file);
-//		});
-//
-//		var header = [];
-//		header.push('/*');
-//		header.push('JSMake version ' + versionString);
-//		header.push('');
-//		header.push(fs.readFile('LICENSE'));
-//		header.push('*/');
-//		content.unshift(header.join('\n'));
-//
-//		fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
 });
 
 task('test', [ 'compile' ], function () {
@@ -116,7 +79,4 @@ task('jsdoc', [ 'compile' ], function () {
 task('clean', [], function () {
 	fs.deletePath(buildPath);
 });
-
-//main.getProject().runBody(this);
-//main.getProject().runTask(arguments[0], []);
 
