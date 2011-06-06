@@ -16,7 +16,9 @@ JSMAKE_FILES = [
 //	load(JSMAKE_FILES[i]);
 //}
 
-var jsmake = require('jsmake');
+var sys = require('jsmake').Sys;
+var fs = require('jsmake').Fs;
+var utils = require('jsmake').Utils;
 var project = require('jsmake').project;
 var task = require('jsmake').task;
 
@@ -26,10 +28,6 @@ load('tools/JSLint-2011.05.10/jslint.js');
 //main.initGlobalScope(this);
 
 project('jsmake', 'release', function () {
-	var sys = jsmake.Sys;
-	var fs = jsmake.Fs;
-	var utils = jsmake.Utils;
-	
 	var version, versionString, buildPath = 'build/jsmake';
 
 	task('init', [], function () {
@@ -80,7 +78,7 @@ project('jsmake', 'release', function () {
 	});
 	
 	task('test', [ 'compile' ], function () {
-		var runner = jsmake.Sys.createRunner('java');
+		var runner = sys.createRunner('java');
 		runner.args('-jar', 'lib/main/rhino-1.7r3/js.jar', 'specrunner.js');
 		var files = fs.createScanner('src/test').include('**/*.js').scan();
 		utils.each(utils.flatten([ fs.combinePaths(buildPath, 'jsmake.js'), files ]), function (file) {
@@ -96,7 +94,7 @@ project('jsmake', 'release', function () {
 	});
 
 	task('jsdoc', [ 'compile' ], function () {
-		var runner = jsmake.Sys.createRunner('java');
+		var runner = sys.createRunner('java');
 		runner.args('-jar', 'tools/jsdoctoolkit-2.4.0/jsrun.jar', 'tools/jsdoctoolkit-2.4.0/app/run.js');
 		runner.args('-t=tools/jsdoctoolkit-2.4.0/templates/jsdoc');
 		runner.args('-d=' + fs.combinePaths(buildPath, 'jsdoc'));
