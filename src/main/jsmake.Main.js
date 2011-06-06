@@ -11,9 +11,9 @@ jsmake.Main.prototype = {
 	},
 	init: function (global) {
 		this._project = new jsmake.Project('a project', 'default', function () {}, this._logger);
-		global.task = this._bind(this.task, this);
+		global.task = this._bind(this._task, this);
 	},
-	task: function (name, tasks, body) {
+	_task: function (name, tasks, body) {
 		this._project.addTask(new jsmake.Task(name, tasks, body, this._logger));
 	},
 	_bind: function (fn, scope) {

@@ -10,13 +10,13 @@ describe("jsmake.Main", function () {
 
 	it('should add function to the global scope', function () {
 		var scope = {};
-		spyOn(target, 'task');
+		spyOn(target, '_task');
 
 		target.init(scope);
 		scope.task(1, 2, 3);
 
-		expect(target.task).toHaveBeenCalledWith(1, 2, 3);
-		expect(target.task.mostRecentCall.object).toBe(target);
+		expect(target._task).toHaveBeenCalledWith(1, 2, 3);
+		expect(target._task.mostRecentCall.object).toBe(target);
 	});
 
 	it('should throw error when no project defined', function () {
