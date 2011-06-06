@@ -2,14 +2,8 @@ var project = require('jsmake/project');
 var task = require('jsmake/task');
 var sys = require('jsmake/sys');
 
-var _project = null;
+var _project = new project.Project('a project', 'default', function () {}, sys.Sys);
 
-exports.project = function (name, defaultTaskName, body) {
-	if (_project) {
-		throw 'project already defined';
-	}
-	_project = new project.Project(name, defaultTaskName, body, sys.Sys);
-};
 exports.task = function (name, tasks, body) {
 	if (!_project) {
 		throw 'no project defined';
