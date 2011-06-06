@@ -60,6 +60,13 @@ jsmake.Utils = {
 		return v === null || v === undefined || ((this.isArray(v) && !v.length));
 	},
 	/**
+	 * @param v
+	 * @returns {Boolean} true if passed value is a function
+	 */
+	isFunction : function (v) {
+		return Object.prototype.toString.apply(v) === '[object Function]';
+	},
+	/**
 	 * @param {String} str string to trim
 	 * @returns {String} passed value with head and tail spaces removed
 	 */
