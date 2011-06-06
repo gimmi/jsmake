@@ -17,11 +17,13 @@ JSMAKE_FILES = [
 //}
 
 var jsmake = require('jsmake');
+var project = require('jsmake').project;
+var task = require('jsmake').task;
 
 load('tools/JSLint-2011.05.10/jslint.js');
 
-var main = new jsmake.Main();
-main.initGlobalScope(this);
+//var main = new jsmake.Main();
+//main.initGlobalScope(this);
 
 project('jsmake', 'release', function () {
 	var sys = jsmake.Sys;
@@ -108,6 +110,6 @@ project('jsmake', 'release', function () {
 	});
 });
 
-main.getProject().runBody(this);
-main.getProject().runTask(arguments[0], []);
+//main.getProject().runBody(this);
+//main.getProject().runTask(arguments[0], []);
 

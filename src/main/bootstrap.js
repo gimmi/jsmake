@@ -1,8 +1,6 @@
-(function (global, args) {
-	load(args.shift());
-	var main = new jsmake.Main();
-	main.initGlobalScope(global);
-	load('build.js');
-	main.getProject().runBody(global);
-	main.getProject().runTask(args.shift(), args);
-}(this, arguments));
+var jsmake = require('jsmake');
+//var main = new jsmake.Main();
+//main.initGlobalScope(this);
+require('build');
+jsmake.getProject().runBody(this);
+jsmake.getProject().runTask(arguments.shift(), arguments);
