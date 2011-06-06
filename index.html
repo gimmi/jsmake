@@ -89,17 +89,21 @@
 	</div>
 
 	<pre>
-project('my first jsmake project', 'log', function () {
-    var message;
+var message = [];
 
-    task('message', [], function () {
-        message = 'Hello, World!';
-    });
-
-    task('log', [ 'message' ], function () {
-        jsmake.Sys.log(message);
-    });
+task('hello', function () {
+	message.push('Hello');
 });
+
+task('world', function () {
+	message.push('World');
+});
+
+task('greet', [ 'hello', 'world' ], function () {
+	jsmake.Sys.log(message.join(', '));
+});
+
+task('default', 'greet');
 	</pre>
 	<p>JSMake has the following benefits:</p>
 
