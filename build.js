@@ -106,5 +106,5 @@ task('clean', [], function () {
 	fs.deletePath(buildPath);
 });
 
-main.getProject().runTask(arguments[0], []);
+main.runTask(arguments[0], []);
 

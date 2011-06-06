@@ -19,16 +19,10 @@ describe("jsmake.Main", function () {
 		expect(target._task.mostRecentCall.object).toBe(target);
 	});
 
-	it('should throw error when no project defined', function () {
-		expect(function () {
-			target.getProject();
-		}).toThrow('No project defined');
-	});
-
 	it("should define project", function () {
 		target.init({});
 
-		expect(target.getProject().getName()).toEqual('a project');
+		expect(target._project).not.toBeNull();
 	});
 
 	it('should add all defined tasks', function () {
@@ -39,7 +33,7 @@ describe("jsmake.Main", function () {
 		global.task('a task', [], jasmine.createSpy());
 		global.task('another task', [ 'a task' ], jasmine.createSpy());
 
-		expect(target.getProject().getTask('a task').getTaskNames()).toEqual([]);
-		expect(target.getProject().getTask('another task').getTaskNames()).toEqual([ 'a task' ]);
+		expect(target._project.getTask('a task').getTaskNames()).toEqual([]);
+		expect(target._project.getTask('another task').getTaskNames()).toEqual([ 'a task' ]);
 	});
 });
