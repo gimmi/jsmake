@@ -2,8 +2,7 @@ var recursionChecker = require('./recursionChecker');
 var utils = require('./utils');
 var task = require('./task');
 
-var Project = function (defaultTaskName, logger) {
-	this._defaultTaskName = defaultTaskName;
+var Project = function (logger) {
 	this._tasks = {};
 	this._logger = logger;
 };

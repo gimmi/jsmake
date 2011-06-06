@@ -9,7 +9,7 @@ describe("Project", function () {
 		Utils = require('jsmake/utils').Utils;
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
 		body = jasmine.createSpy();
-		target = new Project('default task', logger);
+		target = new Project(logger);
 	});
 
 	function createTask(name, tasks, fn) {
@@ -94,15 +94,6 @@ describe("Project", function () {
 		expect(t3Args).toEqual([]);
 	});
 	
-	it('should run default task if no task specified', function () {
-		var taskBody = jasmine.createSpy();
-		createTask('default task', [], taskBody);
-		
-		target.runTask();
-		
-		expect(taskBody).toHaveBeenCalled();
-	});
-
 	it('should throw exception when trying to get task that does not exists', function () {
 		expect(function () {
 			target.getTask('a task');
