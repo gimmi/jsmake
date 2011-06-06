@@ -62,19 +62,22 @@ project('jsmake', 'release', function () {
 	});
 
 	task('compile', [ 'init', 'jslint' ], function () {
-		var content = utils.map(JSMAKE_FILES, function (file) {
-			return fs.readFile(file);
-		});
 
-		var header = [];
-		header.push('/*');
-		header.push('JSMake version ' + versionString);
-		header.push('');
-		header.push(fs.readFile('LICENSE'));
-		header.push('*/');
-		content.unshift(header.join('\n'));
+		fs.copyPath('src/main', buildPath);
 
-		fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
+//		var content = utils.map(JSMAKE_FILES, function (file) {
+//			return fs.readFile(file);
+//		});
+//
+//		var header = [];
+//		header.push('/*');
+//		header.push('JSMake version ' + versionString);
+//		header.push('');
+//		header.push(fs.readFile('LICENSE'));
+//		header.push('*/');
+//		content.unshift(header.join('\n'));
+//
+//		fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
 	});
 	
 	task('test', [ 'compile' ], function () {
