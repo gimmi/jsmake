@@ -25,5 +25,5 @@ exports.getProject = function () {
 exports.Utils = require('jsmake/utils').Utils;
 exports.Fs = require('jsmake/fs').Fs;
 exports.Sys = require('jsmake/sys').Sys;
-exports.Main = require('jsmake/main').Main;
+
 
