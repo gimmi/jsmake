@@ -6,7 +6,7 @@ describe("jsmake.Project", function () {
 	beforeEach(function () {
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
 		body = jasmine.createSpy();
-		target = new jsmake.Project('test project', 'default task', body, logger);
+		target = new jsmake.Project('default task', body, logger);
 	});
 
 	function createTask(name, tasks, fn) {

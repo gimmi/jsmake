@@ -1,14 +1,10 @@
-jsmake.Project = function (name, defaultTaskName, body, logger) {
-	this._name = name;
+jsmake.Project = function (defaultTaskName, body, logger) {
 	this._defaultTaskName = defaultTaskName;
 	this._tasks = {};
 	this._body = body;
 	this._logger = logger;
 };
 jsmake.Project.prototype = {
-	getName: function () {
-		return this._name;
-	},
 	addTask: function (task) {
 		this._tasks[task.getName()] = task;
 	},
