@@ -1,5 +1,4 @@
-jsmake.Project = function (defaultTaskName, body, logger) {
-	this._defaultTaskName = defaultTaskName;
+jsmake.Project = function (body, logger) {
 	this._tasks = {};
 	this._body = body;
 	this._logger = logger;
@@ -22,7 +21,6 @@ jsmake.Project.prototype = {
 	},
 	runTask: function (name, args) {
 		var tasks, taskNames;
-		name = name || this._defaultTaskName;
 		tasks = this.getTasks(name);
 		taskNames = jsmake.Utils.map(tasks, function (task) {
 			return task.getName();

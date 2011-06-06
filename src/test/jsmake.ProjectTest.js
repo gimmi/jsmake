@@ -6,7 +6,7 @@ describe("jsmake.Project", function () {
 	beforeEach(function () {
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
 		body = jasmine.createSpy();
-		target = new jsmake.Project('default task', body, logger);
+		target = new jsmake.Project(body, logger);
 	});
 
 	function createTask(name, tasks, fn) {
@@ -91,15 +91,6 @@ describe("jsmake.Project", function () {
 		expect(t3Args).toEqual([]);
 	});
 	
-	it('should run default task if no task specified', function () {
-		var taskBody = jasmine.createSpy();
-		createTask('default task', [], taskBody);
-		
-		target.runTask();
-		
-		expect(taskBody).toHaveBeenCalled();
-	});
-
 	it('should throw exception when trying to get task that does not exists', function () {
 		expect(function () {
 			target.getTask('a task');

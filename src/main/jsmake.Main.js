@@ -4,7 +4,7 @@ jsmake.Main = function () {
 };
 jsmake.Main.prototype = {
 	init: function (global) {
-		this._project = new jsmake.Project('default', function () {}, this._logger);
+		this._project = new jsmake.Project(function () {}, this._logger);
 		global.task = this._bind(this._task, this);
 	},
 	runTask: function (name, args) {

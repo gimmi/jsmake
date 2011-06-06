@@ -3,5 +3,5 @@
 	var main = new jsmake.Main();
 	main.init(global);
 	load('build.js');
-	main.runTask(args.shift(), args);
+	main.runTask(args.shift() || 'default', args);
 }(this, arguments));
