@@ -2,7 +2,7 @@ var project = require('jsmake/project');
 var task = require('jsmake/task');
 var sys = require('jsmake/sys');
 
-var _project = new project.Project('a project', 'default', function () {}, sys.Sys);
+var _project = new project.Project('default', sys.Sys);
 
 exports.task = function (name, tasks, body) {
 	_project.addTask(new task.Task(name, tasks, body, sys.Sys));

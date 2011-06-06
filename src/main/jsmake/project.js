@@ -2,17 +2,12 @@ var recursionChecker = require('./recursionChecker');
 var utils = require('./utils');
 var task = require('./task');
 
-var Project = function (name, defaultTaskName, body, logger) {
-	this._name = name;
+var Project = function (defaultTaskName, logger) {
 	this._defaultTaskName = defaultTaskName;
 	this._tasks = {};
-	this._body = body;
 	this._logger = logger;
 };
 Project.prototype = {
-	getName: function () {
-		return this._name;
-	},
 	addTask: function (task) {
 		this._tasks[task.getName()] = task;
 	},
@@ -27,14 +22,6 @@ Project.prototype = {
 		var tasks = [];
 		this._fillDependencies(this.getTask(name), tasks, new recursionChecker.RecursionChecker('Task recursion found'));
 		return utils.Utils.distinct(tasks);
-	},
-	runBody: function (global) {
-		var me = this;
-		global.task = function (name, tasks, body) {
-			me.addTask(new task.Task(name, tasks, body, me._logger));
-		};
-		this._body.apply({}, []);
-		global.task = undefined;
 	},
 	runTask: function (name, args) {
 		var tasks, taskNames;
