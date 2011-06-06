@@ -1,12 +1,13 @@
 /*global Make, jasmine, describe, beforeEach, expect, it */
 
-describe("jsmake.Task", function () {
-	var target, body, logger;
+describe("Task", function () {
+	var target, body, logger, Task;
 
 	beforeEach(function () {
+		Task = require('jsmake/task').Task;
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
 		body = jasmine.createSpy();
-		target = new jsmake.Task('a', [ 'b', 'c' ], body, logger);
+		target = new Task('a', [ 'b', 'c' ], body, logger);
 	});
 
 	it("should return properties", function () {

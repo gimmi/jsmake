@@ -4,7 +4,7 @@ describe("jsmake.Utils", function () {
 	var target;
 
 	beforeEach(function () {
-		target = jsmake.Utils;
+		target = require('jsmake/utils').Utils;
 	});
 
 	xit('isArray should show strange behavior on Firefox', function () {

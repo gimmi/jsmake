@@ -1,20 +1,23 @@
 /*global Make, jasmine, describe, beforeEach, expect, it */
 
-describe("jsmake.Project", function () {
-	var target, body, logger;
+describe("Project", function () {
+	var target, body, logger, Project, Task, Utils;
 
 	beforeEach(function () {
+		Project = require('jsmake/project').Project;
+		Task = require('jsmake/task').Task;
+		Utils = require('jsmake/utils').Utils;
 		logger = jasmine.createSpyObj('logger', [ 'log' ]);
 		body = jasmine.createSpy();
-		target = new jsmake.Project('test project', 'default task', body, logger);
+		target = new Project('test project', 'default task', body, logger);
 	});
 
 	function createTask(name, tasks, fn) {
-		return target.addTask(new jsmake.Task(name, tasks, fn, logger));
+		return target.addTask(new Task(name, tasks, fn, logger));
 	}
 
 	function getTaskNames(tasks) {
-		return jsmake.Utils.map(target.getTasks('t1'), function (task) {
+		return Utils.map(target.getTasks('t1'), function (task) {
 			return task.getName();
 		});
 	}

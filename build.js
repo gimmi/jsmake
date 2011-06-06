@@ -82,9 +82,11 @@ project('jsmake', 'release', function () {
 	
 	task('test', [ 'compile' ], function () {
 		var runner = sys.createRunner('java');
-		runner.args('-jar', 'lib/main/rhino-1.7r3/js.jar', 'specrunner.js');
+		runner.args('-jar', 'lib/main/rhino-1.7r3/js.jar');
+		runner.args('-modules', 'src/main');
+		runner.args('specrunner.js');
 		var files = fs.createScanner('src/test').include('**/*.js').scan();
-		utils.each(utils.flatten([ fs.combinePaths(buildPath, 'jsmake.js'), files ]), function (file) {
+		utils.each(files, function (file) {
 			runner.args(file);
 		});
 		runner.run();
@@ -101,7 +103,10 @@ project('jsmake', 'release', function () {
 		runner.args('-jar', 'tools/jsdoctoolkit-2.4.0/jsrun.jar', 'tools/jsdoctoolkit-2.4.0/app/run.js');
 		runner.args('-t=tools/jsdoctoolkit-2.4.0/templates/jsdoc');
 		runner.args('-d=' + fs.combinePaths(buildPath, 'jsdoc'));
-		runner.args(fs.combinePaths(buildPath, 'jsmake.js'));
+		var files = fs.createScanner('src/main').include('**/*.js').scan();
+		utils.each(files, function (file) {
+			runner.args(file);
+		});
 		runner.run();
 		fs.copyPath(fs.combinePaths(buildPath, 'jsdoc'), 'gh-pages/jsdoc');
 	});

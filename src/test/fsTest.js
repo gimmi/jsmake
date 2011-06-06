@@ -1,10 +1,10 @@
 /*global Make, describe, beforeEach, afterEach, expect, it, spyOn */
 
-describe("jsmake.Fs", function () {
+describe("Fs", function () {
 	var target;
 
 	beforeEach(function () {
-		target = jsmake.Fs;
+		target = require('jsmake/fs').Fs;
 		target.createDirectory('temp');
 	});
 
