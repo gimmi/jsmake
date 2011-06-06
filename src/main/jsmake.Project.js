@@ -24,14 +24,6 @@ jsmake.Project.prototype = {
 		this._fillDependencies(this.getTask(name), tasks, new jsmake.RecursionChecker('Task recursion found'));
 		return jsmake.Utils.distinct(tasks);
 	},
-	runBody: function (global) {
-		var me = this;
-		global.task = function (name, tasks, body) {
-			me.addTask(new jsmake.Task(name, tasks, body, me._logger));
-		};
-		this._body.apply({}, []);
-		global.task = undefined;
-	},
 	runTask: function (name, args) {
 		var tasks, taskNames;
 		name = name || this._defaultTaskName;

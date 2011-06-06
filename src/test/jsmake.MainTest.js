@@ -30,4 +30,16 @@ describe("jsmake.Main", function () {
 
 		expect(target.getProject().getName()).toEqual('a project');
 	});
+
+	it('should add all defined tasks', function () {
+		var global = {};
+
+		target.init(global);
+
+		global.task('a task', [], jasmine.createSpy());
+		global.task('another task', [ 'a task' ], jasmine.createSpy());
+
+		expect(target.getProject().getTask('a task').getTaskNames()).toEqual([]);
+		expect(target.getProject().getTask('another task').getTaskNames()).toEqual([ 'a task' ]);
+	});
 });
