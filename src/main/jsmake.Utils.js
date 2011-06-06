@@ -74,6 +74,11 @@ jsmake.Utils = {
 		return str.replace(/(?:^\s+)|(?:\s+$)/g, '');
 	},
 	/**
+	 * A function that does nothing, useful to pass around as null value
+	 */
+	EMPTY_FN: function () {
+	},
+	/**
 	 * Iterate over each element of items.
 	 * @param items the collection on which iterate, can be anything
 	 * @param {Function} fn the funcion to call for each element in items.

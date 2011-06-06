@@ -36,4 +36,15 @@ describe("jsmake.Main", function () {
 		expect(target._project.getTask('a task').getTaskNames()).toEqual([]);
 		expect(target._project.getTask('another task').getTaskNames()).toEqual([ 'a task' ]);
 	});
+
+	it('should support various parameter combinations for task definition', function () {
+		var fn = function () {
+		};
+
+		expect(target._getTaskParameters([ 'name' ])).toEqual([ 'name', [], jsmake.Utils.EMPTY_FN ]);
+		expect(target._getTaskParameters([ 'name', fn])).toEqual([ 'name', [], fn ]);
+		expect(target._getTaskParameters([ 'name', 'a'])).toEqual([ 'name', [ 'a' ], jsmake.Utils.EMPTY_FN ]);
+		expect(target._getTaskParameters([ 'name', [ 'a' ]])).toEqual([ 'name', [ 'a' ], jsmake.Utils.EMPTY_FN ]);
+		expect(target._getTaskParameters([ 'name', [ 'a' ], fn])).toEqual([ 'name', [ 'a' ], fn ]);
+	});
 });

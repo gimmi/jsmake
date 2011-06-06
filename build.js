@@ -26,10 +26,9 @@ var utils = jsmake.Utils;
 
 var version, versionString, buildPath = 'build/jsmake';
 
-task('default', [ 'release' ], function () {
-});
+task('default', 'release');
 
-task('init', [], function () {
+task('init', function () {
 	version = JSON.parse(fs.readFile('version.json'));
 	versionString = version.major + '.' + version.minor + '.' + version.patch;
 });
@@ -40,7 +39,7 @@ task('release', [ 'build', 'jsdoc' ], function () {
 	fs.zipPath(buildPath, buildPath + '-' + versionString + '.zip');
 });
 
-task('jslint', [], function () {
+task('jslint', function () {
 	var files = fs.createScanner('src').include('**/*.js').scan();
 	var errors = [];
 	utils.each(files, function (file) {
@@ -76,9 +75,11 @@ task('compile', [ 'init', 'jslint' ], function () {
 	fs.writeFile(fs.combinePaths(buildPath, 'jsmake.js'), content.join('\n'));
 });
 
-task('test', [ 'compile' ], function () {
+task('test', 'compile', function () {
 	var runner = jsmake.Sys.createRunner('java');
-	runner.args('-jar', 'lib/main/rhino-1.7r3/js.jar', 'specrunner.js');
+	runner.args('-cp', 'lib/main/rhino-1.7r3/js.jar');
+	runner.args('org.mozilla.javascript.tools.shell.Main'); // runner.args('org.mozilla.javascript.tools.debugger.Main');
+	runner.args('specrunner.js');
 	var files = fs.createScanner('src/test').include('**/*.js').scan();
 	utils.each(utils.flatten([ fs.combinePaths(buildPath, 'jsmake.js'), files ]), function (file) {
 		runner.args(file);
@@ -86,13 +87,13 @@ task('test', [ 'compile' ], function () {
 	runner.run();
 });
 
-task('build', [ 'test' ], function () {
+task('build', 'test', function () {
 	utils.each([ 'src/main/bootstrap.js', 'src/main/jsmake.cmd', 'src/main/jsmaked.cmd', 'lib/main/rhino-1.7r3/js.jar' ], function (file) {
 		fs.copyPath(file, buildPath);
 	});
 });
 
-task('jsdoc', [ 'compile' ], function () {
+task('jsdoc', 'compile', function () {
 	var runner = jsmake.Sys.createRunner('java');
 	runner.args('-jar', 'tools/jsdoctoolkit-2.4.0/jsrun.jar', 'tools/jsdoctoolkit-2.4.0/app/run.js');
 	runner.args('-t=tools/jsdoctoolkit-2.4.0/templates/jsdoc');
@@ -102,7 +103,7 @@ task('jsdoc', [ 'compile' ], function () {
 	fs.copyPath(fs.combinePaths(buildPath, 'jsdoc'), 'gh-pages/jsdoc');
 });
 
-task('clean', [], function () {
+task('clean', function () {
 	fs.deletePath(buildPath);
 });
 
