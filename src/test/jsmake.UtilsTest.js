@@ -183,14 +183,14 @@ describe("jsmake.Utils", function () {
 	it('map', function () {
 		var fn, scope, actual;
 		fn = jasmine.createSpy();
-		fn.andCallFake(function (item) {
-			return item.toUpperCase();
+		fn.andCallFake(function (item, index) {
+			return '[' + index + ']=' + item.toUpperCase();
 		});
 		scope = {};
 
 		actual = target.map([ 'a', 'b' ], fn, scope);
 
-		expect(actual).toEqual([ 'A', 'B' ]);
+		expect(actual).toEqual([ '[0]=A', '[1]=B' ]);
 		expect(fn.mostRecentCall.object).toBe(scope);
 	});
 	
@@ -211,14 +211,14 @@ describe("jsmake.Utils", function () {
 	it('reduce', function () {
 		var fn, scope, actual;
 		fn = jasmine.createSpy();
-		fn.andCallFake(function (memo, item) {
-			return memo + item;
+		fn.andCallFake(function (memo, item, index) {
+			return memo + '[' + index + ']=' + item;
 		});
 		scope = {};
 
 		actual = target.reduce([ '2', '3', '4' ], fn, '1', scope);
 
-		expect(actual).toEqual('1234');
+		expect(actual).toEqual('1[0]=2[1]=3[2]=4');
 		expect(fn.callCount).toEqual(3);
 		expect(fn.mostRecentCall.object).toBe(scope);
 	});
