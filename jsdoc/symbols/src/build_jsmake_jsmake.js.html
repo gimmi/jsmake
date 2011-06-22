@@ -6,7 +6,7 @@
 	.REGX {color: #339;}
 	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
 	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/*
-<span class='line'>  2</span> JSMake version 0.8.26
+<span class='line'>  2</span> JSMake version 0.8.27
 <span class='line'>  3</span> 
 <span class='line'>  4</span> Copyright 2011 Gian Marco Gherardi
 <span class='line'>  5</span> 
@@ -483,7 +483,7 @@
 <span class='line'>476</span> 	 * @returns {String} path separator, e.g. '/' or '\'
 <span class='line'>477</span> 	 */</span><span class="WHIT">
 <span class='line'>478</span> </span><span class="WHIT">	</span><span class="NAME">getPathSeparator</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>479</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">java.io.File.separator</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>479</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._translateJavaString</span><span class="PUNC">(</span><span class="NAME">java.io.File.separator</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>480</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'>481</span> </span><span class="WHIT">	</span><span class="COMM">/**
 <span class='line'>482</span> 	 * Returns true if OS has case sensitive filesystem
