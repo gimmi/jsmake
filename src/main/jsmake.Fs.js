@@ -36,7 +36,7 @@ jsmake.Fs = {
 	 * @returns {String} path separator, e.g. '/' or '\'
 	 */
 	getPathSeparator: function () {
-		return java.io.File.separator;
+		return this._translateJavaString(java.io.File.separator);
 	},
 	/**
 	 * Returns true if OS has case sensitive filesystem

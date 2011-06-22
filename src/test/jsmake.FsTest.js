@@ -103,4 +103,9 @@ describe("jsmake.Fs", function () {
 		expect(target.fileExists('temp/a/b/c/file.txt')).toBeTruthy();
 		expect(target.readFile('temp/a/b/c/file.txt')).toEqual('אטעיש');
 	});
+	
+	it('path separator should be a true JS string', function () {
+		var ps = target.getPathSeparator();
+		expect(ps === '\\' || ps === '/').toBe(true);
+	});
 });
