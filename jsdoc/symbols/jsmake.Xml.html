@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - jsmake.FsScanner</title>
+		<title>JsDoc Reference - jsmake.Xml</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -214,7 +214,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class jsmake.FsScanner
+				Class jsmake.Xml
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -222,7 +222,7 @@ ul.inheritsList
 				
 				
 			
-				
+				Various helper methods for manipulating XML files
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/build_jsmake_jsmake.js.html">jsmake.js</a>.
@@ -231,7 +231,7 @@ ul.inheritsList
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class jsmake.FsScanner.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class jsmake.Xml.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -244,9 +244,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/jsmake.FsScanner.html#constructor">jsmake.FsScanner</a></b>(basePath, caseSensitive)
+								<b><a href="../symbols/jsmake.Xml.html#constructor">jsmake.Xml</a></b>()
 							</div>
-							<div class="description">Don't instantiate it directly, use <a href="../symbols/jsmake.Fs.html#.createScanner">jsmake.Fs.createScanner</a></div>
+							<div class="description"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -260,7 +260,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class jsmake.FsScanner.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class jsmake.Xml.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -271,29 +271,29 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/jsmake.FsScanner.html#exclude">exclude</a></b>(pattern)
+								<div class="fixedFont">jsmake.Xml.<b><a href="../symbols/jsmake.Xml.html#.getValue">getValue</a></b>(file, xpath)
 								</div>
-								<div class="description">Add a criteria for path exclusion</div>
+								<div class="description">Like <a href="../symbols/jsmake.Xml.html#.getValues">jsmake.Xml.getValues</a>, but expect a single match, throwing exception otherwise.</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/jsmake.FsScanner.html#include">include</a></b>(pattern)
+								<div class="fixedFont">jsmake.Xml.<b><a href="../symbols/jsmake.Xml.html#.getValues">getValues</a></b>(file, xpath)
 								</div>
-								<div class="description">Add a criteria for path inclusion.</div>
+								<div class="description">Search nodes that match XPath in XML file.</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/jsmake.FsScanner.html#scan">scan</a></b>()
+								<div class="fixedFont">jsmake.Xml.<b><a href="../symbols/jsmake.Xml.html#.setValue">setValue</a></b>(file, xpath, value)
 								</div>
-								<div class="description">Execute filesystem scanning with defined criterias</div>
+								<div class="description">Set value of matching node in XML file.</div>
 							</td>
 						</tr>
 					
@@ -314,34 +314,17 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>jsmake.FsScanner</b>(basePath, caseSensitive)
+						<b>jsmake.Xml</b>()
 				</div>
 				
 				<div class="description">
-					Don't instantiate it directly, use <a href="../symbols/jsmake.Fs.html#.createScanner">jsmake.Fs.createScanner</a>
+					
 					
 				</div>
 				
 				
 				
 				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								 <b>basePath</b>
-								
-							</dt>
-								<dd></dd>
-						
-							<dt>
-								 <b>caseSensitive</b>
-								
-							</dt>
-								<dd></dd>
-						
-						</dl>
 					
 					
 					
@@ -362,22 +345,22 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="exclude"> </a>
-					<div class="fixedFont">
+					<a name=".getValue"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span>
-					<b>exclude</b>(pattern)
+					<span class="light">{String}</span>
+					<span class="light">jsmake.Xml.</span><b>getValue</b>(file, xpath)
 					
 					</div>
 					<div class="description">
-						Add a criteria for path exclusion
+						Like <a href="../symbols/jsmake.Xml.html#.getValues">jsmake.Xml.getValues</a>, but expect a single match, throwing exception otherwise.
 						
 						
 					</div>
 					
 					
 					
-					<pre class="code">jsmake.Fs.createScanner('\home').exclude('**\.git').scan();</pre>
+					<pre class="code">var episode = jsmake.Xml.getValue('temp/file.xml', '//series/season[@id="1"]/episode/text()');</pre>
 					
 					
 					
@@ -386,10 +369,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{String}</span> <b>pattern</b>
+									<span class="light fixedFont">{String}</span> <b>file</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>XML file path</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>xpath</b>
+									
+								</dt>
+								<dd>XPath query to search for</dd>
 							
 							</dl>
 						
@@ -400,7 +389,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span> this instance, for chaining calls</dd>
+								<dd><span class="light fixedFont">{String}</span> value of matching node</dd>
 							
 							</dl>
 						
@@ -409,72 +398,42 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="include"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span>
-					<b>include</b>(pattern)
-					
-					</div>
-					<div class="description">
-						Add a criteria for path inclusion. If no inclusion path are specified, '**\*' is assumed
-						
-						
-					</div>
-					
-					
-					
-					<pre class="code">jsmake.Fs.createScanner('\home').include('**\*.js').scan();</pre>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>pattern</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a>}</span> this instance, for chaining calls</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="scan"> </a>
-					<div class="fixedFont">
+					<a name=".getValues"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{String[]}</span>
-					<b>scan</b>()
+					<span class="light">jsmake.Xml.</span><b>getValues</b>(file, xpath)
 					
 					</div>
 					<div class="description">
-						Execute filesystem scanning with defined criterias
+						Search nodes that match XPath in XML file.
 						
 						
 					</div>
 					
 					
 					
-					<pre class="code">// returns the path of all files in /home directoryjsmake.Fs.createScanner('/home').scan();</pre>
+					<pre class="code">var values = jsmake.Xml.getValues('temp/file.xml', '//series/season/episode/text()');</pre>
 					
 					
 					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>file</b>
+									
+								</dt>
+								<dd>XML file path</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>xpath</b>
+									
+								</dt>
+								<dd>XPath query to search for</dd>
+							
+							</dl>
 						
 						
 						
@@ -483,9 +442,61 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{String[]}</span> all mathing paths</dd>
+								<dd><span class="light fixedFont">{String[]}</span> an array of values of matching nodes</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".setValue"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Xml.</span><b>setValue</b>(file, xpath, value)
+					
+					</div>
+					<div class="description">
+						Set value of matching node in XML file. throw exception if multiple nodes match XPath.
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">jsmake.Xml.setValue('temp/file.xml', '//series/season[@id="1"]/episode', 'new episode value');</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>file</b>
+									
+								</dt>
+								<dd>XML file path</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>xpath</b>
+									
+								</dt>
+								<dd>XPath query to search for</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>value</b>
+									
+								</dt>
+								<dd>value to set</dd>
+							
+							</dl>
+						
+						
+						
+						
 						
 						
 						
