@@ -30,11 +30,12 @@ jsmake.Sys = {
 	/**
 	 * Returns environment variable value
 	 * @param {String} name name of the environment variable
-	 * @param {String} def default value to return if environment variable not defined
-	 * @returns {String} environment variable value or def
+	 * @param {String} [def] default value to return if environment variable not defined.
+	 * @returns {String} environment variable value if found, or default value.
+	 * @throws {Error} if environment variable is not found and no default value passed.
 	 */
 	getEnvVar: function (name, def) {
-		return java.lang.System.getenv(name) || def;
+		return this._getEnvVar(name, String(java.lang.System.getenv(name)), def);
 	},
 	/**
 	 * Log message to the console
@@ -42,5 +43,14 @@ jsmake.Sys = {
 	 */
 	log: function (msg) {
 		print(msg);
+	},
+	_getEnvVar: function (name, val, def) {
+		if (val !== null) {
+			return val;
+		}
+		if (def !== undefined) {
+			return def;
+		}
+		throw 'Environment variable "' + name + '" not defined.';
 	}
 };
