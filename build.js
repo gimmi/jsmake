@@ -1,17 +1,17 @@
 JSMAKE_FILES = [
 	'src/main/jsmake.js',
-	'src/main/jsmake.Utils.js',
-	'src/main/jsmake.Project.js',
-	'src/main/jsmake.Task.js',
-	'src/main/jsmake.RecursionChecker.js',
-	'src/main/jsmake.AntPathMatcher.js',
-	'src/main/jsmake.Sys.js',
-	'src/main/jsmake.Fs.js',
-	'src/main/jsmake.FsScanner.js',
-	'src/main/jsmake.CommandRunner.js',
-	'src/main/jsmake.PathZipper.js',
-	'src/main/jsmake.Xml.js',
-	'src/main/jsmake.Main.js'
+	'src/main/jsmake/Utils.js',
+	'src/main/jsmake/Project.js',
+	'src/main/jsmake/Task.js',
+	'src/main/jsmake/RecursionChecker.js',
+	'src/main/jsmake/AntPathMatcher.js',
+	'src/main/jsmake/Sys.js',
+	'src/main/jsmake/Fs.js',
+	'src/main/jsmake/FsScanner.js',
+	'src/main/jsmake/CommandRunner.js',
+	'src/main/jsmake/PathZipper.js',
+	'src/main/jsmake/Xml.js',
+	'src/main/jsmake/Main.js'
 ];
 for (var i = 0; i < JSMAKE_FILES.length; i += 1) {
 	load(JSMAKE_FILES[i]);
