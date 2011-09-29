@@ -1,5 +1,6 @@
 JSMAKE_FILES = [
 	'src/main/jsmake.js',
+	'src/main/jsmake.Rhino.js',
 	'src/main/jsmake.Utils.js',
 	'src/main/jsmake.Project.js',
 	'src/main/jsmake.Task.js',

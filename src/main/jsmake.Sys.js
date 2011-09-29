@@ -35,7 +35,8 @@ jsmake.Sys = {
 	 * @throws {Error} if environment variable is not found and no default value passed.
 	 */
 	getEnvVar: function (name, def) {
-		return this._getEnvVar(name, String(java.lang.System.getenv(name)), def);
+		var val = jsmake.Rhino.translateJavaString(java.lang.System.getenv(name));
+		return this._getEnvVar(name, val, def);
 	},
 	/**
 	 * Log message to the console

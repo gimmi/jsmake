@@ -12,7 +12,7 @@ jsmake.Xml = {
 		var i, ret = [], nodeList;
 		nodeList = this._getNodeList(this._loadDocument(file), xpath);
 		for (i = 0; i < nodeList.getLength(); i += 1) {
-			ret.push(this._translateJavaString(nodeList.item(i).getNodeValue()));
+			ret.push(jsmake.Rhino.translateJavaString(nodeList.item(i).getNodeValue()));
 		}
 		return ret;
 	},
@@ -63,8 +63,5 @@ jsmake.Xml = {
 		var transformer;
 		transformer = javax.xml.transform.TransformerFactory.newInstance().newTransformer();
 		transformer.transform(new javax.xml.transform.dom.DOMSource(document), new javax.xml.transform.stream.StreamResult(new java.io.File(file)));
-	},
-	_translateJavaString: function (javaString) {
-		return String(javaString);
 	}
 };
