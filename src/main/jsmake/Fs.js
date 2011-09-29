@@ -36,7 +36,7 @@ jsmake.Fs = {
 	 * @returns {String} path separator, e.g. '/' or '\'
 	 */
 	getPathSeparator: function () {
-		return this._translateJavaString(java.io.File.separator);
+		return jsmake.Rhino.translateJavaString(java.io.File.separator);
 	},
 	/**
 	 * Returns true if OS has case sensitive filesystem
@@ -83,7 +83,7 @@ jsmake.Fs = {
 	 * jsmake.Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
 	 */
 	getName: function (path) {
-		return this._translateJavaString(new java.io.File(path).getName());
+		return jsmake.Rhino.translateJavaString(new java.io.File(path).getName());
 	},
 	/**
 	 * Copy file or directory to another directory
@@ -158,7 +158,7 @@ jsmake.Fs = {
 	 * jsmake.Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
 	 */
 	getCanonicalPath: function (path) {
-		return this._translateJavaString(new java.io.File(path).getCanonicalPath());
+		return jsmake.Rhino.translateJavaString(new java.io.File(path).getCanonicalPath());
 	},
 	/**
 	 * Returns parent path
@@ -166,7 +166,7 @@ jsmake.Fs = {
 	 * @returns {String} parent path
 	 */
 	getParentDirectory: function (path) {
-		return this._translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
+		return jsmake.Rhino.translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
 	},
 	/**
 	 * Combine all passed path fragments into one, using OS path separator. Supports any number of parameters.
@@ -196,7 +196,7 @@ jsmake.Fs = {
 		});
 	},
 	_javaCombine: function (path1, path2) {
-		return this._translateJavaString(new java.io.File(path1, path2).getPath());
+		return jsmake.Rhino.translateJavaString(new java.io.File(path1, path2).getPath());
 	},
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
@@ -236,7 +236,7 @@ jsmake.Fs = {
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
 		return jsmake.Utils.map(files, function (file) {
-			return this._translateJavaString(file.getName());
+			return jsmake.Rhino.translateJavaString(file.getName());
 		}, this);
 	},
 	_translateJavaArray: function (javaArray) {
@@ -248,8 +248,5 @@ jsmake.Fs = {
 			ary.push(javaArray[i]);
 		}
 		return ary;
-	},
-	_translateJavaString: function (javaString) {
-		return String(javaString);
 	}
 };
