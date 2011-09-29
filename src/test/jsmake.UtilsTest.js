@@ -62,6 +62,21 @@ describe("jsmake.Utils", function () {
 		expect(target.isFunction(function () {})).toBe(true);
 	});
 
+	it("isString", function () {
+		expect(target.isString(1)).toBe(false);
+		expect(target.isString(null)).toBe(false);
+		expect(target.isString(undefined)).toBe(false);
+		expect(target.isString(function () {})).toBe(false);
+		expect(target.isString(NaN)).toBe(false);
+		expect(target.isString(arguments)).toBe(false);
+		expect(target.isString(true)).toBe(false);
+		expect(target.isString(false)).toBe(false);
+		expect(target.isString({})).toBe(false);
+		expect(target.isString(new Date())).toBe(false);
+		expect(target.isString('')).toBe(true);
+		expect(target.isString('a string')).toBe(true);
+	});
+
 	it('toArray', function () {
 		expect(target.toArray()).toEqual([]);
 		expect(target.toArray(null)).toEqual([]);

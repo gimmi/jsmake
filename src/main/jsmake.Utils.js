@@ -67,6 +67,13 @@ jsmake.Utils = {
 		return Object.prototype.toString.apply(v) === '[object Function]';
 	},
 	/**
+	 * @param v
+	 * @returns {Boolean} true if passed value is a string
+	 */
+	isString: function (value) {
+		return typeof value === 'string';
+	},
+	/**
 	 * @param {String} str string to trim
 	 * @returns {String} passed value with head and tail spaces removed
 	 */
