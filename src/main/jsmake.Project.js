@@ -1,6 +1,5 @@
-jsmake.Project = function (body, logger) {
+jsmake.Project = function (logger) {
 	this._tasks = {};
-	this._body = body;
 	this._logger = logger;
 };
 jsmake.Project.prototype = {
