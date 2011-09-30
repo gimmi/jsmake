@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, afterEach, expect, it, spyOn */
 
 describe("jsmake.Rhino", function () {
-	var target;
+	var target, jsmake = { Rhino: require('jsmake/Rhino').Rhino, Utils: require('jsmake/Utils').Utils };
 
 	beforeEach(function () {
 		target = jsmake.Rhino;

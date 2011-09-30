@@ -1,4 +1,4 @@
-jsmake.Rhino = {
+var Rhino = {
 	translateJavaString: function (javaString) {
 		if (javaString === null) {
 			return null;
@@ -9,3 +9,5 @@ jsmake.Rhino = {
 		return String(javaString);
 	}
 };
+
+exports.Rhino = Rhino;

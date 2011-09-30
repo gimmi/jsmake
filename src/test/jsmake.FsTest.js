@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, afterEach, expect, it, spyOn */
 
 describe("jsmake.Fs", function () {
-	var target;
+	var target, jsmake = { Fs: require('jsmake/Fs').Fs };
 
 	beforeEach(function () {
 		target = jsmake.Fs;

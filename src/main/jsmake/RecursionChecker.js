@@ -1,8 +1,10 @@
-jsmake.RecursionChecker = function (message) {
+var utils = require('./Utils');
+
+var RecursionChecker = function (message) {
 	this._message = message;
 	this._stack = [];
 };
-jsmake.RecursionChecker.prototype = {
+RecursionChecker.prototype = {
 	enter: function (id) {
 		this._check(id);
 		this._stack.push(id);
@@ -19,9 +21,11 @@ jsmake.RecursionChecker.prototype = {
 		}
 	},
 	_check: function (id) {
-		if (jsmake.Utils.contains(this._stack, id)) {
+		if (utils.Utils.contains(this._stack, id)) {
 			this._stack.push(id);
 			throw this._message + ': ' + this._stack.join(' => ');
 		}
 	}
 };
+
+exports.RecursionChecker = RecursionChecker;

@@ -1,7 +1,3 @@
-(function (global, args) {
-	load(args.shift());
-	var main = new jsmake.Main();
-	main.init(global);
-	load('build.js');
-	main.runTask(args.shift() || 'default', args);
-}(this, arguments));
+var jsmake = require('./jsmake');
+require('build');
+jsmake.runTask(arguments.shift() || 'default', arguments);

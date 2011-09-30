@@ -1,7 +1,7 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, spyOn */
 
 describe("jsmake.Main", function () {
-	var target;
+	var target, jsmake = { Main: require('jsmake/Main').Main, Utils: require('jsmake/Utils').Utils };
 
 	beforeEach(function () {
 		target = new jsmake.Main();

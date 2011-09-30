@@ -1,5 +1,5 @@
 /** @class Various helper methods to make working with Javascript easier */
-jsmake.Utils = {
+var Utils = {
 	/**
 	 * Return the same string with escaped regex chars, in order to be safely included as part of regex
 	 * @param {String} str string to escape
@@ -96,14 +96,14 @@ jsmake.Utils = {
 	 * // Array iteration: the following code logs
 	 * // item=a, index=0, items=[a,b]
 	 * // item=b, index=1, items=[a,b]
-	 * jsmake.Utils.each([ 'a', 'b'], function (item, index, items) {
-	 *     jsmake.Sys.log('item=' + item + ', index=' + index + ', items=' + items);
+	 * Utils.each([ 'a', 'b'], function (item, index, items) {
+	 *     Sys.log('item=' + item + ', index=' + index + ', items=' + items);
 	 * }, this);
 	 * // Object iteration: the following code logs
 	 * // item=1, index=a, items=[object]
 	 * // item=2, index=b, items=[object]
-	 * jsmake.Utils.each({ a: 1, b: 2 }, function (item, index, items) {
-	 *     jsmake.Sys.log('item=' + item + ', index=' + index + ', items=' + items);
+	 * Utils.each({ a: 1, b: 2 }, function (item, index, items) {
+	 *     Sys.log('item=' + item + ', index=' + index + ', items=' + items);
 	 * }, this);
 	 */
 	each: function (items, fn, scope) {
@@ -127,14 +127,14 @@ jsmake.Utils = {
 	},
 	/**
 	 * Filter collection, returning elements that satisfy passed criteria
-	 * @param items can be anything, see {@link jsmake.Utils.each}
+	 * @param items can be anything, see {@link Utils.each}
 	 * @param {Function} fn filter criteria, will be called for each element in items, passing current element as parameter.
 	 * Must return falsy value to indicate that the element should be filtered out
 	 * @param {Object} [scope] 'this' binding for function
 	 * @returns {Array} filtered values
 	 * @example
 	 * // returns [ 1, 2 ]
-	 * jsmake.Utils.filter([ 1, 2, 3 ], function (item) {
+	 * Utils.filter([ 1, 2, 3 ], function (item) {
 	 *     return item < 3;
 	 * });
 	 */
@@ -149,7 +149,7 @@ jsmake.Utils = {
 	},
 	/**
 	 * Transform each item in passed collection, returning a new array with transformed items
-	 * @param items can be anything, see {@link jsmake.Utils.each}
+	 * @param items can be anything, see {@link Utils.each}
 	 * @param {Function} fn transformation function, will be called for each element in items.
 	 * Will be called with the following parameters: currentItem, itemIndex, items.
 	 * If function returns truthy value then iteration will stop
@@ -158,7 +158,7 @@ jsmake.Utils = {
 	 * @returns {Array} new array with transformed items
 	 * @example
 	 * // returns [ 4, 9 ]
-	 * jsmake.Utils.map([ 2, 3 ], function (item, index, items) {
+	 * Utils.map([ 2, 3 ], function (item, index, items) {
 	 *     return item * item;
 	 * });
 	 */
@@ -172,7 +172,7 @@ jsmake.Utils = {
 	/**
 	 * @example
 	 * // returns 'items are: 2 3 '
-	 * jsmake.Utils.reduce([ 2, 3 ], function (memo, item, index, items) {
+	 * Utils.reduce([ 2, 3 ], function (memo, item, index, items) {
 	 *     return memo + item + ' ';
 	 * }, 'items are: ');
 	 */
@@ -184,8 +184,8 @@ jsmake.Utils = {
 	},
 	/**
 	 * @example
-	 * jsmake.Utils.contains([ 2, 3 ], 3); // returns true
-	 * jsmake.Utils.contains([ 2, 3 ], 4); // returns false
+	 * Utils.contains([ 2, 3 ], 3); // returns true
+	 * Utils.contains([ 2, 3 ], 4); // returns false
 	 */
 	contains: function (items, item) {
 		var ret = false;
@@ -197,7 +197,7 @@ jsmake.Utils = {
 	},
 	/**
 	 * @example
-	 * jsmake.Utils.distinct([ 2, 3, 2, 3 ]); // returns [ 2, 3 ]
+	 * Utils.distinct([ 2, 3, 2, 3 ]); // returns [ 2, 3 ]
 	 */
 	distinct: function (items) {
 		var ret = [];
@@ -210,7 +210,7 @@ jsmake.Utils = {
 	},
 	/**
 	 * @example
-	 * jsmake.Utils.flatten([ 1, [ 2, 3 ], [ 4, [ 5, 6 ] ] ]); // returns [ 1, 2, 3, 4, 5, 6 ]
+	 * Utils.flatten([ 1, [ 2, 3 ], [ 4, [ 5, 6 ] ] ]); // returns [ 1, 2, 3, 4, 5, 6 ]
 	 */
 	flatten: function (items) {
 		return this.reduce(items, function (memo, item) {
@@ -223,3 +223,5 @@ jsmake.Utils = {
 		}, [], this);
 	}
 };
+
+exports.Utils = Utils;

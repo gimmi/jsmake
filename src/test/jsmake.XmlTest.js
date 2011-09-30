@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, afterEach, expect, it, spyOn */
 
 describe("jsmake.Xml", function () {
-	var target;
+	var target, jsmake = { Xml: require('jsmake/Xml').Xml, Fs: require('jsmake/Fs').Fs };
 
 	beforeEach(function () {
 		var xml;

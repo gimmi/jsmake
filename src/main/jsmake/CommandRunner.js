@@ -1,21 +1,24 @@
+var sys = require('./Sys');
+var utils = require('./Utils');
+
 /**
- * Don't instantiate it directly, use {@link jsmake.Sys.createRunner}
+ * Don't instantiate it directly, use {@link Sys.createRunner}
  * @constructor
  */
-jsmake.CommandRunner = function (command) {
+var CommandRunner = function (command) {
 	this._command = command;
 	this._arguments = [];
-	this._logger = jsmake.Sys;
+	this._logger = sys.Sys;
 };
-jsmake.CommandRunner.prototype = {
+CommandRunner.prototype = {
 	/**
 	 * Add all passed arguments. Supports any number of parameters.
-	 * @returns {jsmake.CommandRunner} this instance, for chaining calls
+	 * @returns {CommandRunner} this instance, for chaining calls
 	 * @example
-	 * jsmake.Sys.createRunner('cmd.exe').args('par1', 'par2', [ 'par3', 'par4' ]).run();
+	 * Sys.createRunner('cmd.exe').args('par1', 'par2', [ 'par3', 'par4' ]).run();
 	 */
 	args: function () {
-		this._arguments = this._arguments.concat(jsmake.Utils.flatten(arguments));
+		this._arguments = this._arguments.concat(utils.Utils.flatten(arguments));
 		return this;
 	},
 	/**
@@ -23,9 +26,11 @@ jsmake.CommandRunner.prototype = {
 	 */
 	run: function () {
 		this._logger.log(this._command + ' ' + this._arguments.join(' '));
-		var exitStatus = jsmake.Sys.runCommand(this._command, { args: this._arguments });
+		var exitStatus = sys.Sys.runCommand(this._command, { args: this._arguments });
 		if (exitStatus !== 0) {
 			throw 'Command failed with exit status ' + exitStatus;
 		}
 	}
 };
+
+exports.CommandRunner = CommandRunner;

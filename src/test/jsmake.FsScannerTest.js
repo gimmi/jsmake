@@ -1,8 +1,7 @@
 /*global Make, describe, beforeEach, expect, it, spyOn */
 
 describe("jsmake.FsScanner", function () {
-	var files, directories;
-
+	var files, directories, jsmake = { FsScanner: require('jsmake/FsScanner').FsScanner, Fs: require('jsmake/Fs').Fs, Utils: require('jsmake/Utils').Utils };
 
 	beforeEach(function () {
 		files = {

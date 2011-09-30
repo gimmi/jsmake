@@ -1,7 +1,7 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, spyOn */
 
 describe("jsmake.CommandRunner", function () {
-	var target;
+	var target, jsmake = { CommandRunner: require('jsmake/CommandRunner').CommandRunner, Sys: require('jsmake/Sys').Sys };
 
 	beforeEach(function () {
 		target = new jsmake.CommandRunner('cmd');

@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, afterEach, expect, it, spyOn */
 
 describe("jsmake.PathZipper", function () {
-	var target;
+	var target, jsmake = { PathZipper: require('jsmake/PathZipper').PathZipper, Fs: require('jsmake/Fs').Fs };
 
 	beforeEach(function () {
 		target = jsmake.PathZipper;

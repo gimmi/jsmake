@@ -1,7 +1,7 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, xit, toString */
 
 describe("jsmake.Utils", function () {
-	var target;
+	var target, jsmake = { Utils: require('jsmake/Utils').Utils };
 
 	beforeEach(function () {
 		target = jsmake.Utils;

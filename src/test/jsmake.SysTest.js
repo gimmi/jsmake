@@ -1,7 +1,7 @@
 /*global Make, jasmine, describe, beforeEach, expect, it, xit, toString */
 
 describe("jsmake.Sys", function () {
-	var target;
+	var target, jsmake = { Sys: require('jsmake/Sys').Sys };
 
 	beforeEach(function () {
 		target = jsmake.Sys;

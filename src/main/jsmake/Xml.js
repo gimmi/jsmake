@@ -1,28 +1,30 @@
+var rhino = require('./Rhino');
+
 /** @class Various helper methods for manipulating XML files */
-jsmake.Xml = {
+var Xml = {
 	/**
 	 * Search nodes that match XPath in XML file.
 	 * @param {String} file XML file path
 	 * @param {String} xpath XPath query to search for
 	 * @returns {String[]} an array of values of matching nodes
 	 * @example
-	 * var values = jsmake.Xml.getValues('temp/file.xml', '//series/season/episode/text()');
+	 * var values = Xml.getValues('temp/file.xml', '//series/season/episode/text()');
 	 */
 	getValues: function (file, xpath) {
 		var i, ret = [], nodeList;
 		nodeList = this._getNodeList(this._loadDocument(file), xpath);
 		for (i = 0; i < nodeList.getLength(); i += 1) {
-			ret.push(jsmake.Rhino.translateJavaString(nodeList.item(i).getNodeValue()));
+			ret.push(rhino.Rhino.translateJavaString(nodeList.item(i).getNodeValue()));
 		}
 		return ret;
 	},
 	/**
-	 * Like {@link jsmake.Xml.getValues}, but expect a single match, throwing exception otherwise.
+	 * Like {@link Xml.getValues}, but expect a single match, throwing exception otherwise.
 	 * @param {String} file XML file path
 	 * @param {String} xpath XPath query to search for
 	 * @returns {String} value of matching node
 	 * @example
-	 * var episode = jsmake.Xml.getValue('temp/file.xml', '//series/season[@id="1"]/episode/text()');
+	 * var episode = Xml.getValue('temp/file.xml', '//series/season[@id="1"]/episode/text()');
 	 */
 	getValue: function (file, xpath) {
 		var values = this.getValues(file, xpath);
@@ -37,7 +39,7 @@ jsmake.Xml = {
 	 * @param {String} xpath XPath query to search for
 	 * @param {String} value value to set
 	 * @example
-	 * jsmake.Xml.setValue('temp/file.xml', '//series/season[@id="1"]/episode', 'new episode value');
+	 * Xml.setValue('temp/file.xml', '//series/season[@id="1"]/episode', 'new episode value');
 	 */
 	setValue: function (file, xpath, value) {
 		var nodeList, document;
@@ -65,3 +67,5 @@ jsmake.Xml = {
 		transformer.transform(new javax.xml.transform.dom.DOMSource(document), new javax.xml.transform.stream.StreamResult(new java.io.File(file)));
 	}
 };
+
+exports.Xml = Xml;

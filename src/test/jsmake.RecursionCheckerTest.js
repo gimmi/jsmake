@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, expect, it */
 
 describe("jsmake.RecursionChecker", function () {
-	var target;
+	var target, jsmake = { RecursionChecker: require('jsmake/RecursionChecker').RecursionChecker };
 	beforeEach(function () {
 		target = new jsmake.RecursionChecker('Recursion detected');
 	});

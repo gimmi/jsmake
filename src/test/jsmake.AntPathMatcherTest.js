@@ -1,7 +1,7 @@
 /*global Make, describe, beforeEach, expect, it */
 
 describe("jsmake.AntPathMatcher", function () {
-	var target;
+	var target, jsmake = { AntPathMatcher: require('jsmake/AntPathMatcher').AntPathMatcher };
 
 	beforeEach(function () {
 		target = new jsmake.AntPathMatcher('', true);

@@ -1,28 +1,34 @@
+var fsScanner = require('./FsScanner');
+var pathZipper = require('./PathZipper');
+var rhino = require('./Rhino');
+var sys = require('./Sys');
+var utils = require('./Utils');
+
 /** @class Contains methods for working with filesystem */
-jsmake.Fs = {
+var Fs = {
 	/**
 	 * Create a zip file containing specified file/directory
 	 * @param {String} srcPath file/directory to zip
 	 * @param {String} destFile zip file name
 	 */
 	zipPath: function (srcPath, destFile) {
-		jsmake.PathZipper.zip(srcPath, destFile);
+		pathZipper.PathZipper.zip(srcPath, destFile);
 	},
 	/**
 	 * Create a filesystem scanner
 	 * @param {String} basePath the path to scan for children tha match criteria
-	 * @returns {jsmake.FsScanner} FsScanner instance to fluently configure and run scanner
-	 * @see jsmake.FsScanner
+	 * @returns {FsScanner} FsScanner instance to fluently configure and run scanner
+	 * @see FsScanner
 	 * @example
 	 * // returns all js and java files in \home folder, including subfolders, excluding .git folders
-	 * jsmake.Fs.createScanner('\home')
+	 * Fs.createScanner('\home')
 	 *     .include('**\*.js')
 	 *     .include('**\*.java')
 	 *     .exclude('**\.git')
 	 *     .scan();
 	 */
 	createScanner: function (basePath) {
-		return new jsmake.FsScanner(basePath, this.isCaseSensitive());
+		return new fsScanner.FsScanner(basePath, this.isCaseSensitive());
 	},
 	/**
 	 * Return default OS character encoding
@@ -36,14 +42,14 @@ jsmake.Fs = {
 	 * @returns {String} path separator, e.g. '/' or '\'
 	 */
 	getPathSeparator: function () {
-		return jsmake.Rhino.translateJavaString(java.io.File.separator);
+		return rhino.Rhino.translateJavaString(java.io.File.separator);
 	},
 	/**
 	 * Returns true if OS has case sensitive filesystem
 	 * @returns {Boolean} true if OS has case sensitive filesystem
 	 */
 	isCaseSensitive: function () {
-		return !jsmake.Sys.isWindowsOs();
+		return !sys.Sys.isWindowsOs();
 	},
 	/**
 	 * Read text file content
@@ -80,10 +86,10 @@ jsmake.Fs = {
 	 * @param {String} path the source path
 	 * @returns {String} the name of the last element in the path
 	 * @example
-	 * jsmake.Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
+	 * Fs.getName('/users/gimmi/file.txt'); // returns 'file.txt'
 	 */
 	getName: function (path) {
-		return jsmake.Rhino.translateJavaString(new java.io.File(path).getName());
+		return rhino.Rhino.translateJavaString(new java.io.File(path).getName());
 	},
 	/**
 	 * Copy file or directory to another directory
@@ -143,7 +149,7 @@ jsmake.Fs = {
 		if (!this.pathExists(path)) {
 			return;
 		}
-		jsmake.Utils.each(jsmake.Fs.getChildPathNames(path), function (name) {
+		utils.Utils.each(this.getChildPathNames(path), function (name) {
 			this.deletePath(this.combinePaths(path, name));
 		}, this);
 		if (!new java.io.File(path)['delete']()) {
@@ -155,10 +161,10 @@ jsmake.Fs = {
 	 * @param {String} path path to translate
 	 * @returns {String} path in canonical form
 	 * @example
-	 * jsmake.Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
+	 * Fs.getCanonicalPath('../file.txt'); // returns '/users/file.txt'
 	 */
 	getCanonicalPath: function (path) {
-		return jsmake.Rhino.translateJavaString(new java.io.File(path).getCanonicalPath());
+		return rhino.Rhino.translateJavaString(new java.io.File(path).getCanonicalPath());
 	},
 	/**
 	 * Returns parent path
@@ -166,17 +172,17 @@ jsmake.Fs = {
 	 * @returns {String} parent path
 	 */
 	getParentDirectory: function (path) {
-		return jsmake.Rhino.translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
+		return rhino.Rhino.translateJavaString(new java.io.File(path).getCanonicalFile().getParent());
 	},
 	/**
 	 * Combine all passed path fragments into one, using OS path separator. Supports any number of parameters.
 	 * @example
-	 * jsmake.Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);
+	 * Fs.combinePaths('home', 'gimmi', [ 'dir/subdir', 'file.txt' ]);
 	 * // returns 'home/gimmi/dir/subdir/file.txt'
 	 */
 	combinePaths: function () {
-		var paths = jsmake.Utils.flatten(arguments);
-		return jsmake.Utils.reduce(paths, function (memo, path) {
+		var paths = utils.Utils.flatten(arguments);
+		return utils.Utils.reduce(paths, function (memo, path) {
 			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);
 	},
@@ -196,15 +202,15 @@ jsmake.Fs = {
 		});
 	},
 	_javaCombine: function (path1, path2) {
-		return jsmake.Rhino.translateJavaString(new java.io.File(path1, path2).getPath());
+		return rhino.Rhino.translateJavaString(new java.io.File(path1, path2).getPath());
 	},
 	_copyDirectory: function (srcDirectory, destDirectory) {
 		this.deletePath(destDirectory);
 		this.createDirectory(destDirectory);
-		jsmake.Utils.each(this.getChildFileNames(srcDirectory), function (path) {
+		utils.Utils.each(this.getChildFileNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), destDirectory);
 		}, this);
-		jsmake.Utils.each(this.getChildDirectoryNames(srcDirectory), function (path) {
+		utils.Utils.each(this.getChildDirectoryNames(srcDirectory), function (path) {
 			this.copyPath(this.combinePaths(srcDirectory, path), this.combinePaths(destDirectory, path));
 		}, this);
 	},
@@ -235,8 +241,8 @@ jsmake.Fs = {
 		var fileFilter, files;
 		fileFilter = new java.io.FileFilter({ accept: filter });
 		files = this._translateJavaArray(new java.io.File(basePath).listFiles(fileFilter));
-		return jsmake.Utils.map(files, function (file) {
-			return jsmake.Rhino.translateJavaString(file.getName());
+		return utils.Utils.map(files, function (file) {
+			return rhino.Rhino.translateJavaString(file.getName());
 		}, this);
 	},
 	_translateJavaArray: function (javaArray) {
@@ -250,3 +256,5 @@ jsmake.Fs = {
 		return ary;
 	}
 };
+
+exports.Fs = Fs;

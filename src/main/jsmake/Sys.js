@@ -1,13 +1,17 @@
+var rhino = require('./Rhino');
+var fs = require('./Fs');
+var commandRunner = require('./CommandRunner');
+
 /**
  * @class Contains methods for system interaciont and informations
  */
-jsmake.Sys = {
+var Sys = {
 	/**
 	 * Returns if OS is Windows
 	 * @returns true if running on Windows
 	 */
 	isWindowsOs: function () {
-		return jsmake.Fs.getPathSeparator() === '\\';
+		return fs.Fs.getPathSeparator() === '\\';
 	},
 	runCommand: function (command, opts) {
 		return runCommand(command, opts);
@@ -15,17 +19,17 @@ jsmake.Sys = {
 	/**
 	 * Create a runner object, used to define and invoke an external program
 	 * @param {String} command the path of the command executable
-	 * @return {jsmake.CommandRunner} CommandRunner instance to fluently configure and run command
-	 * @see jsmake.CommandRunner
+	 * @return {CommandRunner} CommandRunner instance to fluently configure and run command
+	 * @see CommandRunner
 	 * @example
 	 * // runs '/path/to/cmd.exe par1 par2 par3 par4'
-	 * jsmake.Sys.createRunner('/path/to/cmd.exe')
+	 * Sys.createRunner('/path/to/cmd.exe')
 	 *     .args('par1', 'par2')
 	 *     .args([ 'par3', 'par4' ])
 	 *     .run();
 	 */
 	createRunner: function (command) {
-		return new jsmake.CommandRunner(command);
+		return new commandRunner.CommandRunner(command);
 	},
 	/**
 	 * Returns environment variable value
@@ -35,7 +39,7 @@ jsmake.Sys = {
 	 * @throws {Error} if environment variable is not found and no default value passed.
 	 */
 	getEnvVar: function (name, def) {
-		var val = jsmake.Rhino.translateJavaString(java.lang.System.getenv(name));
+		var val = rhino.Rhino.translateJavaString(java.lang.System.getenv(name));
 		return this._getEnvVar(name, val, def);
 	},
 	/**
@@ -55,3 +59,5 @@ jsmake.Sys = {
 		throw 'Environment variable "' + name + '" not defined.';
 	}
 };
+
+exports.Sys = Sys;
