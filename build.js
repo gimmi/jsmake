@@ -70,6 +70,8 @@ task('compile', [ 'init', 'jslint' ], function () {
 	header.push('/*');
 	header.push('JSMake version ' + versionString);
 	header.push('');
+	header.push('http://gimmi.github.com/jsmake/');
+	header.push('');
 	header.push(fs.readFile('LICENSE'));
 	header.push('*/');
 	content.unshift(header.join('\n'));
