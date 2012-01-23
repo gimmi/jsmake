@@ -176,6 +176,9 @@ jsmake.Fs = {
 	 */
 	combinePaths: function () {
 		var paths = jsmake.Utils.flatten(arguments);
+		paths = jsmake.Utils.filter(paths, function (path) {
+			return !!path;
+		}, this);
 		return jsmake.Utils.reduce(paths, function (memo, path) {
 			return (memo ? this._javaCombine(memo, path) : path);
 		}, null, this);

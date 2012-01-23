@@ -13,8 +13,15 @@ describe("jsmake.Fs", function () {
 	});
 
 	it('should combine paths', function () {
+		expect(target.combinePaths('a')).toEqual('a');
 		expect(target.combinePaths('a', 'b', [ 'c', [ 'd' ] ])).toEqual([ 'a', 'b', 'c', 'd' ].join(target.getPathSeparator()));
 		expect(target.combinePaths()).toBeNull();
+	});
+
+	it('should tolerate falsy values in paths', function () {
+		expect(target.combinePaths('', 'b')).toEqual('b');
+		expect(target.combinePaths('a', '')).toEqual('a');
+		expect(target.combinePaths('a', null)).toEqual('a');
 	});
 
 	it('should get path name', function () {
