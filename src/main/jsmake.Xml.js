@@ -38,6 +38,7 @@ jsmake.Xml = {
 	 * @param {String} value value to set
 	 * @example
 	 * jsmake.Xml.setValue('temp/file.xml', '//series/season[@id="1"]/episode', 'new episode value');
+	 * jsmake.Xml.setValue('Web.config', '/configuration/connectionStrings/add[@name="MyConnStr"]/@connectionString', 'data source=(local);initial catalog=MyDb;integrated security=true');
 	 */
 	setValue: function (file, xpath, value) {
 		var nodeList, document;
