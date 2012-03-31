@@ -23,7 +23,7 @@ jsmake.CommandRunner.prototype = {
 	 */
 	run: function () {
 		this._logger.log(this._command + ' ' + this._arguments.join(' '));
-		var exitStatus = jsmake.Sys.runCommand(this._command, { args: this._arguments });
+		var exitStatus = jsmake.Rhino.runCommand(this._command, { args: this._arguments });
 		if (exitStatus !== 0) {
 			throw 'Command failed with exit status ' + exitStatus;
 		}

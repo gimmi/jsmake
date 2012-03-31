@@ -1,4 +1,7 @@
 jsmake.Rhino = {
+	runCommand: function (command, opts) {
+		return runCommand(command, opts);
+	},
 	translateJavaString: function (javaString) {
 		if (javaString === null) {
 			return null;

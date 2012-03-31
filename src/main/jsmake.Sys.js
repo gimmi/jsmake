@@ -9,9 +9,6 @@ jsmake.Sys = {
 	isWindowsOs: function () {
 		return jsmake.Fs.getPathSeparator() === '\\';
 	},
-	runCommand: function (command, opts) {
-		return runCommand(command, opts);
-	},
 	/**
 	 * Create a runner object, used to define and invoke an external program
 	 * @param {String} command the path of the command executable
