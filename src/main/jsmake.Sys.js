@@ -24,6 +24,27 @@ jsmake.Sys = {
 	createRunner: function (command) {
 		return new jsmake.CommandRunner(command);
 	},
+	/**
+	 * Run an external program
+	 * This method can be called in two ways: 
+	 * @example
+	 * // Simple call pattern
+	 * jsmake.Sys.run('COMMAND_TO_RUN'); // Just invoke the command, throwing error if return code of the command is not 0
+	 * jsmake.Sys.run('COMMAND_TO_RUN', 'PARAMETER 1', 'PARAMETER 2', ...); // Same as above, with command line parameters
+	 * @example
+	 * // Complex call pattern
+	 * jsmake.Sys.run({
+	 *     cmd: 'COMMAND_TO_RUN', // Same as simple call
+	 *     args: [ 'PARAMETER 1', 'PARAMETER 2' ], // (Optional, default to []) Command parameters.
+	 *     successCodes: [0, 1, 2], // (Optional, default to [0]) Command exit codes that are considered a succesful execution.
+	 *     failOnError: false, // (Optional, default to true) Indicate if an error must be thrown when execution fail.
+	 *                         // A command execution is considered failed when the return code is not one of the successCodes.
+	 *     captureOutput: true, // (Optional, default to false) Indicate if the output of the commend must be captured and returned to the caller.
+	 *                          // Note that if captureOutput=true, the output of the command is not printed to the console during JSMake execution.
+	 * });
+	 * @return If called with captureOutput=false the return value is just the command return code, otherwise is an object containig the following fields:
+	 * 'code' (the command return code), 'out' (the command stdout) and 'err' (the command stderr)
+	 */
 	run: function () {
 		var cfg = this._buildRunConfig.apply(this, arguments),
 			options = { args: cfg.args },
