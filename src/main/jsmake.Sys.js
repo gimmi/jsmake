@@ -24,6 +24,28 @@ jsmake.Sys = {
 	createRunner: function (command) {
 		return new jsmake.CommandRunner(command);
 	},
+	run: function () {
+		var cfg = this._buildRunConfig.apply(this, arguments),
+			options = { args: cfg.args },
+			exitCode;
+			
+		if (cfg.captureOutput) {
+			options.output = '';
+			options.err = '';
+		}
+
+		exitCode = jsmake.Rhino.runCommand(cfg.cmd, options);
+
+		if (cfg.failOnError && !jsmake.Utils.contains(cfg.successCodes, exitCode)) {
+			throw 'Command failed with exit status ' + exitCode;
+		}
+
+		return cfg.captureOutput ? {
+			out: options.output,
+			err: options.err,
+			code: exitCode
+		} : exitCode;
+	},
 	/**
 	 * Returns environment variable value
 	 * @param {String} name name of the environment variable

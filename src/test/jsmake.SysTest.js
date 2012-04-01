@@ -1,4 +1,4 @@
-/*global Make, jasmine, describe, beforeEach, expect, it, xit, toString */
+/*global Make, jasmine, describe, beforeEach, expect, it, xit, toString, spyOn */
 
 describe("jsmake.Sys", function () {
 	var target;
@@ -18,7 +18,7 @@ describe("jsmake.Sys", function () {
 		}).toThrow('Environment variable "name" not defined.');
 	});
 	
-	describe('run', function () {
+	describe('_buildRunConfig', function () {
 		it('should build configuration from simple parameters', function () {
 			expect(target._buildRunConfig('COMMAND')).toEqual({
 				cmd: 'COMMAND',
@@ -65,6 +65,73 @@ describe("jsmake.Sys", function () {
 			expect(target._buildRunConfig({}).captureOutput).toEqual(false);
 			expect(target._buildRunConfig({ captureOutput: true }).captureOutput).toEqual(true);
 			expect(target._buildRunConfig({ captureOutput: 0 }).captureOutput).toEqual(false);
+		});
+	});
+	
+	describe('run', function () {
+		beforeEach(function () {
+			spyOn(jsmake.Rhino, 'runCommand').andReturn(0);
+			spyOn(target, '_buildRunConfig');
+		});
+		
+		it('should delegate to _buildRunConfig parameter interpretation', function () {
+			target._buildRunConfig.andReturn({});
+			
+			target.run('p1', 'p2');
+			
+			expect(target._buildRunConfig).toHaveBeenCalledWith('p1', 'p2');
+			expect(target._buildRunConfig.mostRecentCall.object).toBe(target);
+		});
+		
+		it('should pass command and parameters, returning code', function () {
+			target._buildRunConfig.andReturn({
+				cmd: 'command',
+				args: [1, 2, 3]
+			});
+			
+			var actual = target.run();
+			
+			expect(jsmake.Rhino.runCommand).toHaveBeenCalledWith('command', { args: [1, 2, 3]});
+			expect(actual).toBe(0);
+		});
+
+		it('should pass output and err when capturing output, and return values to the caller', function () {
+			target._buildRunConfig.andReturn({
+				cmd: '',
+				args: [],
+				captureOutput: true				
+			});
+			
+			var actual = target.run();
+			
+			expect(jsmake.Rhino.runCommand).toHaveBeenCalledWith('', { args: [], output: '', err: ''});
+			expect(actual.out).toBe('');
+			expect(actual.err).toBe('');
+			expect(actual.code).toBe(0);
+		});
+
+		it('should throw exception when execution fail and failOnError is set', function () {
+			target._buildRunConfig.andReturn({
+				cmd: '',
+				args: [],
+				failOnError: true,
+				successCodes: 1
+			});
+			
+			expect(function () {
+				target.run();
+			}).toThrow('Command failed with exit status 0');
+		});
+
+		it('should not throw exception when execution fail and failOnError is not set', function () {
+			target._buildRunConfig.andReturn({
+				cmd: '',
+				args: [],
+				failOnError: false,
+				successCodes: 1
+			});
+			
+			target.run();
 		});
 	});
 });
