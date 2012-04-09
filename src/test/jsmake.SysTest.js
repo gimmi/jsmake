@@ -101,20 +101,24 @@ describe("jsmake.Sys", function () {
 	});
 	
 	describe('run', function () {
+		var cfg;
+
 		beforeEach(function () {
 			spyOn(jsmake.Rhino, 'runCommand').andReturn(0);
 			spyOn(target, '_buildRunConfig');
 			spyOn(target, 'log');
+
+			cfg = {
+				cmd: '',
+				args: [],
+				successCodes: [0],
+				failOnError: true,
+				captureOutput: false
+			};
+			target._buildRunConfig.andReturn(cfg);
 		});
 		
 		it('should delegate to _buildRunConfig parameter interpretation', function () {
-			target._buildRunConfig.andReturn({
-				cmd: '',
-				args: [],
-				failOnError: false,
-				successCodes: 1
-			});
-			
 			target.run('p1', 'p2');
 			
 			expect(target._buildRunConfig).toHaveBeenCalledWith('p1', 'p2');
@@ -122,10 +126,8 @@ describe("jsmake.Sys", function () {
 		});
 		
 		it('should pass command and parameters, returning code', function () {
-			target._buildRunConfig.andReturn({
-				cmd: 'command',
-				args: [1, 2, 3]
-			});
+			cfg.cmd = 'command';
+			cfg.args = [1, 2, 3];
 			
 			var actual = target.run();
 			
@@ -134,11 +136,7 @@ describe("jsmake.Sys", function () {
 		});
 
 		it('should pass output and err when capturing output, and return values to the caller', function () {
-			target._buildRunConfig.andReturn({
-				cmd: '',
-				args: [],
-				captureOutput: true				
-			});
+			cfg.captureOutput = true;
 			
 			var actual = target.run();
 			
@@ -149,12 +147,7 @@ describe("jsmake.Sys", function () {
 		});
 
 		it('should throw exception when execution fail and failOnError is set', function () {
-			target._buildRunConfig.andReturn({
-				cmd: '',
-				args: [],
-				failOnError: true,
-				successCodes: 1
-			});
+			cfg.successCodes = 1;
 			
 			expect(function () {
 				target.run();
@@ -162,23 +155,15 @@ describe("jsmake.Sys", function () {
 		});
 
 		it('should not throw exception when execution fail and failOnError is not set', function () {
-			target._buildRunConfig.andReturn({
-				cmd: '',
-				args: [],
-				failOnError: false,
-				successCodes: 1
-			});
+			cfg.failOnError = false;
+			cfg.successCodes = 1;
 			
 			target.run();
 		});
 
 		it('should log command with arguments', function () {
-			target._buildRunConfig.andReturn({
-				cmd: 'cmd',
-				args: ['p1', 'p2'],
-				failOnError: false,
-				successCodes: 1
-			});
+			cfg.cmd = 'cmd';
+			cfg.args = ['p1', 'p2'];
 			
 			target.run();
 
