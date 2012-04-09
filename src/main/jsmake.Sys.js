@@ -10,16 +10,7 @@ jsmake.Sys = {
 		return jsmake.Fs.getPathSeparator() === '\\';
 	},
 	/**
-	 * Create a runner object, used to define and invoke an external program
-	 * @param {String} command the path of the command executable
-	 * @return {jsmake.CommandRunner} CommandRunner instance to fluently configure and run command
-	 * @see jsmake.CommandRunner
-	 * @example
-	 * // runs '/path/to/cmd.exe par1 par2 par3 par4'
-	 * jsmake.Sys.createRunner('/path/to/cmd.exe')
-	 *     .args('par1', 'par2')
-	 *     .args([ 'par3', 'par4' ])
-	 *     .run();
+	 * @deprecated Use {@link jsmake.Sys.run}
 	 */
 	createRunner: function (command) {
 		return new jsmake.CommandRunner(command);
