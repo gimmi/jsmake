@@ -17,6 +17,38 @@ describe("jsmake.Sys", function () {
 			target._getEnvVar('name', null, undefined);
 		}).toThrow('Environment variable "name" not defined.');
 	});
+
+	describe('wait', function () {
+		beforeEach(function () {
+			spyOn(target, 'log');
+		});
+
+		it('should wait for the specified amount of seconds', function () {
+			var elapsed = new Date().getTime();
+			
+			target.wait(1);
+			
+			elapsed = new Date().getTime() - elapsed;
+			expect(elapsed).toBeGreaterThan(990);
+			expect(elapsed).toBeLessThan(1010);
+		});
+
+		it('should support fractional seconds', function () {
+			var elapsed = new Date().getTime();
+
+			target.wait(0.1);
+
+			elapsed = new Date().getTime() - elapsed;
+			expect(elapsed).toBeGreaterThan(90);
+			expect(elapsed).toBeLessThan(110);
+		});
+
+		it('should log wait message', function () {
+			target.wait(0.1);
+
+			expect(target.log).toHaveBeenCalledWith('Waiting 0.1 seconds...');
+		});
+	});
 	
 	describe('_buildRunConfig', function () {
 		it('should build configuration from simple parameters', function () {

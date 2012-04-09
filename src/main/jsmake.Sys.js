@@ -16,6 +16,13 @@ jsmake.Sys = {
 		return new jsmake.CommandRunner(command);
 	},
 	/**
+	 * Stops execution for the specified amount of seconds
+	 */
+	wait: function (seconds) {
+		this.log('Waiting ' + seconds + ' seconds...');
+		java.lang.Thread.sleep(seconds * 1000);
+	},
+	/**
 	 * Run an external program
 	 * This method can be called in two ways: 
 	 * @example
