@@ -104,10 +104,16 @@ describe("jsmake.Sys", function () {
 		beforeEach(function () {
 			spyOn(jsmake.Rhino, 'runCommand').andReturn(0);
 			spyOn(target, '_buildRunConfig');
+			spyOn(target, 'log');
 		});
 		
 		it('should delegate to _buildRunConfig parameter interpretation', function () {
-			target._buildRunConfig.andReturn({});
+			target._buildRunConfig.andReturn({
+				cmd: '',
+				args: [],
+				failOnError: false,
+				successCodes: 1
+			});
 			
 			target.run('p1', 'p2');
 			
@@ -164,6 +170,19 @@ describe("jsmake.Sys", function () {
 			});
 			
 			target.run();
+		});
+
+		it('should log command with arguments', function () {
+			target._buildRunConfig.andReturn({
+				cmd: 'cmd',
+				args: ['p1', 'p2'],
+				failOnError: false,
+				successCodes: 1
+			});
+			
+			target.run();
+
+			expect(target.log).toHaveBeenCalledWith('cmd p1 p2');
 		});
 	});
 });

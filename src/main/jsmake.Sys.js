@@ -53,6 +53,7 @@ jsmake.Sys = {
 			options.err = '';
 		}
 
+		this.log(cfg.cmd + ' ' + cfg.args.join(' '));
 		exitCode = jsmake.Rhino.runCommand(cfg.cmd, options);
 
 		if (cfg.failOnError && !jsmake.Utils.contains(cfg.successCodes, exitCode)) {
