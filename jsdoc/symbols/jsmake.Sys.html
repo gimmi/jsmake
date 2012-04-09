@@ -193,8 +193,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/jsmake.html">jsmake</a></li>
 	
-	<li><a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a></li>
-	
 	<li><a href="../symbols/jsmake.Fs.html">jsmake.Fs</a></li>
 	
 	<li><a href="../symbols/jsmake.FsScanner.html">jsmake.FsScanner</a></li>
@@ -275,7 +273,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">jsmake.Sys.<b><a href="../symbols/jsmake.Sys.html#.createRunner">createRunner</a></b>(command)
 								</div>
-								<div class="description">Create a runner object, used to define and invoke an external program</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -303,6 +301,15 @@ ul.inheritsList
 								<div class="fixedFont">jsmake.Sys.<b><a href="../symbols/jsmake.Sys.html#.log">log</a></b>(msg)
 								</div>
 								<div class="description">Log message to the console</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">jsmake.Sys.<b><a href="../symbols/jsmake.Sys.html#.run">run</a></b>()
+								</div>
+								<div class="description">Run an external programThis method can be called in two ways:</div>
 							</td>
 						</tr>
 					
@@ -357,19 +364,15 @@ ul.inheritsList
 					<a name=".createRunner"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{<a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a>}</span>
+					
 					<span class="light">jsmake.Sys.</span><b>createRunner</b>(command)
 					
 					</div>
 					<div class="description">
-						Create a runner object, used to define and invoke an external program
+						
 						
 						
 					</div>
-					
-					
-					
-					<pre class="code">// runs '/path/to/cmd.exe par1 par2 par3 par4'jsmake.Sys.createRunner('/path/to/cmd.exe')    .args('par1', 'par2')    .args([ 'par3', 'par4' ])    .run();</pre>
 					
 					
 					
@@ -378,32 +381,25 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{String}</span> <b>command</b>
+									<b>command</b>
 									
 								</dt>
-								<dd>the path of the command executable</dd>
+								<dd></dd>
 							
 							</dl>
-						
-						
-						
 						
 						
 							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a>}</span> CommandRunner instance to fluently configure and run command</dd>
-							
+							<dt class="heading">Deprecated:</dt>
+							<dt>
+								Use <a href="../symbols/jsmake.Sys.html#.run">jsmake.Sys.run</a>
+							</dt>
 							</dl>
 						
 						
 						
-							<dl class="detailList">
-							<dt class="heading">See:</dt>
-							
-								<dd><a href="../symbols/jsmake.CommandRunner.html">jsmake.CommandRunner</a></dd>
-							
-							</dl>
+						
+						
 						
 
 					<hr />
@@ -533,6 +529,44 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name=".run"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">jsmake.Sys.</span><b>run</b>()
+					
+					</div>
+					<div class="description">
+						Run an external programThis method can be called in two ways:
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">// Simple call patternjsmake.Sys.run('COMMAND_TO_RUN'); // Just invoke the command, throwing error if return code of the command is not 0jsmake.Sys.run('COMMAND_TO_RUN', 'PARAMETER 1', 'PARAMETER 2', ...); // Same as above, with command line parameters</pre>
+					
+					<pre class="code">// Complex call patternjsmake.Sys.run({    cmd: 'COMMAND_TO_RUN', // Same as simple call    args: [ 'PARAMETER 1', 'PARAMETER 2' ], // (Optional, default to []) Command parameters.    successCodes: [0, 1, 2], // (Optional, default to [0]) Command exit codes that are considered a succesful execution.    failOnError: false, // (Optional, default to true) Indicate if an error must be thrown when execution fail.                        // A command execution is considered failed when the return code is not one of the successCodes.    captureOutput: true, // (Optional, default to false) Indicate if the output of the commend must be captured and returned to the caller.                         // Note that if captureOutput=true, the output of the command is not printed to the console during JSMake execution.});</pre>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>If called with captureOutput=false the return value is just the command return code, otherwise is an object containig the following fields:'code' (the command return code), 'out' (the command stdout) and 'err' (the command stderr)</dd>
+							
+							</dl>
+						
+						
+						
+
 					
 				
 			
@@ -547,7 +581,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Jan 23 2012 22:37:31 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Apr 09 2012 09:42:57 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
